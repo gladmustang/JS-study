@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+    .arc text {
+        font: 10px sans-serif;
+        text-anchor: middle;
+    }
+
+    .arc path {
+        stroke: #fff;
+    }
+
+</style>
+<svg width="960" height="500"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+    var svg = d3.select("svg"),
+        width = +svg.attr("width"),
+        height = +svg.attr("height"),
+        radius = Math.min(width, height) / 2,
+        g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+    var data= [
+        {state: "initial", population:2704659},
+        {state: "requested", population:4499890},
+        {state: "inprogress", population:2159981},
+        {state: "completed", population:3853788},
+        {state: "deleted", population:4106543},
+
+
+    ];
+
+    var colorMapping= {
+        initial: "#98abc5",
+        requested: "#d0743c",
+        inprogress: "#ff8c00",
+        completed: "#6b486b",
+        deleted: "#a05d56"
+    }
+
+    var pie = d3.pie()
+        .sort(null)
+        .value(function(d) { return d.population; });
+
+    var path = d3.arc()
+        .outerRadius(radius - 10)
+        .innerRadius(0);
+
+    var pathActive = d3.arc()
+        .outerRadius(radius-5 )
+        .innerRadius(0);
+
+    var label = d3.arc()
+        .outerRadius(radius - 40)
+        .innerRadius(radius - 150);
+
+
+    var arc = g.selectAll(".arc")
+        .data(pie(data))
+        .enter().append("g")
+        .attr("class", "arc");
+
+    arc.append("path")
+        .attr("d", path)
+        .attr("fill", function(d) { return colorMapping[d.data.state]; })
+        .attr("count", function (d) {
+            return d.data.population;
+        });
+
+    arc.append("text")
+        .attr("transform", function(d) { return "translate(" + label.centroid(d) + ")"; })
+        .attr("dy", "0.7em")
+        .text(function(d) { return d.data.state; });
+
+    arc.on("click", function () {
+//        console.dir(d3.select(this).select("path").attr("count"));
+//        d3.selectAll(".arc").select("path").attr("d", path);
+//        d3.selectAll(".arc").attr("transform", function(d) { return "translate(0)"; })
+//        d3.select(this).select("path").attr("d",pathActive); //缩放方法1
+//        d3.select(this).attr("transform", function(d) { return "translateY(10)"; })
+        d3.selectAll(".arc").attr("transform", function(d) { return "scale(1) translate(1)"; });
+        d3.select(this).attr("transform", function(d) { return "scale(1.02)"; }); //缩放方法2
+    })
+
+
+</script>

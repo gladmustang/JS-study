@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Study 1</title>
+    <!--<script src="d3.v4.min.js"></script>-->
+    <script src="d3.v3.min.js"></script>
+    <style>
+        rect {
+            fill:steelblue;
+        }
+
+        .axis path,
+        .axis line{
+            fill: none;
+            stroke: black;
+            shape-rendering: crispEdges;
+        }
+
+        .axis text {
+            font-family: sans-serif;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+<div> first </div>
+<div>second</div>
+</body>
+<script>
+    var data = ["red","blue"];
+    var divs = d3.selectAll("body div").text("ok");
+    divs.data(data);
+    //divs.style("color", "red");
+    divs.style("color", function (d, i) {
+        return d;
+    })
+    divs.text(function(d, i){
+        return d;
+    });
+
+    var svg = d3.select("body").append("svg").attr("width", 500).attr("height", 600);//.style("background-color","black");
+
+
+    var dataset = [ 25 , 21 , 17 , 13 , 9 ];
+    var linear = d3.scale.linear().domain([0, d3.max(dataset)]).range([0,250]);
+//    var linear = d3.scale.linear()
+//        .domain([0, d3.max(dataset)])
+//        .range([0, 250]);
+
+    var yLinear = d3.scale.linear().domain([0, 150]).range([150,0]);
+
+
+    var axis = d3.svg.axis()
+        .scale(yLinear)      //指定比例尺
+        .orient("left")   //指定刻度的方向
+        .ticks(7);          //指定刻度的数量
+
+    var rectHeight = 25;
+
+    svg.append("g").selectAll("rect")
+        .data(dataset)
+        .enter().append("rect").attr("x", 20)
+        .attr("y",function(d,i){
+            return i * rectHeight;
+        })
+        .attr("width", function(d,i){return linear(d)})
+        .attr("height", function (d,i) {
+            return rectHeight-2;
+        })
+        //.attr("fill","steelblue");
+    svg.append("g").attr("class", "axis").attr("transform","translate(30,130)").call(axis);
+
+</script>
+</html>

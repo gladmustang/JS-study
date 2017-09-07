@@ -1,0 +1,2 @@
+webpack 打包的代码直接调用没有通过webpack打包的代码是OK的。
+但是一旦代码通过webpack打包，那么只能通过webpack 的方式， 在代码中import之后才能使用。

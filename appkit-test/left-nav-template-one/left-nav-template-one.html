@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Appkit - Left navigation template layout 1</title>
+    <!--<link rel="stylesheet" href="vendor/vendor.css">-->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/appkit.min.css">
+</head>
+<body>
+<div class="nav-template outer-leftNav">
+    <nav class="navbar navbar-search">
+        <div class="top-bar">
+            <div class="pull-left logo-box">
+                <img class="logo" src="assets/images/component/logo.png"></div>
+            <div class="pull-left sidebar-ctrl-box">
+                <a class="hamberger-btn"><i class="appkiticon icon-outline-list-view"></i></a>
+            </div>
+            <div class="app-name pull-left">Application name</div>
+            <div class="logout-container pull-right border-left">
+                <div class="user-name">AB</div>
+                <div class="popup user-profile-container">
+                    <ul class="profile-list">
+                        <li class="profile-list-item profile">
+                            <div class="user-name">AB</div>
+                            <div class="user-text">
+                                <span class="user-full-name">Angie Ball</span>
+                                <!-- <span class="user-mail">angie.test@pwc.com</span> -->
+                            </div>
+                        </li>
+                        <li class="profile-list-item logout">
+                            <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="logout-svg">
+                                <g id="Fill-v2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Logout" fill="#231F1F">
+                                        <path d="M18.7785,6.78315 C18.1935,6.19665 17.244,6.19665 16.6575,6.78315 C16.071,7.36965 16.071,8.31915 16.6575,8.90415 L18.258,10.50465 L9.8595,10.50465 L9.8595,13.50465 L18.258,13.50465 L16.6665,15.09615 C16.0815,15.68115 16.0815,16.63065 16.6665,17.21715 C17.253,17.80215 18.2025,17.80215 18.7875,17.21715 L24,12.00465 L18.7785,6.78315 Z M12,16.5 L12,21 L3,21 L3,3 L12,3 L12,7.5 L12.3525,7.5 L15,4.8525 L15,1.5 C15,0.672 14.328,0 13.5,0 L1.5,0 C0.672,0 0,0.672 0,1.5 L0,22.5 C0,23.328 0.672,24 1.5,24 L13.5,24 C14.328,24 15,23.328 15,22.5 L15,19.1475 L12.3525,16.5 L12,16.5 Z"></path>
+                                    </g>
+                                </g>
+                            </svg>
+                            <span>Logout</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pull-right border-left topbar-padding notification-box">
+                <span class="appkiticon icon-outline-notification" aria-hidden="true"></span>
+                <span class="new-notification-flag"></span>
+                <div class="popup notification-container">
+                    <div class="container-header">
+                        <label class="notification-title">Notifications(<span class="notification-count">4</span>)</label>
+                        <a class="clear-all-btn">Clear All</a>
+                    </div>
+                    <ul class="notification-list">
+                        <li>
+                            <div class="notification-type-icon danger-type">
+                                <i class="appkiticon appkiticon icon-fill-alert notification-type"></i>
+                            </div>
+                            <div class="notification-content-div">
+                                <p class="notification-content">You have a rate exception for Lucy Yuan in Conference from Lucy123456 xiao test for approve.</p>
+                                <p class="notification-time">Jan 18, 2017 10:32:47 AM</p>
+                            </div>
+                            <div class="notification-right">
+                                <div class="notification-unread"></div>
+                                <span class="appkiticon icon-fill-close delete"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="notification-type-icon warning-type">
+                                <i class="appkiticon icon-fill-news notification-type"></i>
+                            </div>
+                            <div class="notification-content-div">
+                                <p class="notification-content">You have a rate exception for Lucy Yuan in Conference from Lucy123456 xiao test for approve.</p>
+                                <p class="notification-time">Jan 18, 2017 10:32:47 AM</p>
+                            </div>
+                            <div class="notification-right">
+                                <span class="appkiticon icon-fill-close delete"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="notification-type-icon danger-type">
+                                <i class="appkiticon appkiticon icon-fill-alert notification-type"></i>
+                            </div>
+                            <div class="notification-content-div">
+                                <p class="notification-content">You have a rate exception for Lucy Yuan in Conference from Lucy123456 xiao test for approve.</p>
+                                <p class="notification-time">Jan 18, 2017 10:32:47 AM</p>
+                            </div>
+                            <div class="notification-right">
+                                <span class="appkiticon icon-fill-close delete"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="notification-type-icon warning-type">
+                                <i class="appkiticon icon-fill-news notification-type"></i>
+                            </div>
+                            <div class="notification-content-div">
+                                <p class="notification-content">You have a rate exception for Lucy Yuan in Conference from Lucy123456 xiao test for approve.</p>
+                                <p class="notification-time">Jan 18, 2017 10:32:47 AM</p>
+                            </div>
+                            <div class="notification-right">
+                                <span class="appkiticon icon-fill-close delete"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="empty-view">
+                        <span class="appkiticon icon-fill-notification" aria-hidden="true"></span>
+                        <p>All caught up!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="pull-right global-search">
+                <div class="search-block search-default">
+                    <div class="search-btn"><i class="icon-outline-search"></i></div>
+                    <input type="text" class="input-default search-content pull-left" name="defaultSearchBox" value="" placeholder="Search"></input>
+                    <span class="delete-wrapper display-none"><i class="icon-outline-circle-delete input-delete"></i></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="content">
+        <div class="left-nav">
+            <ul class="left-nav-item-list">
+                <li class="item">
+                    <a class="item-content">
+                        <i class="appkiticon icon-outline-home item-icon"></i>
+                        <span class="item-name">Menu item 1</span>
+                        <i class="appkiticon icon-outline-right-chevron item-open"></i>
+                        <i class="appkiticon icon-outline-down-chevron item-opened"></i>
+                    </a>
+                    <div class="item-detail">
+                        <ul class="item-detail-list">
+                            <li class="item-detail-item detail-name">
+                                <span>Menu item 1</span>
+                            </li>
+                            <li class="item-detail-item">
+                                <span>Link one</span>
+                                <i class="appkiticon icon-outline-right-chevron"></i>
+                                <ul class="sub-item-list">
+                                    <li class="sub-item-list-item active">Child link one</li>
+                                    <li class="sub-item-list-item">Child link two</li>
+                                    <li class="sub-item-list-item">Child link three</li>
+                                </ul>
+                            </li>
+                            <li class="item-detail-item"><span>Link two</span></li>
+                            <li class="item-detail-item"><span>Link three</span></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="divider"></li>
+                <li class="item active">
+                    <a class="item-content">
+                        <i class="appkiticon icon-outline-center-map item-icon"></i>
+                        <span class="item-name">Menu item 2</span>
+                        <i class="appkiticon icon-outline-right-chevron item-open"></i>
+                        <i class="appkiticon icon-outline-down-chevron item-opened"></i>
+                    </a>
+                    <!--<div class="item-detail">
+                        <ul class="item-detail-list">
+                            <li class="item-detail-item detail-name">
+                                <span>Menu item 2</span>
+                            </li>
+                            <li class="item-detail-item">
+                                <span>Link one</span>
+                                <i class="appkiticon icon-outline-right-chevron"></i>
+                                <ul class="sub-item-list">
+                                    <li class="sub-item-list-item">Child link one</li>
+                                    <li class="sub-item-list-item">Child link two</li>
+                                    <li class="sub-item-list-item">Child link three</li>
+                                </ul>
+                            </li>
+                            <li class="item-detail-item"><span>Link two</span></li>
+                            <li class="item-detail-item"><span>Link three</span></li>
+                        </ul>
+                    </div>-->
+                </li>
+                <li class="divider"></li>
+                <li class="item">
+                    <a class="item-content">
+                        <i class="appkiticon icon-outline-email item-icon"></i>
+                        <span class="item-name">Menu item 3</span>
+                        <i class="appkiticon icon-outline-right-chevron item-open"></i>
+                        <i class="appkiticon icon-outline-down-chevron item-opened"></i>
+                    </a>
+                    <!--<div class="item-detail">
+                        <ul class="item-detail-list">
+                            <li class="item-detail-item detail-name">
+                                <span>Menu item 3</span>
+                            </li>
+                            <li class="item-detail-item">
+                                <span>Link one</span>
+                                <i class="appkiticon icon-outline-right-chevron"></i>
+                                <ul class="sub-item-list">
+                                    <li class="sub-item-list-item">Child link one</li>
+                                    <li class="sub-item-list-item">Child link two</li>
+                                    <li class="sub-item-list-item">Child link three</li>
+                                </ul>
+                            </li>
+                            <li class="item-detail-item"><span>Link two</span></li>
+                            <li class="item-detail-item"><span>Link three</span></li>
+                        </ul>
+                    </div>-->
+                </li>
+                <li class="divider"></li>
+                <li class="item">
+                    <a class="item-content">
+                        <i class="appkiticon icon-outline-hospital item-icon"></i>
+                        <span class="item-name">Menu item 4</span>
+                        <!--<i class="appkiticon icon-outline-right-chevron item-open"></i>-->
+                        <!--<i class="appkiticon icon-outline-down-chevron item-opened"></i>-->
+                    </a>
+                    <!--<div class="item-detail">-->
+                        <!--<ul class="item-detail-list">-->
+                            <!--<li class="item-detail-item detail-name">-->
+                                <!--<span>Menu item 4</span>-->
+                            <!--</li>-->
+                            <!--<li class="item-detail-item">-->
+                                <!--<span>Link one</span>-->
+                                <!--<i class="appkiticon icon-outline-right-chevron"></i>-->
+                                <!--<ul class="sub-item-list">-->
+                                    <!--<li class="sub-item-list-item">Child link one</li>-->
+                                    <!--<li class="sub-item-list-item">Child link two</li>-->
+                                    <!--<li class="sub-item-list-item">Child link three</li>-->
+                                <!--</ul>-->
+                            <!--</li>-->
+                            <!--<li class="item-detail-item"><span>Link two</span></li>-->
+                            <!--<li class="item-detail-item"><span>Link three</span></li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                </li>
+            </ul>
+        </div><!-- attention, no space here-->
+        <div class="right-content">
+            <div class="current-page-label">Menu item 2 - Link one - Child link one</div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="foot-left ellipsis"></div>
+        <ul class="nav navbar-nav nav-footer pull-right">
+            <li>Terms of use</li>
+            <!--<li>Data usage policy</li>-->
+            <li>Privacy policy</li>
+            <li>Full legal</li>
+        </ul>
+    </div>
+</div>
+</body>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="assets/appkit.min.js"></script>
+</html>

@@ -1,0 +1,3 @@
+def a="haha"
+ a = 3
+print a

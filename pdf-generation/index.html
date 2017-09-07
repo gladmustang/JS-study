@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>pdf generation</title>
+    <script src="jquery.min.js"></script>
+    <script src="jspdf.min.js"></script>
+    <script src="html2canvas.js"></script>
+    <!--<script src="html2pdf.js"></script>-->
+</head>
+<body>
+    <div id="survey" style="display: block">
+        <table>
+            <tr>
+                <td>你好</td>
+                <td>sjl</td>
+                <td>I like it</td>
+                <td>ok</td>
+                <td>haha </td>
+            </tr>
+        </table>
+    </div>
+    <button id="generatePdf">Generate PDF</button>
+</body>
+
+<script>
+    function exportSurveyPdf(surveyDivId) {
+        var pdfDoc = new jsPDF();
+        html2canvas($('#' + surveyDivId), {
+            onrendered: function (canvas) {
+                var img = new Image();
+                img.src = canvas.toDataURL("image/PNG", 1.0);
+                pdfDoc.addImage(img, 'PNG', 10, 10, 200, 10, 'Survey');
+                pdfDoc.save('Survey_' + 'sjl' + '.pdf');
+            }
+        });
+    }
+
+    function exportSurveyPdf2(surveyDivId){ //这个方式会有乱码
+        
+	  var pdf = new jsPDF('p', 'pt', 'letter');
+	  pdf.canvas.height = 72 * 11;
+	  pdf.canvas.width = 72 * 8.5;
+	  html2pdf($('#' + surveyDivId)[0], pdf, function(pdf){
+        //pdf.output('datauristring');
+        pdf.save('Survey_' + 'sjl2' + '.pdf');
+	  });
+  
+    }
+
+    function exportSurveyPdf3(surveyDivId){ //这个方式会有乱码
+        
+	  var pdf = new jsPDF('p', 'pt', 'letter');
+	  pdf.canvas.height = 72 * 11;
+	  pdf.canvas.width = 72 * 8.5;
+      html2canvas($('#' + surveyDivId), {
+          canvas : pdf.canvas,
+          onrendered: function(canvas){
+            pdf.save('Survey_' + 'sjl3' + '.pdf');
+          }
+      });
+  
+    }
+
+    var specialElementHandlers = {
+    '#editor': function(element, renderer){
+        return true;
+        }
+    };
+
+    function exportSurveyPdf4(surveyDivId) {
+        var doc = new jsPDF();
+        doc.fromHTML($('#' + surveyDivId).get(0), 15, 15, {
+                // 'width': 170,
+                // 'elementHandlers': specialElementHandlers
+        });
+        doc.save('Survey_' + 'sjl4' + '.pdf');
+    };
+
+    $(function(){
+        $("#generatePdf").on("click", function(){
+            exportSurveyPdf("survey");
+        })
+    })
+</script>
+</html>

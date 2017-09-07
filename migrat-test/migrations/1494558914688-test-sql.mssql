@@ -1,0 +1,10 @@
+-- Created on Fri May 12 2017 11:15:14 GMT+0800 (China Standard Time)
+
+-- up:
+
+--insert into test(id, name) values ('2', 'sjl2');
+--insert into test(id, name) values ('2', 'sjl2');
+ALTER TABLE test ADD info varchar(30);
+
+-- down:
+delete from test where id='1'

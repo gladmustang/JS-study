@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bootstrap page</title>
+    <script src="dist/js/common.bundle.js"></script>
+    <script src="dist/js/vendors.bundle.js"></script>
+    <link rel="stylesheet" href="dist/bootstrap_page.style.css">
+
+
+</head>
+<body>
+<div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    Enter a valid email address
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    Launch demo modal
+</button>
+
+<button type="button" id="buttonOwn">
+    Launch by my own script
+</button>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<select id="bselector" name="selector1">
+    <option value=""></option>
+    <option value="mus">Mustard</option>
+    <option class="special" value="ket">Ketchup</option>
+    <option value="reli" style="background: #5cb85c; color: #fff;">Relish</option>
+</select>
+
+<script src="dist/js/bootstrap_page.bundle.js"></script>
+</body>
+</html>

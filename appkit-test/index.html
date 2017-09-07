@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>this is first appkit demo</title>
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./appkit.min.css">
+
+    
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="./appkit.min.js"></script>
+
+</head>
+<body>
+<div class="feed">
+    <div class="feed-content">
+        <div class="subject more">Six Steps to Building Domain Expertise in a Complex Industry Lorem ipsum dolor sit amet.</div>
+        <div class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+    </div>
+    <div class="feed-content interaction">
+        <div class="circle pull-left">LD</div>
+        <div class="customer pull-left">
+            <span class="name">Lucy Davis</span>
+            <span class="days-ago">5 days Ago . 123 views</span>
+        </div>
+    </div>
+    <div class="feed-multi">
+        <div class="icons clearfix">
+        <div class="left pull-left"><i class="tooltip-link icon-outline-heart pull-left" title="" data-placement="top" data-toggle="tooltip" data-original-title="Like" data-container="body" ></i><span class="text pull-left">725 Likes</span></div>
+            <div class="center pull-left"><a data-toggle="modal" data-target="#addCommentModal" href="#"><i class="tooltip-link icon-outline-comment pull-left" title="" data-placement="top" data-toggle="tooltip" data-original-title="Add comment" data-container="body" ></i></a><span class="text pull-left">23 comments</span></div>
+            <div class="right pull-right"><i class="tooltip-link icon-outline-share pull-left" title="" data-placement="top" data-toggle="tooltip" data-original-title="Share" data-container="body" ></i><span class="text pull-left">48 Shares</span></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addCommentModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="feed modal-content comment-modal">
+            <div class="comment-modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="icon-outline-close icon-outline-close-comment" aria-hidden="true"></i>
+                </button>
+                <div class="comment-modal-title">Comment on Jason Rogers</div>
+            </div>
+            <div class="comment-modal-body">
+                <div class="circle pull-left">JR</div>
+                <div class="comment-content">
+                    <div>
+                        <span class="name">Jason Rogers</span>
+                        <span class="name-desc">@ Jason Rogers . 35 minutes ago</span>
+                    </div>
+                    <div class="comment-content-body">
+                        <span>Will automatically add closing tags when you complete the opening tag at </span>
+                        <span class="link">links/0012...#topic01 #topic02</span>
+                    </div>
+                </div>
+            </div>
+            <div class="comment-edit">
+                <textarea class="text-box" placeholder="Enter comments..."></textarea>
+                <div class="comment-edit-icons">
+                    <div class="images pull-left"><i class="icon-outline-image "></i></div>
+                    <div class="images pull-left"><i class="icon-outline-file "></i></div>
+                    <div class="pull-right"><button class="button comment-button">Add</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        
+<script>
+$(document).ready(() => {
+    $('.icons [data-toggle="tooltip"]').tooltip();
+    $(".feed i").filter("[data-original-title='Like']").on("click", function() {
+        $(event.currentTarget).toggleClass("clicked");
+    });
+})
+        
+        
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+com\sjl\simpleSpring\service\RootUserCreatorService.class
+com\sjl\simpleSpring\web\PersonController.class
+com\sjl\simpleSpring\model\Authority.class
+com\sjl\simpleSpring\model\User.class
+com\sjl\simpleSpring\model\Person.class

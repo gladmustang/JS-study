@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Table example</title>
+    <link href="../stylesheets/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+    <script src="../javascripts/jquery.min.js"></script>
+</head>
+<body>
+<div >
+
+
+<table id="example" class="display" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Office</th>
+        <th>Extn.</th>
+        <th>Start date</th>
+        <th>Salary</th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Office</th>
+        <th>Extn.</th>
+        <th>Start date</th>
+        <th>Salary</th>
+    </tr>
+    </tfoot>
+</table>
+</div>
+
+<script src="../javascripts/jquery.dataTables.js"></script>
+<script src="../javascripts/datatable.pagination.input.js"></script>
+<script src="../javascripts/datatable.pagination.list.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable( {
+            "processing": true,
+            "serverSide": true,
+             scrollY: 400,
+             "pagingType": "input", //input, listbox
+            "ajax": '/getData'
+        } );
+    } );
+
+
+
+//    $('#example').DataTable.settings()
+//    $('#example').DataTable().draw();
+//    $('#example').DataTable().ajax.reload();
+//    $('#example').DataTable().search("sjl").draw(); //搜索包含sjl的数据并重新绘制
+//    $('#example').DataTable().page(4).draw(false); //手动跳转到第5页
+//    $('#example').DataTable().search("sjl").page(3).draw(false);//上面两个的结合
+</script>
+</body>
+</html>

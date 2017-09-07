@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!--<link href="http://getbootstrap.com/dist/css/bootstrap.css" type="text/css" rel="stylesheet" />-->
+    <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>-->
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/knockout/build/output/knockout-latest.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!--<link href="https://surveyjs.azureedge.net/0.12.15/surveyeditor.css" type="text/css" rel="stylesheet" />-->
+    <!--<script src="https://surveyjs.azureedge.net/0.12.15/survey.ko.min.js"></script>-->
+    <!--<script src="https://surveyjs.azureedge.net/0.12.15/surveyeditor.min.js"></script>-->
+    <link rel="stylesheet" href="node_modules/surveyjs-editor/surveyeditor.css">
+    <script src="node_modules/survey-knockout/survey.ko.min.js"></script>
+    <script src="node_modules/surveyjs-editor/surveyeditor.min.js"></script>
+
+
+
+</head>
+<body>
+    <div id="surveyEditorContainer"></div>
+
+</body>
+    <script>
+        var editorOptions = {showEmbededSurveyTab: true}; //see examples below
+        var editor = new SurveyEditor.SurveyEditor("surveyEditorContainer", editorOptions);
+        //set function on save callback
+        editor.saveSurveyFunc = saveMySurvey;
+
+        var suvryJson=             {
+            "pages": [
+                {
+                    "name": "sjl",
+                    "elements": [
+                        {
+                            "type": "radiogroup",
+                            "choices": [
+                                "item1",
+                                "item2",
+                                "item3"
+                            ],
+                            "name": "question1"
+                        }
+                    ]
+                }
+            ]
+        };
+
+        editor.text =JSON.stringify(suvryJson);//load existing survey, optional
+
+
+        function saveMySurvey(){
+            var yourNewSurveyJSON = editor.text;
+            //send updated json in your storage
+            console.log(yourNewSurveyJSON);
+        }
+    </script>
+</html>
