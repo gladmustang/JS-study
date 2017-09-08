@@ -37,10 +37,13 @@ module.exports = {
             filename: "css/[name].style.css",
             allChunks: true
         }),
-        // new CopyWebpackPlugin([{
-        //     from: './',
-        //     to: './css'
-        // }]),
+        new CopyWebpackPlugin([{
+            from:  {
+                glob: path.join(__dirname, 'public/dist/*'),
+                dot: true
+            },
+            to: path.join(__dirname, 'public/dist/css')
+        }]),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
