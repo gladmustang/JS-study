@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>flex sample</title>
+    <style>
+        #root {
+            display: flex;
+            border: 1px solid red;
+            height: 100px;
+            flex-direction: row;
+            align-items:center;
+        }
+        #root span {
+            border: 1px solid blue;
+            height: 50px;
+            flex-grow: 1;
+        }
+        #span1 {
+            text-align: right;
+            padding-right: 20px;
+        }
+
+        #span2 {
+            text-align: left;
+            padding-left: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="root">
+    <span id="span1"> haha1 </span>
+    <span id="span2"> haha2 </span>
+</div>
+</body>
+</html>
