@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: {
@@ -31,11 +32,15 @@ module.exports = {
         // new HtmlWebpackPlugin({
         //     title: 'Output Management'
         //   }),
-        new CleanWebpackPlugin(['dist']),
+        new CleanWebpackPlugin(['public/dist']),
         new ExtractTextPlugin({
             filename: "css/[name].style.css",
             allChunks: true
         }),
+        // new CopyWebpackPlugin([{
+        //     from: './',
+        //     to: './css'
+        // }]),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
@@ -60,17 +65,23 @@ module.exports = {
                 })
             },
             {
-                test: /\.(png|svg|jpg|gif)$/,
-                use: [
-                    'file-loader'
-                ]
+                test: /\.(woff|woff2|eot|ttf|otf|png|svg|jpg|gif)$/,
+                loader: require.resolve('file-loader'),
+                // Exclude `js` files to keep "css" loader working as it injects
+                // it's runtime that would otherwise processed through "file" loader.
+                // Also exclude `html` and `json` extensions so they get processed
+                // by webpacks internal loaders.
+                exclude: [/\.js$/, /\.html$/, /\.json$/],
+                // options: {
+                //     name: 'css/',
+                // },
             },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: [
-                    'file-loader'
-                ]
-            },
+            // {
+            //     test: /\.(woff|woff2|eot|ttf|otf)$/,
+            //     use: [
+            //         'file-loader'
+            //     ]
+            // },
             {
                 test: /\.(csv|tsv)$/,
                 use: [
