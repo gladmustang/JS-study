@@ -18,7 +18,7 @@ module.exports = {
 
     },
     output: {
-        filename: '[name].bundle.js',
+        filename: 'js/[name].bundle.js',
         path: path.resolve(__dirname, 'public/dist')
     },
     devtool: 'source-map', //inline-source-map
@@ -33,7 +33,7 @@ module.exports = {
         //   }),
         new CleanWebpackPlugin(['dist']),
         new ExtractTextPlugin({
-            filename: "[name].style.css",
+            filename: "css/[name].style.css",
             allChunks: true
         }),
         new webpack.ProvidePlugin({
