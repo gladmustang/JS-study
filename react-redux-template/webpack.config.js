@@ -37,13 +37,13 @@ module.exports = {
             filename: "css/[name].style.css",
             allChunks: true
         }),
-        new CopyWebpackPlugin([{
-            from:  {
-                glob: path.join(__dirname, 'public/dist/*'),
-                dot: true
-            },
-            to: path.join(__dirname, 'public/dist/css')
-        }]),
+        // new CopyWebpackPlugin([{
+        //     from:  {
+        //         glob: path.join(__dirname, 'public/dist/*'),
+        //         dot: true
+        //     },
+        //     to: path.join(__dirname, 'public/dist/css')
+        // }]),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
@@ -63,21 +63,36 @@ module.exports = {
                 use: ExtractTextPlugin.extract({
                     fallback: "style-loader",
                     use: {
-                        loader: 'css-loader'
-                    }
+                        loader: 'css-loader',
+                    },
+                    publicPath: "../"
                 })
             },
             {
-                test: /\.(woff|woff2|eot|ttf|otf|png|svg|jpg|gif)$/,
+                test: /\.(png|jpg|gif|svg)$/,
                 loader: require.resolve('file-loader'),
                 // Exclude `js` files to keep "css" loader working as it injects
                 // it's runtime that would otherwise processed through "file" loader.
                 // Also exclude `html` and `json` extensions so they get processed
                 // by webpacks internal loaders.
                 exclude: [/\.js$/, /\.html$/, /\.json$/],
-                // options: {
-                //     name: 'css/',
-                // },
+                options: {
+                    outputPath: "images/",
+                    name: '[name].[ext]',
+                },
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                loader: require.resolve('file-loader'),
+                // Exclude `js` files to keep "css" loader working as it injects
+                // it's runtime that would otherwise processed through "file" loader.
+                // Also exclude `html` and `json` extensions so they get processed
+                // by webpacks internal loaders.
+                exclude: [/\.js$/, /\.html$/, /\.json$/],
+                options: {
+                    outputPath: "fonts/",
+                    name: '[name].[ext]',
+                },
             },
             // {
             //     test: /\.(woff|woff2|eot|ttf|otf)$/,
