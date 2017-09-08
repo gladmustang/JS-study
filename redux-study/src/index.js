@@ -1,15 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {createStore, combineReducers} from 'redux';
-import {CounterContainer, countReducer} from './Counter';
+import AppContainer from './App';
 import { Provider } from 'react-redux'
-import {innerReducer} from './Inner';
-
-
-var reducer = combineReducers({
-    countReducer,
-    innerReducer
-})
+import reducer from "./reducerRegistry"
 
 const store = createStore(reducer);
 
@@ -22,7 +16,7 @@ console.log(store.getState());
 const render = () => {
     ReactDOM.render(
         <Provider store={store}>
-            <CounterContainer />
+            <AppContainer/>
         </Provider>,
         document.getElementById('root')
     );
