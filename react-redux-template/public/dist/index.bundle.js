@@ -11409,15 +11409,15 @@ var _App2 = _interopRequireDefault(_App);
 
 var _reactRedux = __webpack_require__(34);
 
-var _reducerRegistry = __webpack_require__(231);
+var _reduxReducerRegistry = __webpack_require__(231);
 
-var _reducerRegistry2 = _interopRequireDefault(_reducerRegistry);
+var _reduxReducerRegistry2 = _interopRequireDefault(_reduxReducerRegistry);
 
 __webpack_require__(232);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var store = (0, _redux.createStore)(_reducerRegistry2.default);
+var store = (0, _redux.createStore)(_reduxReducerRegistry2.default);
 
 console.log(store.getState());
 
