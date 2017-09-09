@@ -4,12 +4,14 @@
 import React from 'react'
 import {CounterContainer} from './components/Counter';
 import BasicRouterExample from './components/Router1'
+import RouterBootcss from './components/Router2'
 
 const App = (props) => {
     return  (
         <div>
+            {/*<BasicRouterExample/>*/}
+            <RouterBootcss/>
             <CounterContainer />
-            <BasicRouterExample/>
         </div>
 
     )
