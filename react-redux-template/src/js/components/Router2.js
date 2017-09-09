@@ -52,6 +52,19 @@ const Topic = ({ match }) => (
 )
 
 class RouterBootcss extends Component {
+    constructor(props) {
+        super(props);
+        this.clickItem = this.clickItem.bind(this);
+        this.state={
+            url: "/"
+        };
+    }
+    clickItem (url) {
+        if(this.state!=url) {
+            this.setState({url:url});
+        }
+
+    }
     render() {
         return (
             <Router>
@@ -59,13 +72,13 @@ class RouterBootcss extends Component {
                     <nav className="navbar navbar-inverse">
                         <div className="container">
                             <ul className="nav nav-pills">
-                                <li role="presentation" className="active">
+                                <li role="presentation" className={this.state.url=="/"?"active":""} onClick={(e)=> this.clickItem('/')}>
                                     <Link to="/">Home</Link>
                                 </li>
-                                <li role="presentation">
+                                <li role="presentation"  className={this.state.url=="about"?"active":""} onClick={(e)=> this.clickItem('about')}>
                                     <Link to="about">Profile</Link>
                                 </li>
-                                <li role="presentation">
+                                <li role="presentation" className={this.state.url=="topics"?"active":""} onClick={(e)=> this.clickItem('topics')}>
                                     <Link to="topics">Messages</Link>
                                 </li>
                             </ul>
