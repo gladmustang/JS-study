@@ -14,7 +14,5 @@ const App = (props) => {
     )
 }
 
-const AppContainer = connect()(App)
-
-export default AppContainer;
+export default App;
 

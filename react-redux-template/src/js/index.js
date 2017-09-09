@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {createStore, combineReducers} from 'redux';
-import AppContainer from './App';
+import App from './App';
 import { Provider } from 'react-redux'
 import reducer from "./reduxReducerRegistry"
 import "../css/index.css"
@@ -18,7 +18,7 @@ console.log(store.getState());
 const render = () => {
     ReactDOM.render(
         <Provider store={store}>
-            <AppContainer/>
+            <App/>
         </Provider>,
         document.getElementById('root')
     );
