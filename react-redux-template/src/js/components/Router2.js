@@ -56,12 +56,12 @@ class RouterBootcss extends Component {
         super(props);
         this.clickItem = this.clickItem.bind(this);
         this.state={
-            url: "/"
+            activeUrl: "/"
         };
     }
     clickItem (url) {
-        if(this.state!=url) {
-            this.setState({url:url});
+        if(this.state.activeUrl!=url) {
+            this.setState({activeUrl:url});
         }
 
     }
@@ -72,13 +72,13 @@ class RouterBootcss extends Component {
                     <nav className="navbar navbar-inverse">
                         <div className="container">
                             <ul className="nav nav-pills">
-                                <li role="presentation" className={this.state.url=="/"?"active":""} onClick={(e)=> this.clickItem('/')}>
+                                <li role="presentation" className={this.state.activeUrl=="/"?"active":""} onClick={(e)=> this.clickItem('/')}>
                                     <Link to="/">Home</Link>
                                 </li>
-                                <li role="presentation"  className={this.state.url=="about"?"active":""} onClick={(e)=> this.clickItem('about')}>
+                                <li role="presentation"  className={this.state.activeUrl=="about"?"active":""} onClick={(e)=> this.clickItem('about')}>
                                     <Link to="about">Profile</Link>
                                 </li>
-                                <li role="presentation" className={this.state.url=="topics"?"active":""} onClick={(e)=> this.clickItem('topics')}>
+                                <li role="presentation" className={this.state.activeUrl=="topics"?"active":""} onClick={(e)=> this.clickItem('topics')}>
                                     <Link to="topics">Messages</Link>
                                 </li>
                             </ul>
