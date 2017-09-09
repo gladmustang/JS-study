@@ -9,10 +9,9 @@ import "bootstrap/dist/css/bootstrap.min.css"
 
 const store = createStore(reducer);
 
-console.log(store.getState());
-
-store.dispatch({type: "Increase"});
-console.log(store.getState());
+// console.log(store.getState());
+// store.dispatch({type: "Increase"});
+// console.log(store.getState());
 
 
 const render = () => {
