@@ -5,14 +5,14 @@ import {
     Link
 } from 'react-router-dom'
 
-import MyEditor from "../components/MyEditor"
+import RichEditor from "../components/RichEditor"
 
 class BootNav extends Component {
     constructor(props) {
         super(props);
         this.clickItem = this.clickItem.bind(this);
         this.state={
-            activeUrl: "editor"
+            activeUrl: "/"
         };
     }
     clickItem (url) {
@@ -28,15 +28,15 @@ class BootNav extends Component {
                     <nav className="navbar navbar-inverse">
                         <div className="container">
                             <ul className="nav nav-pills">
-                                <li role="presentation" className={this.state.activeUrl=="editor"?"active":""} onClick={(e)=> this.clickItem('editor')}>
-                                    <Link to="editor">Editor</Link>
+                                <li role="presentation" className={this.state.activeUrl=="/"?"active":""} onClick={(e)=> this.clickItem('/')}>
+                                    <Link to="/">Editor</Link>
                                 </li>
                             </ul>
                         </div>
                     </nav>
 
                     <hr/>
-                    <Route path="/editor" component={MyEditor}/>
+                    <Route path="/" component={RichEditor}/>
                 </div>
             </Router>
         );
