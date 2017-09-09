@@ -1,6 +1,6 @@
 import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import RichEditor from '../RichEditor'
+import EditorPage from '../../pages/EditorPage'
 
 const styles = {
     headline: {
@@ -23,7 +23,7 @@ const MainTab = () => (
             </div>
         </Tab>
         <Tab label="Editor" >
-            <RichEditor/>
+            <EditorPage/>
         </Tab>
         <Tab
             label="onActive"
