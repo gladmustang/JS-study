@@ -5,6 +5,7 @@ import {
     Link
 } from 'react-router-dom'
 
+import MyEditor from "./MyEditor"
 
 const Home = () => (
     <div>
@@ -81,6 +82,9 @@ class RouterBootcss extends Component {
                                 <li role="presentation" className={this.state.activeUrl=="topics"?"active":""} onClick={(e)=> this.clickItem('topics')}>
                                     <Link to="topics">Messages</Link>
                                 </li>
+                                <li role="presentation" className={this.state.activeUrl=="editor"?"active":""} onClick={(e)=> this.clickItem('editor')}>
+                                    <Link to="editor">Editor</Link>
+                                </li>
                             </ul>
                         </div>
                     </nav>
@@ -90,6 +94,7 @@ class RouterBootcss extends Component {
                     <Route exact path="/" component={Home}/>
                     <Route path="/about" component={About}/>
                     <Route path="/topics" component={Topics}/>
+                    <Route path="/editor" component={MyEditor}/>
                 </div>
             </Router>
         );
