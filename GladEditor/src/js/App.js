@@ -3,11 +3,14 @@
  */
 import React from 'react'
 import BootNav from './nav/BootNav'
+import ReactuiNav from './nav/ReactuiNav'
+
+const Nav = ReactuiNav;
 
 const App = (props) => {
     return  (
         <div>
-            <BootNav/>
+            <Nav/>
         </div>
 
     )

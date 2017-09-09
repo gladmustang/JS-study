@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 
 import RichEditor from "../components/RichEditor"
+import "bootstrap/dist/css/bootstrap.min.css"
 
 class BootNav extends Component {
     constructor(props) {
@@ -34,9 +35,10 @@ class BootNav extends Component {
                             </ul>
                         </div>
                     </nav>
+                    <div id="content">
+                        <Route path="/" component={RichEditor}/>
+                    </div>
 
-                    <hr/>
-                    <Route path="/" component={RichEditor}/>
                 </div>
             </Router>
         );
