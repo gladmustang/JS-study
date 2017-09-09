@@ -1,15 +1,15 @@
 import React from 'react';
-import RichEditor from '../components/RichEditor'
-import RaisedButton from 'material-ui/RaisedButton';
+// import RichEditor from '../components/reactui/RichEditor'
+// import LinkEditor from '../components/reactui/LinkEditor'
+import MyFroalaEditor from '../components/reactui/MyFroalaEditor'
+const Editor = MyFroalaEditor;
 
-const style = {
-    margin: 12,
-};
 const EditorPage = (props) =>{
     return (
-        <div>
-            <RichEditor/>
-            <RaisedButton label="Get input" primary={true} style={style} />
+        <div style={{
+            marginTop: "10px"
+        }}>
+            <Editor/>
         </div>
 
     );

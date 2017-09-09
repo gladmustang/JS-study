@@ -1,7 +1,11 @@
 import React from 'react';
 import Draft from 'draft-js';
-import "../../css/RichEditor.css"
+import RaisedButton from 'material-ui/RaisedButton';
+import "../../../css/RichEditor.css"
 
+const style = {
+    margin: 12,
+};
 
 const {Editor, EditorState, RichUtils} = Draft;
 class RichEditor extends React.Component {
@@ -14,6 +18,7 @@ class RichEditor extends React.Component {
         this.onTab = this._onTab.bind(this);
         this.toggleBlockType = this._toggleBlockType.bind(this);
         this.toggleInlineStyle = this._toggleInlineStyle.bind(this);
+        this.buttonClick = this.buttonClick.bind(this);
     }
     _handleKeyCommand(command, editorState) {
         const newState = RichUtils.handleKeyCommand(editorState, command);
@@ -43,7 +48,12 @@ class RichEditor extends React.Component {
             )
         );
     }
+    buttonClick (){
+
+        alert(this.state.editorState.getCurrentContent().getPlainText())
+    }
     render() {
+
         const {editorState} = this.state;
         // If the user changes block type before entering any text, we can
         // either style the placeholder or hide it. Let's just hide it now.
@@ -77,6 +87,7 @@ class RichEditor extends React.Component {
                         spellCheck={true}
                     />
                 </div>
+                <RaisedButton label="Get input" primary={true} style={style} onClick={this.buttonClick}/>
             </div>
         );
     }
