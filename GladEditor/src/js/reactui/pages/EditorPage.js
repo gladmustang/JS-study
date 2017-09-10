@@ -1,9 +1,10 @@
 import React from 'react';
 // import RichEditor from '../components/RichEditor'
 // import LinkEditor from '../components/LinkEditor'
-import MyFroalaEditor from '../components/MyFroalaEditor'
-const Editor = MyFroalaEditor;
+// import MyFroalaEditor from '../components/MyFroalaEditor'
+import ReactDraftEditor from '../components/ReactDraftEditor'
 
+const Editor = ReactDraftEditor;
 const EditorPage = (props) =>{
     return (
         <div style={{
