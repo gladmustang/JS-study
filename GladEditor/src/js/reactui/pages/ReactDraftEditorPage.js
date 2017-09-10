@@ -6,6 +6,7 @@ import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import Paper from 'material-ui/Paper';
+import MyTree from  '../components/MyTree'
 
 // const divStyle={
 //     width: "45%",
@@ -66,9 +67,7 @@ class ReactDraftEditorPage extends Component {
             }}>
 
                     <Paper style={leftStyle} zDepth={1} children = {
-                        <div>
-                            hahaha
-                        </div>
+                        <MyTree/>
                     } />
 
                     <Paper  style={rightStyle} zDepth={1} children={

@@ -69,6 +69,15 @@ module.exports = {
                 })
             },
             {
+                test: /\.less$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    //resolve-url-loader may be chained before sass-loader if necessary
+                    use: ['css-loader', 'less-loader'],
+                    publicPath: "../"
+                })
+            },
+            {
                 test: /\.(png|jpg|gif|svg)$/,
                 loader: require.resolve('file-loader'),
                 // Exclude `js` files to keep "css" loader working as it injects
