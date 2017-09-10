@@ -6,6 +6,7 @@ import htmlToDraft from 'html-to-draftjs';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 
+
 class ReactDraftEditor extends Component {
     constructor(props){
         super(props);
@@ -26,6 +27,7 @@ class ReactDraftEditor extends Component {
     // }
 
     onEditorStateChange (editorState) {
+        // var html = convertToRaw(editorState.getCurrentContent());
         this.setState({
             editorState,
         });
@@ -33,10 +35,6 @@ class ReactDraftEditor extends Component {
 
     render() {
         const { editorState } = this.state;
-        if(document.getElementById('htmlDisplay')) {
-            document.getElementById('htmlDisplay').innerHTML = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-        }
-
         return (
             <div>
                 <Editor
@@ -45,12 +43,7 @@ class ReactDraftEditor extends Component {
                     editorClassName="demo-editor"
                     onEditorStateChange={this.onEditorStateChange}
                 />
-                {/*<textarea*/}
-                    {/*disabled*/}
-                    {/*value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}*/}
-                {/*/>*/}
-                <div id="htmlDisplay">
-                </div>
+
             </div>
         );
     }
