@@ -5,9 +5,31 @@ import ReactDraftEditor from '../components/ReactDraftEditor'
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
+import Paper from 'material-ui/Paper';
 
+// const divStyle={
+//     width: "45%",
+//     height: 200,
+//     display: "inline-block"
+// }
+const leftStyle = {
+    width: '20%',
+    minHeight: 600,
+    // textAlign: 'center',
+    float: "left",
+    marginLeft: '2%',
+    marginRight:'2%'
+};
+
+const rightStyle = {
+    width: '74%',
+
+    // textAlign: 'center',
+    float: "left"
+};
 
 const Editor = ReactDraftEditor;
+
 
 class ReactDraftEditorPage extends Component {
     constructor(props) {
@@ -42,15 +64,29 @@ class ReactDraftEditorPage extends Component {
             <div style={{
                 marginTop: "10px"
             }}>
-                <Tabs>
-                    <Tab label="DRAFT" >
-                        <Editor onEditorStateChange = {this.onEditorStateChange} editorState={editorState}/>
-                    </Tab>
-                    <Tab label="HTML">
-                        <div id="htmlDisplay" dangerouslySetInnerHTML={{__html: html}}>
+
+                    <Paper style={leftStyle} zDepth={1} children = {
+                        <div>
+                            hahaha
                         </div>
-                    </Tab>
-                </Tabs>
+                    } />
+
+                    <Paper  style={rightStyle} zDepth={1} children={
+                        <Tabs>
+                            <Tab label="DRAFT" >
+                                <Editor onEditorStateChange = {this.onEditorStateChange} editorState={editorState}/>
+                            </Tab>
+                            <Tab label="HTML">
+                                <div id="htmlDisplay" dangerouslySetInnerHTML={{__html: html}}>
+                                </div>
+                            </Tab>
+                        </Tabs>
+
+                    } />
+
+
+
+
             </div>
 
         );
