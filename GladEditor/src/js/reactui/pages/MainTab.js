@@ -1,6 +1,7 @@
 import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import EditorPageWrapper from './EditorPage'
+import CKEditorPage from './CKEditorPage'
 
 const styles = {
     headline: {
@@ -22,20 +23,15 @@ const MainTab = () => (
                 This is editor home
             </div>
         </Tab>
-        <Tab label="Editor" >
+        <Tab label="Draft-Editor" >
             <EditorPageWrapper/>
         </Tab>
         <Tab
-            label="onActive"
+            label="CK-Editor"
             data-route="/home"
-            onActive={handleActive}
+            // onActive={handleActive}
         >
-            <div>
-                <h2 style={styles.headline}>Tab Three</h2>
-                <p>
-                    This is a third example tab.
-                </p>
-            </div>
+            <CKEditorPage/>
         </Tab>
     </Tabs>
 );

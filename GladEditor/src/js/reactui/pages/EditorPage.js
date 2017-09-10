@@ -9,6 +9,7 @@ import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 
+
 const Editor = ReactDraftEditor;
 
 class EditorPage extends Component {
