@@ -2,8 +2,8 @@
  * Created by jshen103 on 9/6/2017.
  */
 import React from 'react'
-import BootNav from './nav/BootNav'
-import ReactuiNav from './nav/ReactuiNav'
+import BootNav from './bootcss/BootNav'
+import ReactuiNav from './reactui/ReactuiNav'
 
 const Nav = ReactuiNav;
 

@@ -5,7 +5,7 @@ import {
     Link
 } from 'react-router-dom'
 
-import RichEditor from "../components/samples/RichEditor"
+import RichEditor from "../samples/RichEditor"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 class BootNav extends Component {

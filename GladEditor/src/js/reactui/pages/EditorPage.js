@@ -1,7 +1,7 @@
 import React from 'react';
-// import RichEditor from '../components/reactui/RichEditor'
-// import LinkEditor from '../components/reactui/LinkEditor'
-import MyFroalaEditor from '../components/reactui/MyFroalaEditor'
+// import RichEditor from '../components/RichEditor'
+// import LinkEditor from '../components/LinkEditor'
+import MyFroalaEditor from '../components/MyFroalaEditor'
 const Editor = MyFroalaEditor;
 
 const EditorPage = (props) =>{

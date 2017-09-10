@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import {countReducer} from './components/Counter';
-import {innerReducer} from './components/Inner';
+import {countReducer} from './samples/Counter';
+import {innerReducer} from './samples/Inner';
 var reducer = combineReducers({
     countReducer,
     innerReducer

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import EditorPage from '../../pages/EditorPage'
+import EditorPage from './EditorPage'
 
 const styles = {
     headline: {
