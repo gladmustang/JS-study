@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import {createStore} from 'redux';
 import App from './App';
 import { Provider } from 'react-redux'
-import reducer from "./reduxReducerRegistry"
+import reducer from "./reducers/reduxReducerRegistry"
 import "font-awesome/css/font-awesome.min.css"
 import "../css/index.css"
 
