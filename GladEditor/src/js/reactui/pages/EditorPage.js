@@ -8,9 +8,10 @@ import ReactDraftEditor from '../components/ReactDraftEditor'
 
 const Editor = ReactDraftEditor;
 const EditorPage = (props) =>{
-    const {html} = props;
+    const {htmlContent} = props;
+    console.log(htmlContent);
     if(document.getElementById('htmlDisplay')) {
-        document.getElementById('htmlDisplay').innerHTML = html;
+        document.getElementById('htmlDisplay').innerHTML = htmlContent;
     }
     return (
         <div style={{
@@ -32,19 +33,19 @@ const EditorPage = (props) =>{
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        html: state.editorPageReducer.html
+        htmlContent: state.editorPageReducer.htmlContent
     }
 }
 
 
 var defaultState = {
-    html:"",
+    htmlContent:"initial",
 }
 const editorPageReducer = (state= defaultState, action) => {
     switch (action.type) {
         case 'contentChange':
             return {
-                html: action.html
+                htmlContent: action.htmlContent
             };
         default:
             return state;
