@@ -29,10 +29,7 @@ class EditorPage extends Component {
     };
     render() {
         const { editorState } = this.state;
-        if(document.getElementById("htmlDisplay")) {
-            var html =draftToHtml(convertToRaw(editorState.getCurrentContent()));
-            document.getElementById("htmlDisplay").innerHTML = html;
-        }
+        var html =draftToHtml(convertToRaw(editorState.getCurrentContent()));
         return (
             <div style={{
                 marginTop: "10px"
@@ -42,7 +39,7 @@ class EditorPage extends Component {
                         <Editor onEditorStateChange = {this.onEditorStateChange} editorState={editorState}/>
                     </Tab>
                     <Tab label="HTML">
-                        <div id="htmlDisplay">
+                        <div id="htmlDisplay" dangerouslySetInnerHTML={{__html: html}}>
                         </div>
                     </Tab>
                 </Tabs>
@@ -51,11 +48,6 @@ class EditorPage extends Component {
         );
     }
 }
-
-
-
-
-
 
 const EditorPageWrapper = connect()(EditorPage)
 
