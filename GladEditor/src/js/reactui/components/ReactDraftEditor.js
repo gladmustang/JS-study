@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
@@ -27,7 +28,12 @@ class ReactDraftEditor extends Component {
     // }
 
     onEditorStateChange (editorState) {
-        // var html = convertToRaw(editorState.getCurrentContent());
+        var html = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+        this.context.store.dispatch({
+            type: "contentChange",
+            htmlContent: html
+        });
+        // console.log(this.context.store.getState());
         this.setState({
             editorState,
         });
@@ -49,4 +55,7 @@ class ReactDraftEditor extends Component {
     }
 }
 
+ReactDraftEditor.contextTypes = { //must set contextTypes if you want to get store from redux
+    store: PropTypes.object
+}
 export default ReactDraftEditor;
