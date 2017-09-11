@@ -1,0 +1,8 @@
+.collapse {
+    overflow: hidden;
+    display: block;
+}
+
+.collapse-active {
+    transition: height 0.3s ease-out;
+}

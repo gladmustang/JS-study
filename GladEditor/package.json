@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "css-animation": "^1.4.1",
     "draft-js": "^0.10.1",
     "draftjs-to-html": "^0.7.5",
     "font-awesome": "^4.7.0",

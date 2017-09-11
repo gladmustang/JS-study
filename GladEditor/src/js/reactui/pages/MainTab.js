@@ -18,11 +18,11 @@ function handleActive(tab) {
 
 const MainTab = () => (
     <Tabs>
-        <Tab label="Home" >
-            <div>
-                This is editor home
-            </div>
-        </Tab>
+        {/*<Tab label="Home" >*/}
+            {/*<div>*/}
+                {/*This is editor home*/}
+            {/*</div>*/}
+        {/*</Tab>*/}
         <Tab label="Draft-Editor" >
             <ReactDraftEditorPageWrapper/>
         </Tab>
