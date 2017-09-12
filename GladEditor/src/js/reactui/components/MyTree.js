@@ -152,13 +152,34 @@ class MyTree extends Component {
         if(this.cmContainer) {
             ReactDOM.unmountComponentAtNode(this.cmContainer);
             this.toolTip = null;
-            document.body.removeChild(container);
+            document.body.removeChild(this.cmContainer);
             this.cmContainer=null;
         }
     }
 
     deleteTreeItem = (info) => {
-
+        this._removeContainer();
+        const deleteKey = info.node.props.eventKey;
+        // const dragNodesKeys = info.dragNodesKeys;
+        const loop = (data, key, callback) => {
+            data.forEach((item, index, arr) => {
+                if (item.key === key) {
+                    return callback(item, index, arr);
+                }
+                if (item.children) {
+                    return loop(item.children, key, callback);
+                }
+            });
+        };
+        const data = [...this.state.gData];
+        let deleteObj;
+        loop(data, deleteKey, (item, index, arr) => {
+            arr.splice(index, 1);
+            deleteObj = item;
+        });
+        this.setState({
+            gData: data,
+        });
     }
     renderCm(info) {
         if (this.toolTip) {

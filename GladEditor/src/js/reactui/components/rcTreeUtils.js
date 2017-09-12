@@ -25,6 +25,7 @@ export function generateData(x = 3, y = 2, z = 1, gData = []) {
         });
     }
     _loop(z);
+    // console.log(gData);
     return gData;
 }
 export function calcTotal(x = 3, y = 2, z = 1) {
