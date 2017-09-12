@@ -61,7 +61,8 @@ class MyTree extends Component {
     state = {
         gData,
         autoExpandParent: true,
-        expandedKeys: []
+        expandedKeys: [],
+        selectedKeys:[]
     };
 
     componentDidMount() {
@@ -73,9 +74,9 @@ class MyTree extends Component {
         this._removeContainer();
     }
 
-    // onSelect = (selectedKeys) => {
-    //     this.setState({ selectedKeys });
-    // }
+    onSelect = (selectedKeys) => {
+        this.setState({ selectedKeys });
+    }
 
     onDragStart = (info)=> {
         console.log('start', info);
@@ -231,8 +232,8 @@ class MyTree extends Component {
                     openAnimation={animation}
                     onRightClick={this.onRightClick}
                     onMouseLeave={this.onMouseLeave}
-                    // onSelect={this.onSelect}
-                    // selectedKeys={this.state.selectedKeys}
+                    onSelect={this.onSelect}
+                    selectedKeys={this.state.selectedKeys}
                     showLine
                     expandedKeys={this.state.expandedKeys}
                     onExpand={this.onExpand}
