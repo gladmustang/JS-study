@@ -126,7 +126,7 @@ class MyTree extends Component {
         }
         this.setState({
             gData: data,
-            selectedKeys:[]
+            // selectedKeys:[dragObj.key]
         });
     }
 
@@ -180,8 +180,7 @@ class MyTree extends Component {
             deleteObj = item;
         });
         this.setState({
-            gData: data,
-            selectedKeys:[]
+            gData: data
         });
     }
     renderCm(info) {
