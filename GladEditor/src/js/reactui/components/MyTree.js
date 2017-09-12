@@ -5,6 +5,7 @@ import Tooltip from 'rc-tooltip';
 import cssAnimation from 'css-animation';
 import '../../../css/rcTreeBasic.css'
 import '../../../less/contextmenu.less'
+import utils from './rcTreeUtils'
 
 var menuListStyle = {
     listStyle:"none",
@@ -69,15 +70,15 @@ class MyTree extends Component {
         this._removeContainer();
     }
 
-    onSelect = (selectedKeys) => {
-        this.setState({ selectedKeys });
-    }
+    // onSelect = (selectedKeys) => {
+    //     this.setState({ selectedKeys });
+    // }
     onRightClick = (info) => {
         console.log('right click', info);
         this.setState({ selectedKeys: [info.node.props.eventKey] });
         this.renderCm(info);
     }
-    getContainer() {
+    getContainer = () => {
         if (!this.cmContainer) {
             this.cmContainer = document.createElement('div');
             document.body.appendChild(this.cmContainer);
@@ -85,13 +86,17 @@ class MyTree extends Component {
         return this.cmContainer;
     }
 
-    _removeContainer() {
+    _removeContainer = () => {
         if(this.cmContainer) {
             ReactDOM.unmountComponentAtNode(this.cmContainer);
             this.toolTip = null;
             document.body.removeChild(container);
             this.cmContainer=null;
         }
+    }
+
+    deleteTreeItem = (info) => {
+
     }
     renderCm(info) {
         if (this.toolTip) {
@@ -102,10 +107,10 @@ class MyTree extends Component {
             <Tooltip placement="bottomLeft"
                      prefixCls="rc-tree-contextmenu"
                      trigger={['click']}
-                     defaultVisible="true"
+                     defaultVisible
                      overlay={
                          <ul style={menuListStyle}>
-                             <li>delete</li>
+                             <li onClick={()=>{this.deleteTreeItem(info)}}>delete</li>
                              <li>add</li>
                          </ul>
                      }
@@ -124,18 +129,19 @@ class MyTree extends Component {
         ReactDOM.render(this.toolTip, container);
     }
 
+
+
     render(){
         return (
             <div>
-                {/*<h2>Documents</h2>*/}
                 <Tree className ="folderTree"
                     defaultExpandAll={false}
                     defaultExpandedKeys={['p1']}
                     openAnimation={animation}
                     onRightClick={this.onRightClick}
                     onMouseLeave={this.onMouseLeave}
-                    onSelect={this.onSelect}
-                    selectedKeys={this.state.selectedKeys}
+                    // onSelect={this.onSelect}
+                    // selectedKeys={this.state.selectedKeys}
                     showLine
                 >
                     <TreeNode title="parent 1" key="p1">
