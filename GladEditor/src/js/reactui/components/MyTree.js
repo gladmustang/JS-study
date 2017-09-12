@@ -6,6 +6,12 @@ import cssAnimation from 'css-animation';
 import '../../../css/rcTreeBasic.css'
 import '../../../less/contextmenu.less'
 
+var menuListStyle = {
+    listStyle:"none",
+    marginLeft: 0,
+    paddingLeft: 0,
+}
+
 function animate(node, show, done) {
     let height = node.offsetHeight;
     return cssAnimation(node, 'collapse', {
@@ -93,12 +99,12 @@ class MyTree extends Component {
             this.toolTip = null;
         }
         this.toolTip = (
-            <Tooltip placement="bottomRight"
+            <Tooltip placement="bottomLeft"
                      prefixCls="rc-tree-contextmenu"
                      trigger={['click']}
                      defaultVisible="true"
                      overlay={
-                         <ul>
+                         <ul style={menuListStyle}>
                              <li>delete</li>
                              <li>add</li>
                          </ul>
