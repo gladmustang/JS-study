@@ -4,6 +4,7 @@ import Tree, { TreeNode } from 'rc-tree';
 import Tooltip from 'rc-tooltip';
 import cssAnimation from 'css-animation';
 import '../../../css/rcTreeBasic.css'
+import '../../../less/contextmenu.less'
 
 function animate(node, show, done) {
     let height = node.offsetHeight;
@@ -73,13 +74,13 @@ class MyTree extends Component {
         this.setState({ selectedKeys: [info.node.props.eventKey] });
         this.renderCm(info);
     }
-    onMouseLeave = (info) => {
-        if (this.toolTip) {
-            ReactDOM.unmountComponentAtNode(this.cmContainer);
-            this.toolTip = null;
-        }
-
-    }
+    // onMouseLeave = (info) => {
+    //     if (this.toolTip) {
+    //         ReactDOM.unmountComponentAtNode(this.cmContainer);
+    //         this.toolTip = null;
+    //     }
+    //
+    // }
     getContainer() {
         if (!this.cmContainer) {
             this.cmContainer = document.createElement('div');
