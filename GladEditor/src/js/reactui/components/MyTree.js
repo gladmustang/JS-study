@@ -60,12 +60,9 @@ class MyTree extends Component {
         console.log(contains(ReactDOM.findDOMNode(this), this.cmContainer));
     }
     componentWillUnmount() {
-        if (this.cmContainer) {
-            ReactDOM.unmountComponentAtNode(this.cmContainer);
-            document.body.removeChild(this.cmContainer);
-            this.cmContainer = null;
-        }
+        this._removeContainer();
     }
+
     onSelect = (selectedKeys) => {
         this.setState({ selectedKeys });
     }
@@ -74,19 +71,21 @@ class MyTree extends Component {
         this.setState({ selectedKeys: [info.node.props.eventKey] });
         this.renderCm(info);
     }
-    // onMouseLeave = (info) => {
-    //     if (this.toolTip) {
-    //         ReactDOM.unmountComponentAtNode(this.cmContainer);
-    //         this.toolTip = null;
-    //     }
-    //
-    // }
     getContainer() {
         if (!this.cmContainer) {
             this.cmContainer = document.createElement('div');
             document.body.appendChild(this.cmContainer);
         }
         return this.cmContainer;
+    }
+
+    _removeContainer() {
+        if(this.cmContainer) {
+            ReactDOM.unmountComponentAtNode(this.cmContainer);
+            this.toolTip = null;
+            document.body.removeChild(container);
+            this.cmContainer=null;
+        }
     }
     renderCm(info) {
         if (this.toolTip) {
@@ -97,12 +96,15 @@ class MyTree extends Component {
             <Tooltip placement="bottomRight"
                      prefixCls="rc-tree-contextmenu"
                      trigger={['click']}
-                     overlay={<span>tooltip</span>}
+                     defaultVisible="true"
+                     overlay={
+                         <ul>
+                             <li>delete</li>
+                             <li>add</li>
+                         </ul>
+                     }
             >
-                <ul>
-                    <li>delete</li>
-                    <li>add</li>
-                </ul>
+            <span></span>
             </Tooltip>
         );
 
