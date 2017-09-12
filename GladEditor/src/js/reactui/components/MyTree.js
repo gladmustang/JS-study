@@ -125,7 +125,8 @@ class MyTree extends Component {
             });
         }
         this.setState({
-            gData: data
+            gData: data,
+            selectedKeys:[]
         });
     }
 
