@@ -5,7 +5,7 @@ import Tooltip from 'rc-tooltip';
 import cssAnimation from 'css-animation';
 import '../../../css/rcTreeBasic.css'
 import '../../../less/contextmenu.less'
-import utils from './rcTreeUtils'
+import { gData } from './rcTreeUtils'
 
 var menuListStyle = {
     listStyle:"none",
@@ -59,8 +59,11 @@ function contains(root, n) {
 
 class MyTree extends Component {
     state = {
-        selectedKeys: ['p1'],
+        gData,
+        autoExpandParent: true,
+        expandedKeys: []
     };
+
     componentDidMount() {
         this.getContainer();
         // console.log(ReactDOM.findDOMNode(this), this.cmContainer);
@@ -73,6 +76,65 @@ class MyTree extends Component {
     // onSelect = (selectedKeys) => {
     //     this.setState({ selectedKeys });
     // }
+
+    onDragStart = (info)=> {
+        console.log('start', info);
+    }
+
+    onDragEnter= (info)=> {
+        console.log('enter', info);
+        this.setState({
+            expandedKeys: info.expandedKeys,
+        });
+    }
+    onDrop = (info) => {
+        console.log('drop', info);
+        const dropKey = info.node.props.eventKey;
+        const dragKey = info.dragNode.props.eventKey;
+        // const dragNodesKeys = info.dragNodesKeys;
+        const loop = (data, key, callback) => {
+            data.forEach((item, index, arr) => {
+                if (item.key === key) {
+                    return callback(item, index, arr);
+                }
+                if (item.children) {
+                    return loop(item.children, key, callback);
+                }
+            });
+        };
+        const data = [...this.state.gData];
+        let dragObj;
+        loop(data, dragKey, (item, index, arr) => {
+            arr.splice(index, 1);
+            dragObj = item;
+        });
+        if (info.dropToGap) {
+            let ar;
+            let i;
+            loop(data, dropKey, (item, index, arr) => {
+                ar = arr;
+                i = index;
+            });
+            ar.splice(i, 0, dragObj);
+        } else {
+            loop(data, dropKey, (item) => {
+                item.children = item.children || [];
+                // where to insert 示例添加到尾部，可以是随意位置
+                item.children.push(dragObj);
+            });
+        }
+        this.setState({
+            gData: data,
+        });
+    }
+
+    onExpand = (expandedKeys) => {
+        console.log('onExpand');
+        this.setState({
+            expandedKeys,
+            autoExpandParent: false,
+        });
+    }
     onRightClick = (info) => {
         console.log('right click', info);
         this.setState({ selectedKeys: [info.node.props.eventKey] });
@@ -132,6 +194,14 @@ class MyTree extends Component {
 
 
     render(){
+        const loop = data => {
+            return data.map((item) => {
+                if (item.children && item.children.length) {
+                    return <TreeNode key={item.key} title={item.title}>{loop(item.children)}</TreeNode>;
+                }
+                return <TreeNode key={item.key} title={item.title} />;
+            });
+        };
         return (
             <div>
                 <Tree className ="folderTree"
@@ -143,17 +213,25 @@ class MyTree extends Component {
                     // onSelect={this.onSelect}
                     // selectedKeys={this.state.selectedKeys}
                     showLine
+                    expandedKeys={this.state.expandedKeys}
+                    onExpand={this.onExpand}
+                    autoExpandParent={this.state.autoExpandParent}
+                    draggable
+                    onDragStart={this.onDragStart}
+                    onDragEnter={this.onDragEnter}
+                    onDrop={this.onDrop}
                 >
-                    <TreeNode title="parent 1" key="p1">
-                        <TreeNode key="p10" title="leaf"/>
-                        <TreeNode title="parent 1-1" key="p11">
-                            <TreeNode title="parent 2-1" key="p21">
-                                <TreeNode title="leaf"/>
-                                <TreeNode title="leaf"/>
-                            </TreeNode>
-                            <TreeNode key="p22" title="leaf"/>
-                        </TreeNode>
-                    </TreeNode>
+                    {/*<TreeNode title="parent 1" key="p1">*/}
+                        {/*<TreeNode key="p10" title="leaf"/>*/}
+                        {/*<TreeNode title="parent 1-1" key="p11">*/}
+                            {/*<TreeNode title="parent 2-1" key="p21">*/}
+                                {/*<TreeNode title="leaf"/>*/}
+                                {/*<TreeNode title="leaf"/>*/}
+                            {/*</TreeNode>*/}
+                            {/*<TreeNode key="p22" title="leaf"/>*/}
+                        {/*</TreeNode>*/}
+                    {/*</TreeNode>*/}
+                    {loop(this.state.gData)}
                 </Tree>
             </div>
         );
