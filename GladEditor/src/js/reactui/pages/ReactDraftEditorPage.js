@@ -6,6 +6,7 @@ import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import Paper from 'material-ui/Paper';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import MyTree from  '../components/MyTree'
 
 // const divStyle={
@@ -19,12 +20,11 @@ const leftStyle = {
     // textAlign: 'center',
     float: "left",
     marginLeft: '2%',
-    marginRight:'2%'
+    marginRight:'2%',
 };
 
 const rightStyle = {
     width: '74%',
-
     // textAlign: 'center',
     float: "left"
 };
@@ -65,10 +65,15 @@ class ReactDraftEditorPage extends Component {
             <div style={{
                 marginTop: "10px"
             }}>
-
-                    <Paper style={leftStyle} zDepth={1} children = {
+                <Card style={leftStyle}>
+                    <CardHeader style={{backgroundColor: 'rgb(0, 188, 212)'}}
+                        title="Documents" titleStyle={{color: 'white'}}
+                        // subtitle="Subtitle"
+                    />
+                    <CardText>
                         <MyTree/>
-                    } />
+                    </CardText>
+                </Card>
 
                     <Paper  style={rightStyle} zDepth={1} children={
                         <Tabs>

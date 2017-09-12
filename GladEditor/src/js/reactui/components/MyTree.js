@@ -118,8 +118,8 @@ class MyTree extends Component {
     render(){
         return (
             <div>
-                <h2>Documents</h2>
-                <Tree
+                {/*<h2>Documents</h2>*/}
+                <Tree className ="folderTree"
                     defaultExpandAll={false}
                     defaultExpandedKeys={['p1']}
                     openAnimation={animation}
