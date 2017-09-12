@@ -7,7 +7,7 @@ import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import Paper from 'material-ui/Paper';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import MyTree from  '../components/MyTree'
+import DynamicDraggableTree from  '../components/rcTree/DynamicDraggableTree'
 
 // const divStyle={
 //     width: "45%",
@@ -71,7 +71,7 @@ class ReactDraftEditorPage extends Component {
                         // subtitle="Subtitle"
                     />
                     <CardText>
-                        <MyTree/>
+                        <DynamicDraggableTree/>
                     </CardText>
                 </Card>
 

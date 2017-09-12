@@ -2,10 +2,12 @@ import 'rc-tree/assets/index.css';
 import React, {Component} from 'react';
 import Tree, { TreeNode } from 'rc-tree';
 import Tooltip from 'rc-tooltip';
-import cssAnimation from 'css-animation';
-import '../../../css/rcTreeBasic.css'
-import '../../../less/contextmenu.less'
-import { gData } from './rcTreeUtils'
+import '../../../../css/rcTreeBasic.css'
+import '../../../../less/contextmenu.less'
+// import { gData } from './rcTreeUtils'
+import {animation, contains} from "./animateUtils"
+import {generateTreeNodes, setLeaf, getNewTreeData} from "./dynamicUtils"
+
 
 var menuListStyle = {
     listStyle:"none",
@@ -13,65 +15,40 @@ var menuListStyle = {
     paddingLeft: 0,
 }
 
-function animate(node, show, done) {
-    let height = node.offsetHeight;
-    return cssAnimation(node, 'collapse', {
-        start() {
-            if (!show) {
-                node.style.height = `${node.offsetHeight}px`;
-            } else {
-                height = node.offsetHeight;
-                node.style.height = 0;
-            }
-        },
-        active() {
-            node.style.height = `${show ? height : 0}px`;
-        },
-        end() {
-            node.style.height = '';
-            done();
-        },
-    });
-}
 
-const animation = {
-    enter(node, done) {
-        return animate(node, true, done);
-    },
-    leave(node, done) {
-        return animate(node, false, done);
-    },
-    appear(node, done) {
-        return animate(node, true, done);
-    },
-};
-
-function contains(root, n) {
-    let node = n;
-    while (node) {
-        if (node === root) {
-            return true;
-        }
-        node = node.parentNode;
-    }
-    return false;
-}
-
-class MyTree extends Component {
+class DynamicDraggableTree extends Component {
     state = {
-        gData,
+        treeData: [],
         autoExpandParent: true,
-        expandedKeys: [],
+        expandedKeys: ['0-2'],
         selectedKeys:[]
     };
 
     componentDidMount() {
         this.getContainer();
-        // console.log(ReactDOM.findDOMNode(this), this.cmContainer);
         console.log(contains(ReactDOM.findDOMNode(this), this.cmContainer));
+        setTimeout(() => {
+            this.setState({
+                treeData: [
+                    { name: 'pNode 01', key: '0-0' },
+                    { name: 'pNode 02', key: '0-1' },
+                    { name: 'pNode 03', key: '0-2', isLeaf: true },
+                ]
+            });
+        }, 100);
     }
     componentWillUnmount() {
         this._removeContainer();
+    }
+    onLoadData = (treeNode) => {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                const treeData = [...this.state.treeData];
+                getNewTreeData(treeData, treeNode.props.eventKey, generateTreeNodes(treeNode), 2);
+                this.setState({ treeData });
+                resolve();
+            }, 500);
+        });
     }
 
     onSelect = (selectedKeys) => {
@@ -90,44 +67,47 @@ class MyTree extends Component {
     }
     onDrop = (info) => {
         console.log('drop', info);
-        const dropKey = info.node.props.eventKey;
-        const dragKey = info.dragNode.props.eventKey;
-        // const dragNodesKeys = info.dragNodesKeys;
-        const loop = (data, key, callback) => {
-            data.forEach((item, index, arr) => {
-                if (item.key === key) {
-                    return callback(item, index, arr);
-                }
-                if (item.children) {
-                    return loop(item.children, key, callback);
-                }
+        this.onLoadData(info.node).then(()=> {
+            const dropKey = info.node.props.eventKey;
+            const dragKey = info.dragNode.props.eventKey;
+            // const dragNodesKeys = info.dragNodesKeys;
+            const loop = (data, key, callback) => {
+                data.forEach((item, index, arr) => {
+                    if (item.key === key) {
+                        return callback(item, index, arr);
+                    }
+                    if (item.children) {
+                        return loop(item.children, key, callback);
+                    }
+                });
+            };
+            const data = [...this.state.treeData];
+            let dragObj;
+            loop(data, dragKey, (item, index, arr) => {
+                arr.splice(index, 1);
+                dragObj = item;
             });
-        };
-        const data = [...this.state.gData];
-        let dragObj;
-        loop(data, dragKey, (item, index, arr) => {
-            arr.splice(index, 1);
-            dragObj = item;
+            if (info.dropToGap) {
+                let ar;
+                let i;
+                loop(data, dropKey, (item, index, arr) => {
+                    ar = arr;
+                    i = index;
+                });
+                ar.splice(i, 0, dragObj);
+            } else {
+                loop(data, dropKey, (item) => {
+                    item.children = item.children || [];
+                    // where to insert 示例添加到尾部，可以是随意位置
+                    item.children.push(dragObj);
+                });
+            }
+            this.setState({
+                treeData: data,
+                // selectedKeys:[dragObj.key]
+            });
         });
-        if (info.dropToGap) {
-            let ar;
-            let i;
-            loop(data, dropKey, (item, index, arr) => {
-                ar = arr;
-                i = index;
-            });
-            ar.splice(i, 0, dragObj);
-        } else {
-            loop(data, dropKey, (item) => {
-                item.children = item.children || [];
-                // where to insert 示例添加到尾部，可以是随意位置
-                item.children.push(dragObj);
-            });
-        }
-        this.setState({
-            gData: data,
-            // selectedKeys:[dragObj.key]
-        });
+
     }
 
     onExpand = (expandedKeys) => {
@@ -173,14 +153,14 @@ class MyTree extends Component {
                 }
             });
         };
-        const data = [...this.state.gData];
+        const data = [...this.state.treeData];
         let deleteObj;
         loop(data, deleteKey, (item, index, arr) => {
             arr.splice(index, 1);
             deleteObj = item;
         });
         this.setState({
-            gData: data
+            treeData: data
         });
     }
     renderCm(info) {
@@ -217,14 +197,18 @@ class MyTree extends Component {
 
 
     render(){
-        const loop = data => {
+        const loop = (data) => {
             return data.map((item) => {
-                if (item.children && item.children.length) {
-                    return <TreeNode key={item.key} title={item.title}>{loop(item.children)}</TreeNode>;
+                if (item.children) {
+                    return <TreeNode title={item.name} key={item.key}>{loop(item.children)}</TreeNode>;
                 }
-                return <TreeNode key={item.key} title={item.title} />;
+                return (
+                    <TreeNode title={item.name} key={item.key} isLeaf={item.isLeaf}
+                    />
+                );
             });
         };
+        const treeNodes = loop(this.state.treeData);
         return (
             <div>
                 <Tree className ="folderTree"
@@ -242,18 +226,9 @@ class MyTree extends Component {
                     onDragStart={this.onDragStart}
                     onDragEnter={this.onDragEnter}
                     onDrop={this.onDrop}
+                    loadData={this.onLoadData}
                 >
-                    {/*<TreeNode title="parent 1" key="p1">*/}
-                        {/*<TreeNode key="p10" title="leaf"/>*/}
-                        {/*<TreeNode title="parent 1-1" key="p11">*/}
-                            {/*<TreeNode title="parent 2-1" key="p21">*/}
-                                {/*<TreeNode title="leaf"/>*/}
-                                {/*<TreeNode title="leaf"/>*/}
-                            {/*</TreeNode>*/}
-                            {/*<TreeNode key="p22" title="leaf"/>*/}
-                        {/*</TreeNode>*/}
-                    {/*</TreeNode>*/}
-                    {loop(this.state.gData)}
+                    {treeNodes}
                 </Tree>
             </div>
         );
@@ -263,4 +238,4 @@ class MyTree extends Component {
 }
 
 
-export default MyTree;
+export default DynamicDraggableTree;
