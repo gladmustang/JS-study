@@ -125,7 +125,7 @@ class MyTree extends Component {
             });
         }
         this.setState({
-            gData: data,
+            gData: data
         });
     }
 
@@ -180,6 +180,7 @@ class MyTree extends Component {
         });
         this.setState({
             gData: data,
+            selectedKeys:[]
         });
     }
     renderCm(info) {
