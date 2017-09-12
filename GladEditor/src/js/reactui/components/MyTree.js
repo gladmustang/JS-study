@@ -229,7 +229,6 @@ class MyTree extends Component {
             <div>
                 <Tree className ="folderTree"
                     defaultExpandAll={false}
-                    defaultExpandedKeys={['p1']}
                     openAnimation={animation}
                     onRightClick={this.onRightClick}
                     onMouseLeave={this.onMouseLeave}
