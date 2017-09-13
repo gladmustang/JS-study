@@ -51,4 +51,14 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+var port = process.env.PORT || '3000';
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+app.listen(port, function () {
+    console.log(app_name + ' is running on port ' + port + ' now!');
+});
+
 module.exports = app;
+
