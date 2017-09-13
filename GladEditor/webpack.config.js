@@ -9,18 +9,18 @@ module.exports = {
     entry: {
         //each entry is mapping to a html page and include all js for they page (different page can have duplicate component import)
         //if you don't want one component to be duplicated, put it in common chunks
-        index: './src/js/index.js',
+        index: './src/client/js/index.js',
         // index2: './src/index2.js',
         // vendors: ['jquery','bootstrap'], //the first method to introduce bootstrap js
         // vendors: ['jquery','bootstrap/dist/js/bootstrap.min.js'], //the second method to introduce bootstrap js
-        vendors: "./src/js/vendors.js" //vendors.js include common chunks that need to be separated,
+        vendors: "./src/client/js/vendors.js" //vendors.js include common chunks that need to be separated,
                                // this style of writing has the same functionality with above, except you can put all common trunk names in a seperate file
         //commonTrunk2: "" // commonTrunk2 can hold different common trunks beside vendors trunk
 
     },
     output: {
         filename: 'js/[name].bundle.js',
-        path: path.resolve(__dirname, 'public/dist')
+        path: path.resolve(__dirname, 'public/resources')
     },
     devtool: 'source-map', //inline-source-map
     plugins: [
@@ -32,7 +32,7 @@ module.exports = {
         // new HtmlWebpackPlugin({
         //     title: 'Output Management'
         //   }),
-        new CleanWebpackPlugin(['public/dist']),
+        new CleanWebpackPlugin(['public/resources']),
         new ExtractTextPlugin({
             filename: "css/[name].style.css",
             allChunks: true
