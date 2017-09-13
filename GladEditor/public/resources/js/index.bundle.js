@@ -52328,7 +52328,18 @@ var ReactuiNav = function (_Component) {
         }
 
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ReactuiNav.__proto__ || Object.getPrototypeOf(ReactuiNav)).call.apply(_ref, [this].concat(args))), _this), _this.rightButtonClick = function () {
-            alert("hello");
+            fetch("./closeApp").then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                if (data.code == 0) {
+                    console.log(data);
+                } else {
+                    console.log(data.error);
+                }
+            }).catch(function (e) {
+                alert("App stopped");
+                console.log("Oops, error");
+            });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -62315,7 +62326,7 @@ var ReactDraftEditorPage = function (_Component) {
             editorState: _draftJs.EditorState.createEmpty()
         };
         //loading previous state
-        var html = '<p>&nbsp;</p> <h2><strong>install</strong></h2> <p><img src="https://nodei.co/npm/react-ckeditor-wrapper.png" alt="react-ckeditor-wrapper" style="float:none;height: undefined;width: undefined"/></p>';
+        var html = '<p>&nbsp;</p> <h2><strong>install</strong></h2></p>';
         var contentBlock = (0, _htmlToDraftjs2.default)(html);
         if (contentBlock) {
             var contentState = _draftJs.ContentState.createFromBlockArray(contentBlock.contentBlocks);

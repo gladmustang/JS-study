@@ -11,6 +11,8 @@ var users = require('./src/server/routes/users');
 
 var app = express();
 
+global.rootDir = __dirname;
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', exphbs(require("./src/server/utils/renderUtil")));

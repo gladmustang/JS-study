@@ -40,7 +40,7 @@ class ReactDraftEditorPage extends Component {
             editorState: EditorState.createEmpty()
         };
         //loading previous state
-        const html = '<p>&nbsp;</p> <h2><strong>install</strong></h2> <p><img src="https://nodei.co/npm/react-ckeditor-wrapper.png" alt="react-ckeditor-wrapper" style="float:none;height: undefined;width: undefined"/></p>';
+        const html = '<p>&nbsp;</p> <h2><strong>install</strong></h2></p>';
         const contentBlock = htmlToDraft(html);
         if (contentBlock) {
             const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);

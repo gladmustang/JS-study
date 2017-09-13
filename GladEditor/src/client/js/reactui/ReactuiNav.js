@@ -5,7 +5,19 @@ import MainTab from './pages/MainTab'
 
 class ReactuiNav extends Component {
     rightButtonClick = ()=> {
-        alert("hello")
+        fetch("./closeApp").then(function(response) {
+            return response.json();
+        }).then(function(data) {
+            if(data.code==0) {
+                console.log(data);
+            } else {
+                console.log(data.error);
+            }
+
+        }).catch(function(e) {
+            alert("App stopped");
+            console.log("Oops, error");
+        });
     }
     render(){
         return (

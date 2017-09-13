@@ -10,7 +10,8 @@
     "pm2": "pm2",
     "open": "node ./openBrowser",
     "start": "pm2 start app.js --name gladapp",
-    "stop": "pm2 stop gladapp"
+    "stop": "pm2 stop gladapp",
+    "restart": "pm2 restart gladapp"
 
   },
   "author": "",
