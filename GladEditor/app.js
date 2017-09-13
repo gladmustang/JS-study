@@ -60,5 +60,7 @@ app.listen(port, function () {
     console.log(app_name + ' is running on port ' + port + ' now!');
 });
 
+require("./openBrowser");
+
 module.exports = app;
 
