@@ -7,4 +7,5 @@ logs
 .env-dev
 .vscode
 .project
-public/dist
+public/resources
+npm-debug.log
