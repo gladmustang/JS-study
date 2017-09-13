@@ -16,7 +16,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.engine('html', exphbs(require("./src/server/utils/renderUtil")));
 app.set('view engine', 'html');
 
-var app_name="gladeditor"
+var app_name="gladmustang"
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
