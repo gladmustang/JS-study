@@ -52305,6 +52305,10 @@ var _MainTab = __webpack_require__(603);
 
 var _MainTab2 = _interopRequireDefault(_MainTab);
 
+var _ConfirmDialog = __webpack_require__(696);
+
+var _ConfirmDialog2 = _interopRequireDefault(_ConfirmDialog);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -52317,32 +52321,9 @@ var ReactuiNav = function (_Component) {
     _inherits(ReactuiNav, _Component);
 
     function ReactuiNav() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
         _classCallCheck(this, ReactuiNav);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
-
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ReactuiNav.__proto__ || Object.getPrototypeOf(ReactuiNav)).call.apply(_ref, [this].concat(args))), _this), _this.rightButtonClick = function () {
-            fetch("./closeApp").then(function (response) {
-                return response.json();
-            }).then(function (data) {
-                if (data.code == 0) {
-                    console.log(data);
-                } else {
-                    console.log(data.error);
-                }
-            }).catch(function (e) {
-                // alert("App stopped, will close the window !");
-                console.log("Oops, error");
-                window.opener = null;
-                window.close();
-            });
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        return _possibleConstructorReturn(this, (ReactuiNav.__proto__ || Object.getPrototypeOf(ReactuiNav)).apply(this, arguments));
     }
 
     _createClass(ReactuiNav, [{
@@ -52358,8 +52339,7 @@ var ReactuiNav = function (_Component) {
                             marginBottom: '1px'
                         },
                         title: 'Glad Editor',
-                        iconClassNameRight: 'fa fa-times',
-                        onRightIconButtonTouchTap: this.rightButtonClick
+                        iconElementRight: _react2.default.createElement(_ConfirmDialog2.default, null)
                     }),
                     _react2.default.createElement(_MainTab2.default, null)
                 )
@@ -69938,6 +69918,2022 @@ exports.default = editorPageReducer;
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 682 */,
+/* 683 */,
+/* 684 */,
+/* 685 */,
+/* 686 */,
+/* 687 */,
+/* 688 */,
+/* 689 */,
+/* 690 */,
+/* 691 */,
+/* 692 */,
+/* 693 */,
+/* 694 */,
+/* 695 */,
+/* 696 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Dialog = __webpack_require__(697);
+
+var _Dialog2 = _interopRequireDefault(_Dialog);
+
+var _FlatButton = __webpack_require__(705);
+
+var _FlatButton2 = _interopRequireDefault(_FlatButton);
+
+var _IconButton = __webpack_require__(247);
+
+var _IconButton2 = _interopRequireDefault(_IconButton);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+ * A modal dialog can only be closed by selecting one of the actions.
+ */
+var ConfirmDialog = function (_React$Component) {
+    _inherits(ConfirmDialog, _React$Component);
+
+    function ConfirmDialog() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, ConfirmDialog);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ConfirmDialog.__proto__ || Object.getPrototypeOf(ConfirmDialog)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+            open: false
+        }, _this.handleOpen = function () {
+            _this.setState({ open: true });
+        }, _this.handleCancel = function () {
+            _this.setState({ open: false });
+        }, _this.handleClose = function () {
+            _this.setState({ open: false });
+            fetch("./closeApp").then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                if (data.code == 0) {
+                    console.log(data);
+                } else {
+                    console.log(data.error);
+                }
+            }).catch(function (e) {
+                // alert("App stopped, will close the window !");
+                console.log("Oops, error");
+                window.opener = null;
+                window.close();
+            });
+        }, _temp), _possibleConstructorReturn(_this, _ret);
+    }
+
+    _createClass(ConfirmDialog, [{
+        key: 'render',
+        value: function render() {
+            var actions = [_react2.default.createElement(_FlatButton2.default, {
+                label: 'Cancel',
+                primary: true,
+                onClick: this.handleCancel
+            }), _react2.default.createElement(_FlatButton2.default, {
+                label: 'Yes',
+                primary: true
+                // disabled={true}
+                , onClick: this.handleClose
+            })];
+
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(_IconButton2.default, { iconClassName: 'fa fa-times', onClick: this.handleOpen, iconStyle: { color: 'white' } }),
+                _react2.default.createElement(
+                    _Dialog2.default,
+                    {
+                        title: 'Close App',
+                        actions: actions,
+                        modal: true,
+                        open: this.state.open
+                    },
+                    'Are you sure to close the editor ?'
+                )
+            );
+        }
+    }]);
+
+    return ConfirmDialog;
+}(_react2.default.Component);
+
+exports.default = ConfirmDialog;
+
+/***/ }),
+/* 697 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _Dialog = __webpack_require__(698);
+
+var _Dialog2 = _interopRequireDefault(_Dialog);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _Dialog2.default;
+
+/***/ }),
+/* 698 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends2 = __webpack_require__(11);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _objectWithoutProperties2 = __webpack_require__(17);
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+var _getPrototypeOf = __webpack_require__(14);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = __webpack_require__(5);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(6);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(7);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(8);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _simpleAssign = __webpack_require__(15);
+
+var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactDom = __webpack_require__(19);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactEventListener = __webpack_require__(699);
+
+var _reactEventListener2 = _interopRequireDefault(_reactEventListener);
+
+var _keycode = __webpack_require__(536);
+
+var _keycode2 = _interopRequireDefault(_keycode);
+
+var _transitions = __webpack_require__(36);
+
+var _transitions2 = _interopRequireDefault(_transitions);
+
+var _Overlay = __webpack_require__(702);
+
+var _Overlay2 = _interopRequireDefault(_Overlay);
+
+var _RenderToLayer = __webpack_require__(704);
+
+var _RenderToLayer2 = _interopRequireDefault(_RenderToLayer);
+
+var _Paper = __webpack_require__(93);
+
+var _Paper2 = _interopRequireDefault(_Paper);
+
+var _TransitionGroup = __webpack_require__(248);
+
+var _TransitionGroup2 = _interopRequireDefault(_TransitionGroup);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TransitionItem = function (_Component) {
+  (0, _inherits3.default)(TransitionItem, _Component);
+
+  function TransitionItem() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    (0, _classCallCheck3.default)(this, TransitionItem);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = TransitionItem.__proto__ || (0, _getPrototypeOf2.default)(TransitionItem)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      style: {}
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+  }
+
+  (0, _createClass3.default)(TransitionItem, [{
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      clearTimeout(this.enterTimeout);
+      clearTimeout(this.leaveTimeout);
+    }
+  }, {
+    key: 'componentWillEnter',
+    value: function componentWillEnter(callback) {
+      this.componentWillAppear(callback);
+    }
+  }, {
+    key: 'componentWillAppear',
+    value: function componentWillAppear(callback) {
+      var spacing = this.context.muiTheme.baseTheme.spacing;
+
+      this.setState({
+        style: {
+          opacity: 1,
+          transform: 'translate(0, ' + spacing.desktopKeylineIncrement + 'px)'
+        }
+      });
+
+      this.enterTimeout = setTimeout(callback, 450); // matches transition duration
+    }
+  }, {
+    key: 'componentWillLeave',
+    value: function componentWillLeave(callback) {
+      this.setState({
+        style: {
+          opacity: 0,
+          transform: 'translate(0, 0)'
+        }
+      });
+
+      this.leaveTimeout = setTimeout(callback, 450); // matches transition duration
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          style = _props.style,
+          children = _props.children,
+          other = (0, _objectWithoutProperties3.default)(_props, ['style', 'children']);
+      var prepareStyles = this.context.muiTheme.prepareStyles;
+
+
+      return _react2.default.createElement(
+        'div',
+        (0, _extends3.default)({}, other, { style: prepareStyles((0, _simpleAssign2.default)({}, this.state.style, style)) }),
+        children
+      );
+    }
+  }]);
+  return TransitionItem;
+}(_react.Component);
+
+TransitionItem.contextTypes = {
+  muiTheme: _propTypes2.default.object.isRequired
+};
+TransitionItem.propTypes = process.env.NODE_ENV !== "production" ? {
+  children: _propTypes2.default.node,
+  style: _propTypes2.default.object
+} : {};
+
+
+function getStyles(props, context) {
+  var autoScrollBodyContent = props.autoScrollBodyContent,
+      open = props.open;
+  var _context$muiTheme = context.muiTheme,
+      _context$muiTheme$bas = _context$muiTheme.baseTheme,
+      spacing = _context$muiTheme$bas.spacing,
+      palette = _context$muiTheme$bas.palette,
+      dialog = _context$muiTheme.dialog,
+      zIndex = _context$muiTheme.zIndex;
+
+
+  var gutter = spacing.desktopGutter;
+  var borderScroll = '1px solid ' + palette.borderColor;
+
+  return {
+    root: {
+      position: 'fixed',
+      boxSizing: 'border-box',
+      WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated)
+      zIndex: zIndex.dialog,
+      top: 0,
+      left: open ? 0 : -10000,
+      width: '100%',
+      height: '100%',
+      transition: open ? _transitions2.default.easeOut('0ms', 'left', '0ms') : _transitions2.default.easeOut('0ms', 'left', '450ms')
+    },
+    content: {
+      boxSizing: 'border-box',
+      WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated)
+      transition: _transitions2.default.easeOut(),
+      position: 'relative',
+      width: '75%',
+      maxWidth: spacing.desktopKeylineIncrement * 12,
+      margin: '0 auto',
+      zIndex: zIndex.dialog
+    },
+    actionsContainer: {
+      boxSizing: 'border-box',
+      WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated)
+      padding: 8,
+      width: '100%',
+      textAlign: 'right',
+      marginTop: autoScrollBodyContent ? -1 : 0
+    },
+    overlay: {
+      zIndex: zIndex.dialogOverlay
+    },
+    title: {
+      margin: 0,
+      padding: gutter + 'px ' + gutter + 'px 20px ' + gutter + 'px',
+      color: palette.textColor,
+      fontSize: dialog.titleFontSize,
+      lineHeight: '32px',
+      fontWeight: 400,
+      marginBottom: autoScrollBodyContent ? -1 : 0
+    },
+    body: {
+      fontSize: dialog.bodyFontSize,
+      color: dialog.bodyColor,
+      padding: (props.title ? 0 : gutter) + 'px ' + gutter + 'px ' + gutter + 'px',
+      boxSizing: 'border-box',
+      overflowY: autoScrollBodyContent ? 'auto' : 'hidden',
+      borderTop: autoScrollBodyContent ? borderScroll : 'none',
+      borderBottom: autoScrollBodyContent ? borderScroll : 'none'
+    }
+  };
+}
+
+var DialogInline = function (_Component2) {
+  (0, _inherits3.default)(DialogInline, _Component2);
+
+  function DialogInline() {
+    var _ref2;
+
+    var _temp2, _this2, _ret2;
+
+    (0, _classCallCheck3.default)(this, DialogInline);
+
+    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+
+    return _ret2 = (_temp2 = (_this2 = (0, _possibleConstructorReturn3.default)(this, (_ref2 = DialogInline.__proto__ || (0, _getPrototypeOf2.default)(DialogInline)).call.apply(_ref2, [this].concat(args))), _this2), _this2.handleTouchTapOverlay = function () {
+      _this2.requestClose(false);
+    }, _this2.handleKeyUp = function (event) {
+      if ((0, _keycode2.default)(event) === 'esc') {
+        _this2.requestClose(false);
+      }
+    }, _this2.handleResize = function () {
+      _this2.positionDialog();
+    }, _temp2), (0, _possibleConstructorReturn3.default)(_this2, _ret2);
+  }
+
+  (0, _createClass3.default)(DialogInline, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.positionDialog();
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      this.positionDialog();
+    }
+  }, {
+    key: 'positionDialog',
+    value: function positionDialog() {
+      var _props2 = this.props,
+          actions = _props2.actions,
+          autoDetectWindowHeight = _props2.autoDetectWindowHeight,
+          autoScrollBodyContent = _props2.autoScrollBodyContent,
+          bodyStyle = _props2.bodyStyle,
+          open = _props2.open,
+          repositionOnUpdate = _props2.repositionOnUpdate,
+          title = _props2.title;
+
+
+      if (!open) {
+        return;
+      }
+
+      var clientHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+      var container = _reactDom2.default.findDOMNode(this);
+      var dialogWindow = _reactDom2.default.findDOMNode(this.refs.dialogWindow);
+      var dialogContent = _reactDom2.default.findDOMNode(this.refs.dialogContent);
+      var minPaddingTop = 16;
+
+      // Reset the height in case the window was resized.
+      dialogWindow.style.height = '';
+      dialogContent.style.height = '';
+
+      var dialogWindowHeight = dialogWindow.offsetHeight;
+      var paddingTop = (clientHeight - dialogWindowHeight) / 2 - 64;
+      if (paddingTop < minPaddingTop) paddingTop = minPaddingTop;
+
+      // Vertically center the dialog window, but make sure it doesn't
+      // transition to that position.
+      if (repositionOnUpdate || !container.style.paddingTop) {
+        container.style.paddingTop = paddingTop + 'px';
+      }
+
+      // Force a height if the dialog is taller than clientHeight
+      if (autoDetectWindowHeight || autoScrollBodyContent) {
+        var styles = getStyles(this.props, this.context);
+        styles.body = (0, _simpleAssign2.default)(styles.body, bodyStyle);
+        var maxDialogContentHeight = clientHeight - 2 * 64;
+
+        if (title) maxDialogContentHeight -= dialogContent.previousSibling.offsetHeight;
+
+        if (_react2.default.Children.count(actions)) {
+          maxDialogContentHeight -= dialogContent.nextSibling.offsetHeight;
+        }
+
+        dialogContent.style.maxHeight = maxDialogContentHeight + 'px';
+        if (maxDialogContentHeight > dialogWindowHeight) {
+          dialogContent.style.borderBottom = 'none';
+          dialogContent.style.borderTop = 'none';
+        }
+      }
+    }
+  }, {
+    key: 'requestClose',
+    value: function requestClose(buttonClicked) {
+      if (!buttonClicked && this.props.modal) {
+        return;
+      }
+
+      if (this.props.onRequestClose) {
+        this.props.onRequestClose(!!buttonClicked);
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props3 = this.props,
+          actions = _props3.actions,
+          actionsContainerClassName = _props3.actionsContainerClassName,
+          actionsContainerStyle = _props3.actionsContainerStyle,
+          bodyClassName = _props3.bodyClassName,
+          bodyStyle = _props3.bodyStyle,
+          children = _props3.children,
+          className = _props3.className,
+          contentClassName = _props3.contentClassName,
+          contentStyle = _props3.contentStyle,
+          overlayClassName = _props3.overlayClassName,
+          overlayStyle = _props3.overlayStyle,
+          open = _props3.open,
+          paperClassName = _props3.paperClassName,
+          paperProps = _props3.paperProps,
+          style = _props3.style,
+          titleClassName = _props3.titleClassName,
+          titleStyle = _props3.titleStyle,
+          title = _props3.title;
+      var prepareStyles = this.context.muiTheme.prepareStyles;
+
+      var styles = getStyles(this.props, this.context);
+
+      styles.root = (0, _simpleAssign2.default)(styles.root, style);
+      styles.content = (0, _simpleAssign2.default)(styles.content, contentStyle);
+      styles.body = (0, _simpleAssign2.default)(styles.body, bodyStyle);
+      styles.actionsContainer = (0, _simpleAssign2.default)(styles.actionsContainer, actionsContainerStyle);
+      styles.overlay = (0, _simpleAssign2.default)(styles.overlay, overlayStyle);
+      styles.title = (0, _simpleAssign2.default)(styles.title, titleStyle);
+
+      var actionsContainer = _react2.default.Children.count(actions) > 0 && _react2.default.createElement(
+        'div',
+        { className: actionsContainerClassName, style: prepareStyles(styles.actionsContainer) },
+        _react2.default.Children.toArray(actions)
+      );
+
+      var titleElement = title;
+      if (_react2.default.isValidElement(title)) {
+        titleElement = _react2.default.cloneElement(title, {
+          className: title.props.className || titleClassName,
+          style: prepareStyles((0, _simpleAssign2.default)(styles.title, title.props.style))
+        });
+      } else if (typeof title === 'string') {
+        titleElement = _react2.default.createElement(
+          'h3',
+          { className: titleClassName, style: prepareStyles(styles.title) },
+          title
+        );
+      }
+
+      return _react2.default.createElement(
+        'div',
+        { className: className, style: prepareStyles(styles.root) },
+        open && _react2.default.createElement(_reactEventListener2.default, {
+          target: 'window',
+          onKeyUp: this.handleKeyUp,
+          onResize: this.handleResize
+        }),
+        _react2.default.createElement(
+          _TransitionGroup2.default,
+          {
+            component: 'div',
+            ref: 'dialogWindow',
+            transitionAppear: true,
+            transitionAppearTimeout: 450,
+            transitionEnter: true,
+            transitionEnterTimeout: 450
+          },
+          open && _react2.default.createElement(
+            TransitionItem,
+            {
+              className: contentClassName,
+              style: styles.content
+            },
+            _react2.default.createElement(
+              _Paper2.default,
+              (0, _extends3.default)({ className: paperClassName, zDepth: 4 }, paperProps),
+              titleElement,
+              _react2.default.createElement(
+                'div',
+                {
+                  ref: 'dialogContent',
+                  className: bodyClassName,
+                  style: prepareStyles(styles.body)
+                },
+                children
+              ),
+              actionsContainer
+            )
+          )
+        ),
+        _react2.default.createElement(_Overlay2.default, {
+          show: open,
+          className: overlayClassName,
+          style: styles.overlay,
+          onClick: this.handleTouchTapOverlay
+        })
+      );
+    }
+  }]);
+  return DialogInline;
+}(_react.Component);
+
+DialogInline.contextTypes = {
+  muiTheme: _propTypes2.default.object.isRequired
+};
+DialogInline.propTypes = process.env.NODE_ENV !== "production" ? {
+  actions: _propTypes2.default.node,
+  actionsContainerClassName: _propTypes2.default.string,
+  actionsContainerStyle: _propTypes2.default.object,
+  autoDetectWindowHeight: _propTypes2.default.bool,
+  autoScrollBodyContent: _propTypes2.default.bool,
+  bodyClassName: _propTypes2.default.string,
+  bodyStyle: _propTypes2.default.object,
+  children: _propTypes2.default.node,
+  className: _propTypes2.default.string,
+  contentClassName: _propTypes2.default.string,
+  contentStyle: _propTypes2.default.object,
+  modal: _propTypes2.default.bool,
+  onRequestClose: _propTypes2.default.func,
+  open: _propTypes2.default.bool.isRequired,
+  overlayClassName: _propTypes2.default.string,
+  overlayStyle: _propTypes2.default.object,
+  paperClassName: _propTypes2.default.string,
+  paperProps: _propTypes2.default.object,
+  repositionOnUpdate: _propTypes2.default.bool,
+  style: _propTypes2.default.object,
+  title: _propTypes2.default.node,
+  titleClassName: _propTypes2.default.string,
+  titleStyle: _propTypes2.default.object
+} : {};
+
+var Dialog = function (_Component3) {
+  (0, _inherits3.default)(Dialog, _Component3);
+
+  function Dialog() {
+    var _ref3;
+
+    var _temp3, _this3, _ret3;
+
+    (0, _classCallCheck3.default)(this, Dialog);
+
+    for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+      args[_key3] = arguments[_key3];
+    }
+
+    return _ret3 = (_temp3 = (_this3 = (0, _possibleConstructorReturn3.default)(this, (_ref3 = Dialog.__proto__ || (0, _getPrototypeOf2.default)(Dialog)).call.apply(_ref3, [this].concat(args))), _this3), _this3.renderLayer = function () {
+      return _react2.default.createElement(DialogInline, _this3.props);
+    }, _temp3), (0, _possibleConstructorReturn3.default)(_this3, _ret3);
+  }
+
+  (0, _createClass3.default)(Dialog, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_RenderToLayer2.default, { render: this.renderLayer, open: true, useLayerForClickAway: false });
+    }
+  }]);
+  return Dialog;
+}(_react.Component);
+
+Dialog.contextTypes = {
+  muiTheme: _propTypes2.default.object.isRequired
+};
+Dialog.defaultProps = {
+  autoDetectWindowHeight: true,
+  autoScrollBodyContent: false,
+  modal: false,
+  repositionOnUpdate: true
+};
+Dialog.propTypes = process.env.NODE_ENV !== "production" ? {
+  /**
+   * Action buttons to display below the Dialog content (`children`).
+   * This property accepts either a React element, or an array of React elements.
+   */
+  actions: _propTypes2.default.node,
+  /**
+   * The `className` to add to the actions container's root element.
+   */
+  actionsContainerClassName: _propTypes2.default.string,
+  /**
+   * Overrides the inline-styles of the actions container's root element.
+   */
+  actionsContainerStyle: _propTypes2.default.object,
+  /**
+   * If set to true, the height of the `Dialog` will be auto detected. A max height
+   * will be enforced so that the content does not extend beyond the viewport.
+   */
+  autoDetectWindowHeight: _propTypes2.default.bool,
+  /**
+   * If set to true, the body content of the `Dialog` will be scrollable.
+   */
+  autoScrollBodyContent: _propTypes2.default.bool,
+  /**
+   * The `className` to add to the content's root element under the title.
+   */
+  bodyClassName: _propTypes2.default.string,
+  /**
+   * Overrides the inline-styles of the content's root element under the title.
+   */
+  bodyStyle: _propTypes2.default.object,
+  /**
+   * The contents of the `Dialog`.
+   */
+  children: _propTypes2.default.node,
+  /**
+   * @ignore
+   */
+  className: _propTypes2.default.string,
+  /**
+   * The `className` to add to the content container.
+   */
+  contentClassName: _propTypes2.default.string,
+  /**
+   * Overrides the inline-styles of the content container.
+   */
+  contentStyle: _propTypes2.default.object,
+  /**
+   * Force the user to use one of the actions in the `Dialog`.
+   * Clicking outside the `Dialog` will not trigger the `onRequestClose`.
+   */
+  modal: _propTypes2.default.bool,
+  /**
+   * Fired when the `Dialog` is requested to be closed by a click outside the `Dialog` or on the buttons.
+   *
+   * @param {bool} buttonClicked Determines whether a button click triggered this request.
+   */
+  onRequestClose: _propTypes2.default.func,
+  /**
+   * Controls whether the Dialog is opened or not.
+   */
+  open: _propTypes2.default.bool.isRequired,
+  /**
+   * The `className` to add to the `Overlay` component that is rendered behind the `Dialog`.
+   */
+  overlayClassName: _propTypes2.default.string,
+  /**
+   * Overrides the inline-styles of the `Overlay` component that is rendered behind the `Dialog`.
+   */
+  overlayStyle: _propTypes2.default.object,
+  /**
+   * The CSS class name of the `Paper` element.
+   */
+  paperClassName: _propTypes2.default.string,
+  /**
+   * Properties applied to the `Paper` element.
+   */
+  paperProps: _propTypes2.default.object,
+  /**
+   * Determines whether the `Dialog` should be repositioned when it's contents are updated.
+   */
+  repositionOnUpdate: _propTypes2.default.bool,
+  /**
+   * Override the inline-styles of the root element.
+   */
+  style: _propTypes2.default.object,
+  /**
+   * The title to display on the `Dialog`. Could be number, string, element or an array containing these types.
+   */
+  title: _propTypes2.default.node,
+  /**
+   * The `className` to add to the title's root container element.
+   */
+  titleClassName: _propTypes2.default.string,
+  /**
+   * Overrides the inline-styles of the title's root container element.
+   */
+  titleStyle: _propTypes2.default.object
+} : {};
+exports.default = Dialog;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 699 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _getPrototypeOf = __webpack_require__(14);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = __webpack_require__(5);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(6);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(7);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(8);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _typeof2 = __webpack_require__(72);
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
+var _keys = __webpack_require__(238);
+
+var _keys2 = _interopRequireDefault(_keys);
+
+var _objectWithoutProperties2 = __webpack_require__(17);
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+var _assign = __webpack_require__(494);
+
+var _assign2 = _interopRequireDefault(_assign);
+
+exports.withOptions = withOptions;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _shallowEqual = __webpack_require__(83);
+
+var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
+
+var _warning = __webpack_require__(16);
+
+var _warning2 = _interopRequireDefault(_warning);
+
+var _supports = __webpack_require__(700);
+
+var supports = _interopRequireWildcard(_supports);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var defaultEventOptions = {
+  capture: false,
+  passive: false
+};
+/* eslint-disable prefer-spread */
+
+function mergeDefaultEventOptions(options) {
+  return (0, _assign2.default)({}, defaultEventOptions, options);
+}
+
+function getEventListenerArgs(eventName, callback, options) {
+  var args = [eventName, callback];
+  args.push(supports.passiveOption ? options : options.capture);
+  return args;
+}
+
+function on(target, eventName, callback, options) {
+  if (supports.addEventListener) {
+    target.addEventListener.apply(target, getEventListenerArgs(eventName, callback, options));
+  } else if (supports.attachEvent) {
+    // IE8+ Support
+    target.attachEvent('on' + eventName, function () {
+      callback.call(target);
+    });
+  }
+}
+
+function off(target, eventName, callback, options) {
+  if (supports.removeEventListener) {
+    target.removeEventListener.apply(target, getEventListenerArgs(eventName, callback, options));
+  } else if (supports.detachEvent) {
+    // IE8+ Support
+    target.detachEvent('on' + eventName, callback);
+  }
+}
+
+function forEachListener(props, iteratee) {
+  var children = props.children,
+      target = props.target,
+      eventProps = (0, _objectWithoutProperties3.default)(props, ['children', 'target']);
+
+
+  (0, _keys2.default)(eventProps).forEach(function (name) {
+    if (name.substring(0, 2) !== 'on') {
+      return;
+    }
+
+    var prop = eventProps[name];
+    var type = typeof prop === 'undefined' ? 'undefined' : (0, _typeof3.default)(prop);
+    var isObject = type === 'object';
+    var isFunction = type === 'function';
+
+    if (!isObject && !isFunction) {
+      return;
+    }
+
+    var capture = name.substr(-7).toLowerCase() === 'capture';
+    var eventName = name.substring(2).toLowerCase();
+    eventName = capture ? eventName.substring(0, eventName.length - 7) : eventName;
+
+    if (isObject) {
+      iteratee(eventName, prop.handler, prop.options);
+    } else {
+      iteratee(eventName, prop, mergeDefaultEventOptions({ capture: capture }));
+    }
+  });
+}
+
+function withOptions(handler, options) {
+  process.env.NODE_ENV !== "production" ? (0, _warning2.default)(options, 'react-event-listener: Should be specified options in withOptions.') : void 0;
+
+  return {
+    handler: handler,
+    options: mergeDefaultEventOptions(options)
+  };
+}
+
+var EventListener = function (_Component) {
+  (0, _inherits3.default)(EventListener, _Component);
+
+  function EventListener() {
+    (0, _classCallCheck3.default)(this, EventListener);
+    return (0, _possibleConstructorReturn3.default)(this, (EventListener.__proto__ || (0, _getPrototypeOf2.default)(EventListener)).apply(this, arguments));
+  }
+
+  (0, _createClass3.default)(EventListener, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.addListeners();
+    }
+  }, {
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(nextProps) {
+      return !(0, _shallowEqual2.default)(this.props, nextProps);
+    }
+  }, {
+    key: 'componentWillUpdate',
+    value: function componentWillUpdate() {
+      this.removeListeners();
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      this.addListeners();
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.removeListeners();
+    }
+  }, {
+    key: 'addListeners',
+    value: function addListeners() {
+      this.applyListeners(on);
+    }
+  }, {
+    key: 'removeListeners',
+    value: function removeListeners() {
+      this.applyListeners(off);
+    }
+  }, {
+    key: 'applyListeners',
+    value: function applyListeners(onOrOff) {
+      var target = this.props.target;
+
+
+      if (target) {
+        var element = target;
+
+        if (typeof target === 'string') {
+          element = window[target];
+        }
+
+        forEachListener(this.props, onOrOff.bind(null, element));
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return this.props.children || null;
+    }
+  }]);
+  return EventListener;
+}(_react.Component);
+
+process.env.NODE_ENV !== "production" ? EventListener.propTypes = {
+  /**
+   * You can provide a single child too.
+   */
+  children: _propTypes2.default.element,
+  /**
+   * The DOM target to listen to.
+   */
+  target: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.string]).isRequired
+} : void 0;
+exports.default = EventListener;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 700 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.passiveOption = exports.detachEvent = exports.attachEvent = exports.removeEventListener = exports.addEventListener = exports.canUseDOM = undefined;
+
+var _defineProperty = __webpack_require__(701);
+
+var _defineProperty2 = _interopRequireDefault(_defineProperty);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Inspired by https://github.com/facebook/fbjs/blob/master/packages/fbjs/src/core/ExecutionEnvironment.js
+var canUseDOM = exports.canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+
+var addEventListener = exports.addEventListener = canUseDOM && 'addEventListener' in window;
+var removeEventListener = exports.removeEventListener = canUseDOM && 'removeEventListener' in window;
+
+// IE8+ Support
+var attachEvent = exports.attachEvent = canUseDOM && 'attachEvent' in window;
+var detachEvent = exports.detachEvent = canUseDOM && 'detachEvent' in window;
+
+// Passive options
+// Inspired by https://github.com/Modernizr/Modernizr/blob/master/feature-detects/dom/passiveeventlisteners.js
+var passiveOption = exports.passiveOption = function () {
+  var cache = null;
+
+  return function () {
+    if (cache !== null) {
+      return cache;
+    }
+
+    var supportsPassiveOption = false;
+
+    try {
+      window.addEventListener('test', null, (0, _defineProperty2.default)({}, 'passive', {
+        get: function get() {
+          supportsPassiveOption = true;
+        }
+      }));
+    } catch (e) {} // eslint-disable-line no-empty
+
+    cache = supportsPassiveOption;
+
+    return supportsPassiveOption;
+  }();
+}();
+
+/***/ }),
+/* 701 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _defineProperty = __webpack_require__(241);
+
+var _defineProperty2 = _interopRequireDefault(_defineProperty);
+
+exports.default = defineProperty;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//  weak
+
+function defineProperty(o, p, attr) {
+  return (0, _defineProperty2.default)(o, p, attr);
+}
+
+/***/ }),
+/* 702 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends2 = __webpack_require__(11);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _objectWithoutProperties2 = __webpack_require__(17);
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+var _getPrototypeOf = __webpack_require__(14);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = __webpack_require__(5);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(6);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(7);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(8);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _simpleAssign = __webpack_require__(15);
+
+var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _transitions = __webpack_require__(36);
+
+var _transitions2 = _interopRequireDefault(_transitions);
+
+var _AutoLockScrolling = __webpack_require__(703);
+
+var _AutoLockScrolling2 = _interopRequireDefault(_AutoLockScrolling);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function getStyles(props, context) {
+  var overlay = context.muiTheme.overlay;
+
+
+  var style = {
+    root: {
+      position: 'fixed',
+      height: '100%',
+      width: '100%',
+      top: 0,
+      left: '-100%',
+      opacity: 0,
+      backgroundColor: overlay.backgroundColor,
+      WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', // Remove mobile color flashing (deprecated)
+
+      // Two ways to promote overlay to its own render layer
+      willChange: 'opacity',
+      transform: 'translateZ(0)',
+
+      transition: props.transitionEnabled && _transitions2.default.easeOut('0ms', 'left', '400ms') + ', ' + _transitions2.default.easeOut('400ms', 'opacity')
+    }
+  };
+
+  if (props.show) {
+    (0, _simpleAssign2.default)(style.root, {
+      left: 0,
+      opacity: 1,
+      transition: _transitions2.default.easeOut('0ms', 'left') + ', ' + _transitions2.default.easeOut('400ms', 'opacity')
+    });
+  }
+
+  return style;
+}
+
+var Overlay = function (_Component) {
+  (0, _inherits3.default)(Overlay, _Component);
+
+  function Overlay() {
+    (0, _classCallCheck3.default)(this, Overlay);
+    return (0, _possibleConstructorReturn3.default)(this, (Overlay.__proto__ || (0, _getPrototypeOf2.default)(Overlay)).apply(this, arguments));
+  }
+
+  (0, _createClass3.default)(Overlay, [{
+    key: 'setOpacity',
+    value: function setOpacity(opacity) {
+      this.refs.overlay.style.opacity = opacity;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          autoLockScrolling = _props.autoLockScrolling,
+          show = _props.show,
+          style = _props.style,
+          transitionEnabled = _props.transitionEnabled,
+          other = (0, _objectWithoutProperties3.default)(_props, ['autoLockScrolling', 'show', 'style', 'transitionEnabled']);
+      var prepareStyles = this.context.muiTheme.prepareStyles;
+
+      var styles = getStyles(this.props, this.context);
+
+      return _react2.default.createElement(
+        'div',
+        (0, _extends3.default)({}, other, { ref: 'overlay', style: prepareStyles((0, _simpleAssign2.default)(styles.root, style)) }),
+        autoLockScrolling && _react2.default.createElement(_AutoLockScrolling2.default, { lock: show })
+      );
+    }
+  }]);
+  return Overlay;
+}(_react.Component);
+
+Overlay.defaultProps = {
+  autoLockScrolling: true,
+  style: {},
+  transitionEnabled: true
+};
+Overlay.contextTypes = {
+  muiTheme: _propTypes2.default.object.isRequired
+};
+Overlay.propTypes = process.env.NODE_ENV !== "production" ? {
+  autoLockScrolling: _propTypes2.default.bool,
+  show: _propTypes2.default.bool.isRequired,
+  /**
+   * Override the inline-styles of the root element.
+   */
+  style: _propTypes2.default.object,
+  transitionEnabled: _propTypes2.default.bool
+} : {};
+exports.default = Overlay;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 703 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _getPrototypeOf = __webpack_require__(14);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = __webpack_require__(5);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(6);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(7);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(8);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = __webpack_require__(1);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var originalBodyOverflow = null;
+var lockingCounter = 0;
+
+var AutoLockScrolling = function (_Component) {
+  (0, _inherits3.default)(AutoLockScrolling, _Component);
+
+  function AutoLockScrolling() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    (0, _classCallCheck3.default)(this, AutoLockScrolling);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = AutoLockScrolling.__proto__ || (0, _getPrototypeOf2.default)(AutoLockScrolling)).call.apply(_ref, [this].concat(args))), _this), _this.locked = false, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+  }
+
+  (0, _createClass3.default)(AutoLockScrolling, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (this.props.lock === true) {
+        this.preventScrolling();
+      }
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (this.props.lock !== nextProps.lock) {
+        if (nextProps.lock) {
+          this.preventScrolling();
+        } else {
+          this.allowScrolling();
+        }
+      }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.allowScrolling();
+    }
+
+    // force to only lock/unlock once
+
+  }, {
+    key: 'preventScrolling',
+    value: function preventScrolling() {
+      if (this.locked === true) {
+        return;
+      }
+
+      lockingCounter = lockingCounter + 1;
+      this.locked = true;
+
+      // only lock the first time the component is mounted.
+      if (lockingCounter === 1) {
+        var body = document.getElementsByTagName('body')[0];
+        originalBodyOverflow = body.style.overflow;
+        body.style.overflow = 'hidden';
+      }
+    }
+  }, {
+    key: 'allowScrolling',
+    value: function allowScrolling() {
+      if (this.locked === true) {
+        lockingCounter = lockingCounter - 1;
+        this.locked = false;
+      }
+
+      if (lockingCounter === 0 && originalBodyOverflow !== null) {
+        var body = document.getElementsByTagName('body')[0];
+        body.style.overflow = originalBodyOverflow || '';
+        originalBodyOverflow = null;
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return null;
+    }
+  }]);
+  return AutoLockScrolling;
+}(_react.Component);
+
+AutoLockScrolling.propTypes = process.env.NODE_ENV !== "production" ? {
+  lock: _propTypes2.default.bool.isRequired
+} : {};
+exports.default = AutoLockScrolling;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 704 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _getPrototypeOf = __webpack_require__(14);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = __webpack_require__(5);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(6);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(7);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(8);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = __webpack_require__(1);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactDom = __webpack_require__(19);
+
+var _dom = __webpack_require__(552);
+
+var _dom2 = _interopRequireDefault(_dom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// heavily inspired by https://github.com/Khan/react-components/blob/master/js/layered-component-mixin.jsx
+var RenderToLayer = function (_Component) {
+  (0, _inherits3.default)(RenderToLayer, _Component);
+
+  function RenderToLayer() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    (0, _classCallCheck3.default)(this, RenderToLayer);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = RenderToLayer.__proto__ || (0, _getPrototypeOf2.default)(RenderToLayer)).call.apply(_ref, [this].concat(args))), _this), _this.onClickAway = function (event) {
+      if (event.defaultPrevented) {
+        return;
+      }
+
+      if (!_this.props.componentClickAway) {
+        return;
+      }
+
+      if (!_this.props.open) {
+        return;
+      }
+
+      var el = _this.layer;
+      if (event.target !== el && event.target === window || document.documentElement.contains(event.target) && !_dom2.default.isDescendant(el, event.target)) {
+        _this.props.componentClickAway(event);
+      }
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+  }
+
+  (0, _createClass3.default)(RenderToLayer, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.renderLayer();
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      this.renderLayer();
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.unrenderLayer();
+    }
+  }, {
+    key: 'getLayer',
+    value: function getLayer() {
+      return this.layer;
+    }
+  }, {
+    key: 'unrenderLayer',
+    value: function unrenderLayer() {
+      if (!this.layer) {
+        return;
+      }
+
+      if (this.props.useLayerForClickAway) {
+        this.layer.style.position = 'relative';
+        this.layer.removeEventListener('touchstart', this.onClickAway);
+        this.layer.removeEventListener('click', this.onClickAway);
+      } else {
+        window.removeEventListener('touchstart', this.onClickAway);
+        window.removeEventListener('click', this.onClickAway);
+      }
+
+      (0, _reactDom.unmountComponentAtNode)(this.layer);
+      document.body.removeChild(this.layer);
+      this.layer = null;
+    }
+
+    /**
+     * By calling this method in componentDidMount() and
+     * componentDidUpdate(), you're effectively creating a "wormhole" that
+     * funnels React's hierarchical updates through to a DOM node on an
+     * entirely different part of the page.
+     */
+
+  }, {
+    key: 'renderLayer',
+    value: function renderLayer() {
+      var _this2 = this;
+
+      var _props = this.props,
+          open = _props.open,
+          render = _props.render;
+
+
+      if (open) {
+        if (!this.layer) {
+          this.layer = document.createElement('div');
+          document.body.appendChild(this.layer);
+
+          if (this.props.useLayerForClickAway) {
+            this.layer.addEventListener('touchstart', this.onClickAway);
+            this.layer.addEventListener('click', this.onClickAway);
+            this.layer.style.position = 'fixed';
+            this.layer.style.top = 0;
+            this.layer.style.bottom = 0;
+            this.layer.style.left = 0;
+            this.layer.style.right = 0;
+            this.layer.style.zIndex = this.context.muiTheme.zIndex.layer;
+          } else {
+            setTimeout(function () {
+              window.addEventListener('touchstart', _this2.onClickAway);
+              window.addEventListener('click', _this2.onClickAway);
+            }, 0);
+          }
+        }
+
+        var layerElement = render();
+        this.layerElement = (0, _reactDom.unstable_renderSubtreeIntoContainer)(this, layerElement, this.layer);
+      } else {
+        this.unrenderLayer();
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return null;
+    }
+  }]);
+  return RenderToLayer;
+}(_react.Component);
+
+RenderToLayer.defaultProps = {
+  useLayerForClickAway: true
+};
+RenderToLayer.contextTypes = {
+  muiTheme: _propTypes2.default.object.isRequired
+};
+RenderToLayer.propTypes = process.env.NODE_ENV !== "production" ? {
+  componentClickAway: _propTypes2.default.func,
+  open: _propTypes2.default.bool.isRequired,
+  render: _propTypes2.default.func.isRequired,
+  useLayerForClickAway: _propTypes2.default.bool
+} : {};
+exports.default = RenderToLayer;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 705 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _FlatButton = __webpack_require__(706);
+
+var _FlatButton2 = _interopRequireDefault(_FlatButton);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _FlatButton2.default;
+
+/***/ }),
+/* 706 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends2 = __webpack_require__(11);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _objectWithoutProperties2 = __webpack_require__(17);
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+var _getPrototypeOf = __webpack_require__(14);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = __webpack_require__(5);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(6);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(7);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(8);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _simpleAssign = __webpack_require__(15);
+
+var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _transitions = __webpack_require__(36);
+
+var _transitions2 = _interopRequireDefault(_transitions);
+
+var _colorManipulator = __webpack_require__(153);
+
+var _EnhancedButton = __webpack_require__(147);
+
+var _EnhancedButton2 = _interopRequireDefault(_EnhancedButton);
+
+var _FlatButtonLabel = __webpack_require__(707);
+
+var _FlatButtonLabel2 = _interopRequireDefault(_FlatButtonLabel);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function validateLabel(props, propName, componentName) {
+  if (process.env.NODE_ENV !== 'production') {
+    if (!props.children && props.label !== 0 && !props.label && !props.icon) {
+      return new Error('Required prop label or children or icon was not specified in ' + componentName + '.');
+    }
+  }
+}
+
+var FlatButton = function (_Component) {
+  (0, _inherits3.default)(FlatButton, _Component);
+
+  function FlatButton() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    (0, _classCallCheck3.default)(this, FlatButton);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = FlatButton.__proto__ || (0, _getPrototypeOf2.default)(FlatButton)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      hovered: false,
+      isKeyboardFocused: false,
+      touch: false
+    }, _this.handleKeyboardFocus = function (event, isKeyboardFocused) {
+      _this.setState({ isKeyboardFocused: isKeyboardFocused });
+      _this.props.onKeyboardFocus(event, isKeyboardFocused);
+    }, _this.handleMouseEnter = function (event) {
+      // Cancel hover styles for touch devices
+      if (!_this.state.touch) _this.setState({ hovered: true });
+      _this.props.onMouseEnter(event);
+    }, _this.handleMouseLeave = function (event) {
+      _this.setState({ hovered: false });
+      _this.props.onMouseLeave(event);
+    }, _this.handleTouchStart = function (event) {
+      _this.setState({ touch: true });
+      _this.props.onTouchStart(event);
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+  }
+
+  (0, _createClass3.default)(FlatButton, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (nextProps.disabled) {
+        this.setState({
+          hovered: false
+        });
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          backgroundColor = _props.backgroundColor,
+          children = _props.children,
+          disabled = _props.disabled,
+          fullWidth = _props.fullWidth,
+          hoverColor = _props.hoverColor,
+          icon = _props.icon,
+          label = _props.label,
+          labelStyle = _props.labelStyle,
+          labelPosition = _props.labelPosition,
+          primary = _props.primary,
+          rippleColor = _props.rippleColor,
+          secondary = _props.secondary,
+          style = _props.style,
+          other = (0, _objectWithoutProperties3.default)(_props, ['backgroundColor', 'children', 'disabled', 'fullWidth', 'hoverColor', 'icon', 'label', 'labelStyle', 'labelPosition', 'primary', 'rippleColor', 'secondary', 'style']);
+      var _context$muiTheme = this.context.muiTheme,
+          borderRadius = _context$muiTheme.borderRadius,
+          _context$muiTheme$but = _context$muiTheme.button,
+          buttonHeight = _context$muiTheme$but.height,
+          buttonMinWidth = _context$muiTheme$but.minWidth,
+          buttonTextTransform = _context$muiTheme$but.textTransform,
+          _context$muiTheme$fla = _context$muiTheme.flatButton,
+          buttonFilterColor = _context$muiTheme$fla.buttonFilterColor,
+          buttonColor = _context$muiTheme$fla.color,
+          disabledTextColor = _context$muiTheme$fla.disabledTextColor,
+          fontSize = _context$muiTheme$fla.fontSize,
+          fontWeight = _context$muiTheme$fla.fontWeight,
+          primaryTextColor = _context$muiTheme$fla.primaryTextColor,
+          secondaryTextColor = _context$muiTheme$fla.secondaryTextColor,
+          textColor = _context$muiTheme$fla.textColor,
+          _context$muiTheme$fla2 = _context$muiTheme$fla.textTransform,
+          textTransform = _context$muiTheme$fla2 === undefined ? buttonTextTransform || 'uppercase' : _context$muiTheme$fla2;
+
+      var defaultTextColor = disabled ? disabledTextColor : primary ? primaryTextColor : secondary ? secondaryTextColor : textColor;
+
+      var defaultHoverColor = (0, _colorManipulator.fade)(buttonFilterColor, 0.2);
+      var defaultRippleColor = buttonFilterColor;
+      var buttonHoverColor = hoverColor || defaultHoverColor;
+      var buttonRippleColor = rippleColor || defaultRippleColor;
+      var buttonBackgroundColor = backgroundColor || buttonColor;
+      var hovered = (this.state.hovered || this.state.isKeyboardFocused) && !disabled;
+
+      var mergedRootStyles = (0, _simpleAssign2.default)({}, {
+        height: buttonHeight,
+        lineHeight: buttonHeight + 'px',
+        minWidth: fullWidth ? '100%' : buttonMinWidth,
+        color: defaultTextColor,
+        transition: _transitions2.default.easeOut(),
+        borderRadius: borderRadius,
+        userSelect: 'none',
+        overflow: 'hidden',
+        backgroundColor: hovered ? buttonHoverColor : buttonBackgroundColor,
+        padding: 0,
+        margin: 0,
+        textAlign: 'center'
+      }, style);
+
+      var iconCloned = void 0;
+      var labelStyleIcon = {};
+
+      if (icon) {
+        var iconStyles = (0, _simpleAssign2.default)({
+          verticalAlign: 'middle',
+          marginLeft: label && labelPosition !== 'before' ? 12 : 0,
+          marginRight: label && labelPosition === 'before' ? 12 : 0
+        }, icon.props.style);
+        iconCloned = _react2.default.cloneElement(icon, {
+          color: icon.props.color || mergedRootStyles.color,
+          style: iconStyles,
+          key: 'iconCloned'
+        });
+
+        if (labelPosition === 'before') {
+          labelStyleIcon.paddingRight = 8;
+        } else {
+          labelStyleIcon.paddingLeft = 8;
+        }
+      }
+
+      var mergedLabelStyles = (0, _simpleAssign2.default)({
+        letterSpacing: 0,
+        textTransform: textTransform,
+        fontWeight: fontWeight,
+        fontSize: fontSize
+      }, labelStyleIcon, labelStyle);
+
+      var labelElement = label ? _react2.default.createElement(_FlatButtonLabel2.default, { key: 'labelElement', label: label, style: mergedLabelStyles }) : undefined;
+
+      // Place label before or after children.
+      var enhancedButtonChildren = labelPosition === 'before' ? [labelElement, iconCloned, children] : [children, iconCloned, labelElement];
+
+      return _react2.default.createElement(
+        _EnhancedButton2.default,
+        (0, _extends3.default)({}, other, {
+          disabled: disabled,
+          focusRippleColor: buttonRippleColor,
+          focusRippleOpacity: 0.3,
+          onKeyboardFocus: this.handleKeyboardFocus,
+          onMouseLeave: this.handleMouseLeave,
+          onMouseEnter: this.handleMouseEnter,
+          onTouchStart: this.handleTouchStart,
+          style: mergedRootStyles,
+          touchRippleColor: buttonRippleColor,
+          touchRippleOpacity: 0.3
+        }),
+        enhancedButtonChildren
+      );
+    }
+  }]);
+  return FlatButton;
+}(_react.Component);
+
+FlatButton.muiName = 'FlatButton';
+FlatButton.defaultProps = {
+  disabled: false,
+  fullWidth: false,
+  labelStyle: {},
+  labelPosition: 'after',
+  onKeyboardFocus: function onKeyboardFocus() {},
+  onMouseEnter: function onMouseEnter() {},
+  onMouseLeave: function onMouseLeave() {},
+  onTouchStart: function onTouchStart() {},
+  primary: false,
+  secondary: false
+};
+FlatButton.contextTypes = {
+  muiTheme: _propTypes2.default.object.isRequired
+};
+FlatButton.propTypes = process.env.NODE_ENV !== "production" ? {
+  /**
+   * Color of button when mouse is not hovering over it.
+   */
+  backgroundColor: _propTypes2.default.string,
+  /**
+   * This is what will be displayed inside the button.
+   * If a label is specified, the text within the label prop will
+   * be displayed. Otherwise, the component will expect children
+   * which will then be displayed. (In our example,
+   * we are nesting an `<input type="file" />` and a `span`
+   * that acts as our label to be displayed.) This only
+   * applies to flat and raised buttons.
+   */
+  children: _propTypes2.default.node,
+  /**
+   * The CSS class name of the root element.
+   */
+  className: _propTypes2.default.string,
+  /**
+   * The element to use as the container for the FlatButton. Either a string to
+   * use a DOM element or a ReactElement. This is useful for wrapping the
+   * FlatButton in a custom Link component. If a ReactElement is given, ensure
+   * that it passes all of its given props through to the underlying DOM
+   * element and renders its children prop for proper integration.
+   */
+  containerElement: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.element]),
+  /**
+   * If true, the element's ripple effect will be disabled.
+   */
+  disableTouchRipple: _propTypes2.default.bool,
+  /**
+   * Disables the button if set to true.
+   */
+  disabled: _propTypes2.default.bool,
+  /**
+   * If true, the button will take up the full width of its container.
+   */
+  fullWidth: _propTypes2.default.bool,
+  /**
+   * Color of button when mouse hovers over.
+   */
+  hoverColor: _propTypes2.default.string,
+  /**
+   * The URL to link to when the button is clicked.
+   */
+  href: _propTypes2.default.string,
+  /**
+   * Use this property to display an icon.
+   */
+  icon: _propTypes2.default.node,
+  /**
+   * Label for the button.
+   */
+  label: validateLabel,
+  /**
+   * Place label before or after the passed children.
+   */
+  labelPosition: _propTypes2.default.oneOf(['before', 'after']),
+  /**
+   * Override the inline-styles of the button's label element.
+   */
+  labelStyle: _propTypes2.default.object,
+  /**
+   * Callback function fired when the button is touch-tapped.
+   *
+   * @param {object} event TouchTap event targeting the button.
+   */
+  onClick: _propTypes2.default.func,
+  /**
+   * Callback function fired when the element is focused or blurred by the keyboard.
+   *
+   * @param {object} event `focus` or `blur` event targeting the element.
+   * @param {boolean} isKeyboardFocused Indicates whether the element is focused.
+   */
+  onKeyboardFocus: _propTypes2.default.func,
+  /** @ignore */
+  onMouseEnter: _propTypes2.default.func,
+  /** @ignore */
+  onMouseLeave: _propTypes2.default.func,
+  /** @ignore */
+  onTouchStart: _propTypes2.default.func,
+  /**
+   * If true, colors button according to
+   * primaryTextColor from the Theme.
+   */
+  primary: _propTypes2.default.bool,
+  /**
+   * Color for the ripple after button is clicked.
+   */
+  rippleColor: _propTypes2.default.string,
+  /**
+   * If true, colors button according to secondaryTextColor from the theme.
+   * The primary prop has precendent if set to true.
+   */
+  secondary: _propTypes2.default.bool,
+  /**
+   * Override the inline-styles of the root element.
+   */
+  style: _propTypes2.default.object
+} : {};
+exports.default = FlatButton;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 707 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _getPrototypeOf = __webpack_require__(14);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = __webpack_require__(5);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(6);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(7);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(8);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _simpleAssign = __webpack_require__(15);
+
+var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function getStyles(props, context) {
+  var baseTheme = context.muiTheme.baseTheme;
+
+
+  return {
+    root: {
+      position: 'relative',
+      paddingLeft: baseTheme.spacing.desktopGutterLess,
+      paddingRight: baseTheme.spacing.desktopGutterLess,
+      verticalAlign: 'middle'
+    }
+  };
+}
+
+var FlatButtonLabel = function (_Component) {
+  (0, _inherits3.default)(FlatButtonLabel, _Component);
+
+  function FlatButtonLabel() {
+    (0, _classCallCheck3.default)(this, FlatButtonLabel);
+    return (0, _possibleConstructorReturn3.default)(this, (FlatButtonLabel.__proto__ || (0, _getPrototypeOf2.default)(FlatButtonLabel)).apply(this, arguments));
+  }
+
+  (0, _createClass3.default)(FlatButtonLabel, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          label = _props.label,
+          style = _props.style;
+      var prepareStyles = this.context.muiTheme.prepareStyles;
+
+      var styles = getStyles(this.props, this.context);
+
+      return _react2.default.createElement(
+        'span',
+        { style: prepareStyles((0, _simpleAssign2.default)(styles.root, style)) },
+        label
+      );
+    }
+  }]);
+  return FlatButtonLabel;
+}(_react.Component);
+
+FlatButtonLabel.contextTypes = {
+  muiTheme: _propTypes2.default.object.isRequired
+};
+FlatButtonLabel.propTypes = process.env.NODE_ENV !== "production" ? {
+  label: _propTypes2.default.node,
+  style: _propTypes2.default.object
+} : {};
+exports.default = FlatButtonLabel;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ })
 ],[273]);
