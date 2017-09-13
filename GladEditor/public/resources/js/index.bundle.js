@@ -52337,8 +52337,10 @@ var ReactuiNav = function (_Component) {
                     console.log(data.error);
                 }
             }).catch(function (e) {
-                alert("App stopped");
+                // alert("App stopped, will close the window !");
                 console.log("Oops, error");
+                window.opener = null;
+                window.close();
             });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }

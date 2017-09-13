@@ -15,8 +15,10 @@ class ReactuiNav extends Component {
             }
 
         }).catch(function(e) {
-            alert("App stopped");
+            // alert("App stopped, will close the window !");
             console.log("Oops, error");
+            window.opener=null;
+            window.close();
         });
     }
     render(){
