@@ -8,3 +8,4 @@ logs
 .vscode
 .project
 **/npm-debug.log
+GladEditor/public/resources/
