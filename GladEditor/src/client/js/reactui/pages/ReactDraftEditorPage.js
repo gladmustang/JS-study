@@ -39,13 +39,6 @@ class ReactDraftEditorPage extends Component {
         this.state={
             editorState: EditorState.createEmpty()
         };
-        //loading previous state
-        const html = '<p>&nbsp;</p> <h2><strong>install</strong></h2></p>';
-        const contentBlock = htmlToDraft(html);
-        if (contentBlock) {
-            const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
-            this.state.editorState = EditorState.createWithContent(contentState);
-        }
 
     }
     // state = {
@@ -57,6 +50,18 @@ class ReactDraftEditorPage extends Component {
             editorState,
         });
     };
+
+    showContent= (content)=> {
+        //loading previous state
+        const html = content;
+        const contentBlock = htmlToDraft(html);
+        if (contentBlock) {
+            const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+            this.setState({
+                editorState: EditorState.createWithContent(contentState)
+            });
+        }
+    }
     render() {
         const { editorState } = this.state;
         var html =draftToHtml(convertToRaw(editorState.getCurrentContent()));
@@ -71,7 +76,7 @@ class ReactDraftEditorPage extends Component {
                         // subtitle="Subtitle"
                     />
                     <CardText>
-                        <DynamicDraggableTree/>
+                        <DynamicDraggableTree showContent = {this.showContent}/>
                     </CardText>
                 </Card>
 

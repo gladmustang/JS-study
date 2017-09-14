@@ -79,6 +79,7 @@ class DynamicDraggableTree extends Component {
 
     onSelect = (selectedKeys, info) => {
         this.setState({ selectedKeys });
+        const showContent = this.props.showContent;
         if(info.node.props.isLeaf) {
             fetch("./documents/getDocument", {
                 headers: {
@@ -92,7 +93,7 @@ class DynamicDraggableTree extends Component {
             }).then(function (data) {
                 if (data.code == 0) {
                     //show data in editor
-                    console.log(data.content);
+                    showContent(data.content);
                 } else {
                     console.log(data.error);
                 }
