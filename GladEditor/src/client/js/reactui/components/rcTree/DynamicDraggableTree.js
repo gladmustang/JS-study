@@ -67,12 +67,6 @@ class DynamicDraggableTree extends Component {
                 console.log(e);
                 console.log("Oops, error");
             });
-            // setTimeout(() => {
-            //     const treeData = [...this.state.treeData];
-            //     getNewTreeData(treeData, treeNode.props.eventKey, generateTreeNodes(treeNode), 2);
-            //     this.setState({ treeData });
-            //     resolve();
-            // }, 500);
         });
     }
 
@@ -215,6 +209,31 @@ class DynamicDraggableTree extends Component {
 
     }
 
+    addChildFolder = (info) => {
+        this._removeContainer();
+        const parentKey = info.node.props.eventKey;
+        const loop = (data, key, callback) => {
+            data.forEach((item, index, arr) => {
+                if (item.key === key) {
+                    return callback(item, index, arr);
+                }
+                if (item.children) {
+                    return loop(item.children, key, callback);
+                }
+            });
+        };
+        const data = [...this.state.treeData];
+        loop(data, parentKey, (item, index, arr) => {
+            item.children.push(
+                {name:"NewFolder", key: item.key + "\\NewFolder"}
+            );
+        });
+        this.setState({
+            treeData: data
+        });
+
+    }
+
     deleteTreeItem = (info) => {
         this._removeContainer();
         const deleteKey = info.node.props.eventKey;
@@ -268,6 +287,7 @@ class DynamicDraggableTree extends Component {
                          overlay={
                              <ul style={menuListStyle}>
                                  <li onClick={()=>{this.addChildItem(info)}}>Add a new document</li>
+                                 <li onClick={()=>{this.addChildFolder(info)}}>Add a new folder</li>
                                  <li onClick={()=>{this.deleteTreeItem(info)}}>delete</li>
                              </ul>
                          }
