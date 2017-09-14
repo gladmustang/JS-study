@@ -64632,10 +64632,30 @@ var DynamicDraggableTree = function (_Component) {
                 //     resolve();
                 // }, 500);
             });
-        }, _this2.onSelect = function (selectedKeys) {
-            alert(selectedKeys);
-
+        }, _this2.onSelect = function (selectedKeys, info) {
             _this2.setState({ selectedKeys: selectedKeys });
+            if (info.node.props.isLeaf) {
+                fetch("./documents/getDocument", {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "POST",
+                    body: JSON.stringify({ docPath: selectedKeys })
+                }).then(function (response) {
+                    return response.json();
+                }).then(function (data) {
+                    if (data.code == 0) {
+                        //show data in editor
+                        console.log(data.content);
+                    } else {
+                        console.log(data.error);
+                    }
+                }).catch(function (e) {
+                    console.log(e);
+                    console.log("Oops, error");
+                });
+            }
         }, _this2.onDragStart = function (info) {
             console.log('start', info);
         }, _this2.onDragEnter = function (info) {

@@ -77,10 +77,32 @@ class DynamicDraggableTree extends Component {
         });
     }
 
-    onSelect = (selectedKeys) => {
-        alert(selectedKeys);
-
+    onSelect = (selectedKeys, info) => {
         this.setState({ selectedKeys });
+        if(info.node.props.isLeaf) {
+            fetch("./documents/getDocument", {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify({docPath: selectedKeys})
+            }).then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                if (data.code == 0) {
+                    //show data in editor
+                    console.log(data.content);
+                } else {
+                    console.log(data.error);
+                }
+
+            }).catch(function (e) {
+                console.log(e);
+                console.log("Oops, error");
+            });
+        }
+
     }
 
     onDragStart = (info)=> {
