@@ -11,15 +11,32 @@
     display: inline;
 }
 
+
 .folderTree .rc-tree-node-selected {
-    background-color: #ffe6b0;
-    border: 1px #ffb951 solid;
+    /*background-color: #ffe6b0;*/
+    /*border: 1px #ffb951 solid;*/
+    background-color: black;
+    border: 2px black solid;
     opacity: 1;
+}
+
+.folderTree .rc-tree-node-selected .rc-tree-title{
+    color: white
 }
 body .rc-tree-contextmenu {
     background-color: black;
     color: white;
+    width: 180px;
+}
+.menuItem {
+    height: 25px;
+    line-height: 25px;
 }
 .menuItem:hover {
     color: rgb(255, 211, 146);
+}
+
+.folderTree .rc-tree li span.rc-tree-iconEle {
+    background-color: rgb(0, 188, 212);
+    background-image: none;
 }

@@ -15,6 +15,7 @@ var menuListStyle =   {
     listStyle:"none",
     marginLeft: 0,
     paddingLeft: 0,
+    paddingTop: 8
 }
 
 var menuItemStyle = {
