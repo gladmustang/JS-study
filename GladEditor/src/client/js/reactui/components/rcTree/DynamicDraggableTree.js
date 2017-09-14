@@ -15,7 +15,6 @@ var menuListStyle = {
     paddingLeft: 0,
 }
 
-
 class DynamicDraggableTree extends Component {
     state = {
         treeData: [],
@@ -193,7 +192,27 @@ class DynamicDraggableTree extends Component {
 
     addChildItem = (info) => {
         this._removeContainer();
-        alert("add a document");
+        const parentKey = info.node.props.eventKey;
+        const loop = (data, key, callback) => {
+            data.forEach((item, index, arr) => {
+                if (item.key === key) {
+                    return callback(item, index, arr);
+                }
+                if (item.children) {
+                    return loop(item.children, key, callback);
+                }
+            });
+        };
+        const data = [...this.state.treeData];
+        loop(data, parentKey, (item, index, arr) => {
+            item.children.push(
+                {name:"NewDoc.html", key: item.key + "\\NewDoc.html", isLeaf: true}
+            );
+        });
+        this.setState({
+            treeData: data
+        });
+
     }
 
     deleteTreeItem = (info) => {
