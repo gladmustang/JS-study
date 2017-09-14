@@ -30,9 +30,9 @@ class DynamicDraggableTree extends Component {
         setTimeout(() => {
             this.setState({
                 treeData: [
-                    { name: 'pNode 01', key: '0-0' },
-                    { name: 'pNode 02', key: '0-1' },
-                    { name: 'pNode 03', key: '0-2', isLeaf: true },
+                    { name: 'Document Root', key: '/docu' },
+                    // { name: 'pNode 02', key: '0-1' },
+                    // { name: 'pNode 03', key: '0-2', isLeaf: true },
                 ]
             });
         }, 100);
@@ -41,7 +41,23 @@ class DynamicDraggableTree extends Component {
         this._removeContainer();
     }
     onLoadData = (treeNode) => {
+        const treeData = [...this.state.treeData];
         return new Promise((resolve) => {
+            fetch("./getChildNodes").then(function(response) {
+                return response.json();
+            }).then(function(data) {
+                if(data.code==0) {
+                    console.log(data);
+                    getNewTreeData(treeData, treeNode.props.eventKey, data.childNodes, 2);
+                    this.setState({ treeData });
+                    resolve();
+                } else {
+                    console.log(data.error);
+                }
+
+            }).catch(function(e) {
+                console.log("Oops, error");
+            });
             setTimeout(() => {
                 const treeData = [...this.state.treeData];
                 getNewTreeData(treeData, treeNode.props.eventKey, generateTreeNodes(treeNode), 2);

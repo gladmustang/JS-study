@@ -21,4 +21,16 @@ router.get('/closeApp', function(req, res, next) {
 
 });
 
+router.get('/getChildNodes', function(req, res, next) {
+    var result = [
+        { name: 'child1', key: '/path1' },
+        { name: 'child2', key: '/path2' },
+        { name: 'child3', key: '/path3', isLeaf: true },
+        ]
+
+    res.json({code:0, childNodes: result});
+
+});
+
+
 module.exports = router;
