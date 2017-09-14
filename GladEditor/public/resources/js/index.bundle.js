@@ -64586,7 +64586,7 @@ var DynamicDraggableTree = function (_Component) {
     function DynamicDraggableTree() {
         var _ref;
 
-        var _temp, _this, _ret;
+        var _temp, _this2, _ret;
 
         _classCallCheck(this, DynamicDraggableTree);
 
@@ -64594,13 +64594,14 @@ var DynamicDraggableTree = function (_Component) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DynamicDraggableTree.__proto__ || Object.getPrototypeOf(DynamicDraggableTree)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+        return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, (_ref = DynamicDraggableTree.__proto__ || Object.getPrototypeOf(DynamicDraggableTree)).call.apply(_ref, [this].concat(args))), _this2), _this2.state = {
             treeData: [],
             autoExpandParent: true,
             expandedKeys: ['0-2'],
             selectedKeys: []
-        }, _this.onLoadData = function (treeNode) {
-            var treeData = [].concat(_toConsumableArray(_this.state.treeData));
+        }, _this2.onLoadData = function (treeNode) {
+            var treeData = [].concat(_toConsumableArray(_this2.state.treeData));
+            var _this = _this2;
             return new Promise(function (resolve) {
                 fetch("./getChildNodes", {
                     headers: {
@@ -64615,7 +64616,7 @@ var DynamicDraggableTree = function (_Component) {
                     if (data.code == 0) {
                         console.log(data);
                         (0, _dynamicUtils.getNewTreeData)(treeData, treeNode.props.eventKey, data.childNodes, 100);
-                        this.setState({ treeData: treeData });
+                        _this.setState({ treeData: treeData });
                         resolve();
                     } else {
                         console.log(data.error);
@@ -64623,26 +64624,27 @@ var DynamicDraggableTree = function (_Component) {
                 }).catch(function (e) {
                     console.log("Oops, error");
                 });
-                setTimeout(function () {
-                    var treeData = [].concat(_toConsumableArray(_this.state.treeData));
-                    (0, _dynamicUtils.getNewTreeData)(treeData, treeNode.props.eventKey, (0, _dynamicUtils.generateTreeNodes)(treeNode), 2);
-                    _this.setState({ treeData: treeData });
-                    resolve();
-                }, 500);
+                // setTimeout(() => {
+                //     const treeData = [...this.state.treeData];
+                //     getNewTreeData(treeData, treeNode.props.eventKey, generateTreeNodes(treeNode), 2);
+                //     this.setState({ treeData });
+                //     resolve();
+                // }, 500);
             });
-        }, _this.onSelect = function (selectedKeys) {
+        }, _this2.onSelect = function (selectedKeys) {
             alert(selectedKeys);
-            _this.setState({ selectedKeys: selectedKeys });
-        }, _this.onDragStart = function (info) {
+
+            _this2.setState({ selectedKeys: selectedKeys });
+        }, _this2.onDragStart = function (info) {
             console.log('start', info);
-        }, _this.onDragEnter = function (info) {
+        }, _this2.onDragEnter = function (info) {
             console.log('enter', info);
-            _this.setState({
+            _this2.setState({
                 expandedKeys: info.expandedKeys
             });
-        }, _this.onDrop = function (info) {
+        }, _this2.onDrop = function (info) {
             console.log('drop', info);
-            _this.onLoadData(info.node).then(function () {
+            _this2.onLoadData(info.node).then(function () {
                 var dropKey = info.node.props.eventKey;
                 var dragKey = info.dragNode.props.eventKey;
                 // const dragNodesKeys = info.dragNodesKeys;
@@ -64656,7 +64658,7 @@ var DynamicDraggableTree = function (_Component) {
                         }
                     });
                 };
-                var data = [].concat(_toConsumableArray(_this.state.treeData));
+                var data = [].concat(_toConsumableArray(_this2.state.treeData));
                 var dragObj = void 0;
                 loop(data, dragKey, function (item, index, arr) {
                     arr.splice(index, 1);
@@ -64677,36 +64679,36 @@ var DynamicDraggableTree = function (_Component) {
                         item.children.push(dragObj);
                     });
                 }
-                _this.setState({
+                _this2.setState({
                     treeData: data
                     // selectedKeys:[dragObj.key]
                 });
             });
-        }, _this.onExpand = function (expandedKeys) {
+        }, _this2.onExpand = function (expandedKeys) {
             console.log('onExpand');
-            _this.setState({
+            _this2.setState({
                 expandedKeys: expandedKeys,
                 autoExpandParent: false
             });
-        }, _this.onRightClick = function (info) {
+        }, _this2.onRightClick = function (info) {
             console.log('right click', info);
-            _this.setState({ selectedKeys: [info.node.props.eventKey] });
-            _this.renderCm(info);
-        }, _this.getContainer = function () {
-            if (!_this.cmContainer) {
-                _this.cmContainer = document.createElement('div');
-                document.body.appendChild(_this.cmContainer);
+            _this2.setState({ selectedKeys: [info.node.props.eventKey] });
+            _this2.renderCm(info);
+        }, _this2.getContainer = function () {
+            if (!_this2.cmContainer) {
+                _this2.cmContainer = document.createElement('div');
+                document.body.appendChild(_this2.cmContainer);
             }
-            return _this.cmContainer;
-        }, _this._removeContainer = function () {
-            if (_this.cmContainer) {
-                ReactDOM.unmountComponentAtNode(_this.cmContainer);
-                _this.toolTip = null;
-                document.body.removeChild(_this.cmContainer);
-                _this.cmContainer = null;
+            return _this2.cmContainer;
+        }, _this2._removeContainer = function () {
+            if (_this2.cmContainer) {
+                ReactDOM.unmountComponentAtNode(_this2.cmContainer);
+                _this2.toolTip = null;
+                document.body.removeChild(_this2.cmContainer);
+                _this2.cmContainer = null;
             }
-        }, _this.deleteTreeItem = function (info) {
-            _this._removeContainer();
+        }, _this2.deleteTreeItem = function (info) {
+            _this2._removeContainer();
             var deleteKey = info.node.props.eventKey;
             // const dragNodesKeys = info.dragNodesKeys;
             var loop = function loop(data, key, callback) {
@@ -64719,27 +64721,27 @@ var DynamicDraggableTree = function (_Component) {
                     }
                 });
             };
-            var data = [].concat(_toConsumableArray(_this.state.treeData));
+            var data = [].concat(_toConsumableArray(_this2.state.treeData));
             var deleteObj = void 0;
             loop(data, deleteKey, function (item, index, arr) {
                 arr.splice(index, 1);
                 deleteObj = item;
             });
-            _this.setState({
+            _this2.setState({
                 treeData: data
             });
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        }, _temp), _possibleConstructorReturn(_this2, _ret);
     }
 
     _createClass(DynamicDraggableTree, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this2 = this;
+            var _this3 = this;
 
             this.getContainer();
             console.log((0, _animateUtils.contains)(ReactDOM.findDOMNode(this), this.cmContainer));
             setTimeout(function () {
-                _this2.setState({
+                _this3.setState({
                     treeData: [{ name: 'Document Root', key: '\\public\\documents' }]
                 });
             }, 100);
@@ -64752,7 +64754,7 @@ var DynamicDraggableTree = function (_Component) {
     }, {
         key: 'renderCm',
         value: function renderCm(info) {
-            var _this3 = this;
+            var _this4 = this;
 
             if (this.toolTip) {
                 ReactDOM.unmountComponentAtNode(this.cmContainer);
@@ -64770,7 +64772,7 @@ var DynamicDraggableTree = function (_Component) {
                         _react2.default.createElement(
                             'li',
                             { onClick: function onClick() {
-                                    _this3.deleteTreeItem(info);
+                                    _this4.deleteTreeItem(info);
                                 } },
                             'delete'
                         ),

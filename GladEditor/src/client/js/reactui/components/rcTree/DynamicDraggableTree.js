@@ -42,6 +42,7 @@ class DynamicDraggableTree extends Component {
     }
     onLoadData = (treeNode) => {
         const treeData = [...this.state.treeData];
+        var _this = this;
         return new Promise((resolve) => {
             fetch("./getChildNodes",{
                 headers: {
@@ -56,8 +57,9 @@ class DynamicDraggableTree extends Component {
                 if(data.code==0) {
                     console.log(data);
                     getNewTreeData(treeData, treeNode.props.eventKey, data.childNodes, 100);
-                    this.setState({ treeData });
+                    _this.setState({ treeData });
                     resolve();
+
                 } else {
                     console.log(data.error);
                 }
@@ -65,17 +67,18 @@ class DynamicDraggableTree extends Component {
             }).catch(function(e) {
                 console.log("Oops, error");
             });
-            setTimeout(() => {
-                const treeData = [...this.state.treeData];
-                getNewTreeData(treeData, treeNode.props.eventKey, generateTreeNodes(treeNode), 2);
-                this.setState({ treeData });
-                resolve();
-            }, 500);
+            // setTimeout(() => {
+            //     const treeData = [...this.state.treeData];
+            //     getNewTreeData(treeData, treeNode.props.eventKey, generateTreeNodes(treeNode), 2);
+            //     this.setState({ treeData });
+            //     resolve();
+            // }, 500);
         });
     }
 
     onSelect = (selectedKeys) => {
         alert(selectedKeys);
+
         this.setState({ selectedKeys });
     }
 
