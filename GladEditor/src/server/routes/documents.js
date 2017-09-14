@@ -39,9 +39,15 @@ router.post('/getChildNodes', function(req, res, next) {
 router.post('/getDocument', function(req, res, next) {
     var docPath = req.body.docPath;
     var filePath= rootDir + docPath;
-    fs.statSync(filePath)
-    // fs.readFile()
-    res.json({code:0, content: "<html>hello</html>"});
+    fs.readFile(filePath,function (err, data) {
+        if (err) {
+            res.json({code:1, error: err});
+            return;
+        }
+        var content = data.toString();
+        res.json({code:0, content: content});
+    })
+
 
 });
 
