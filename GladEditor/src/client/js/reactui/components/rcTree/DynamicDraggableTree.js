@@ -191,6 +191,11 @@ class DynamicDraggableTree extends Component {
         }
     }
 
+    addChildItem = (info) => {
+        this._removeContainer();
+        alert("add a document");
+    }
+
     deleteTreeItem = (info) => {
         this._removeContainer();
         const deleteKey = info.node.props.eventKey;
@@ -220,21 +225,40 @@ class DynamicDraggableTree extends Component {
             ReactDOM.unmountComponentAtNode(this.cmContainer);
             this.toolTip = null;
         }
-        this.toolTip = (
-            <Tooltip placement="bottomLeft"
-                     prefixCls="rc-tree-contextmenu"
-                     trigger={['click']}
-                     defaultVisible
-                     overlay={
-                         <ul style={menuListStyle}>
-                             <li onClick={()=>{this.deleteTreeItem(info)}}>delete</li>
-                             <li>add</li>
-                         </ul>
-                     }
-            >
-            <span></span>
-            </Tooltip>
-        );
+        if(info.node.props.isLeaf) {
+            this.toolTip = (
+                <Tooltip placement="bottomLeft"
+                         prefixCls="rc-tree-contextmenu"
+                         trigger={['click']}
+                         defaultVisible
+                         overlay={
+                             <ul style={menuListStyle}>
+                                 <li onClick={()=>{this.deleteTreeItem(info)}}>delete</li>
+                             </ul>
+                         }
+                >
+                    <span></span>
+                </Tooltip>
+            );
+        } else {
+            this.toolTip = (
+                <Tooltip placement="bottomLeft"
+                         prefixCls="rc-tree-contextmenu"
+                         trigger={['click']}
+                         defaultVisible
+                         overlay={
+                             <ul style={menuListStyle}>
+                                 <li onClick={()=>{this.addChildItem(info)}}>Add a new document</li>
+                                 <li onClick={()=>{this.deleteTreeItem(info)}}>delete</li>
+                             </ul>
+                         }
+                >
+                    <span></span>
+                </Tooltip>
+            );
+        }
+
+
 
         const container = this.getContainer();
         Object.assign(this.cmContainer.style, {
