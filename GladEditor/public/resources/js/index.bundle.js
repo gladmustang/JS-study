@@ -64739,7 +64739,7 @@ var DynamicDraggableTree = function (_Component) {
             console.log((0, _animateUtils.contains)(ReactDOM.findDOMNode(this), this.cmContainer));
             setTimeout(function () {
                 _this2.setState({
-                    treeData: [{ name: 'Document Root', key: '/public/documents' }]
+                    treeData: [{ name: 'Document Root', key: '\\public\\documents' }]
                 });
             }, 100);
         }

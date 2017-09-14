@@ -25,6 +25,7 @@ router.get('/closeApp', function(req, res, next) {
 });
 
 router.post('/getChildNodes', function(req, res, next) {
+    var clientPath = req.body.path;
     var filePath= rootDir + req.body.path;
 
     fs.readdir(filePath,function(err,files) {
@@ -40,9 +41,9 @@ router.post('/getChildNodes', function(req, res, next) {
             try {
                 var stats = fs.statSync(path.join(filePath, filename));
                 if (stats.isFile()) {
-                    results.push({name:filename, key: path.join(filePath, filename), isLeaf: true});
+                    results.push({name:filename, key: path.join(clientPath, filename), isLeaf: true});
                 } else if (stats.isDirectory()) {
-                    results.push({name:filename, key:  path.join(filePath, filename)});
+                    results.push({name:filename, key:  path.join(clientPath, filename)});
                 }
             } catch(err) {
                 res.json({code:1, error: err});

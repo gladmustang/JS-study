@@ -30,7 +30,7 @@ class DynamicDraggableTree extends Component {
         setTimeout(() => {
             this.setState({
                 treeData: [
-                    { name: 'Document Root', key: '/public/documents' },
+                    { name: 'Document Root', key: '\\public\\documents' },
                     // { name: 'pNode 02', key: '0-1' },
                     // { name: 'pNode 03', key: '0-2', isLeaf: true },
                 ]
