@@ -244,7 +244,28 @@ class DynamicDraggableTree extends Component {
         });
 
     }
+    renameTreeItem = (info)=> {
+        const renameKey = info.node.props.eventKey;
+        const loop = (data, key, callback) => {
+            data.forEach((item, index, arr) => {
+                if (item.key === key) {
+                    return callback(item, index, arr);
+                }
+                if (item.children) {
+                    return loop(item.children, key, callback);
+                }
+            });
+        };
+        const data = [...this.state.treeData];
+        loop(data, renameKey, (item, index, arr) => {
+            item.name="NewName"
+        });
+        this.setState({
+            treeData: data
+        });
 
+
+    }
     deleteTreeItem = (info) => {
         this._removeContainer();
         const deleteKey = info.node.props.eventKey;
@@ -283,6 +304,7 @@ class DynamicDraggableTree extends Component {
                          overlay={
                              <ul style={menuListStyle}>
                                  <li className="menuItem" onClick={()=>{this.deleteTreeItem(info)}}>Delete</li>
+                                 <li className="menuItem" onClick={()=>{this.renameTreeItem(info)}}>Rename</li>
                              </ul>
                          }
                 >
@@ -299,6 +321,7 @@ class DynamicDraggableTree extends Component {
                              <ul style={menuListStyle}>
                                  <li className="menuItem" onClick={()=>{this.addChildItem(info)}}>Add a new document</li>
                                  <li className="menuItem" onClick={()=>{this.addChildFolder(info)}}>Add a new folder</li>
+                                 <li className="menuItem" onClick={()=>{this.renameTreeItem(info)}}>Rename</li>
                                  <li className="menuItem" onClick={()=>{this.deleteTreeItem(info)}}>Delete</li>
                              </ul>
                          }
