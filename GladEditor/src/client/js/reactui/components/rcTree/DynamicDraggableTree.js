@@ -1,6 +1,7 @@
 import 'rc-tree/assets/index.css';
 import React, {Component} from 'react';
-var Radium = require('radium');
+// var Radium = require('radium');
+// import Style from 'style-it';
 import Tree, { TreeNode } from 'rc-tree';
 import Tooltip from 'rc-tooltip';
 import '../../../../css/rcTreeBasic.css'
@@ -10,10 +11,16 @@ import {animation, contains} from "./animateUtils"
 import {generateTreeNodes, setLeaf, getNewTreeData} from "./dynamicUtils"
 
 
-var menuListStyle =    {
+var menuListStyle =   {
     listStyle:"none",
     marginLeft: 0,
     paddingLeft: 0,
+}
+
+var menuItemStyle = {
+    // ':hover': {
+    //     backgroundColor: 'green'
+    // }
 }
 
 
@@ -274,7 +281,7 @@ class DynamicDraggableTree extends Component {
                          defaultVisible
                          overlay={
                              <ul style={menuListStyle}>
-                                 <li onClick={()=>{this.deleteTreeItem(info)}}>delete</li>
+                                 <li className="menuItem" onClick={()=>{this.deleteTreeItem(info)}}>Delete</li>
                              </ul>
                          }
                 >
@@ -289,9 +296,9 @@ class DynamicDraggableTree extends Component {
                          defaultVisible
                          overlay={
                              <ul style={menuListStyle}>
-                                 <li  onClick={()=>{this.addChildItem(info)}}>Add a new document</li>
-                                 <li  onClick={()=>{this.addChildFolder(info)}}>Add a new folder</li>
-                                 <li  onClick={()=>{this.deleteTreeItem(info)}}>delete</li>
+                                 <li className="menuItem" onClick={()=>{this.addChildItem(info)}}>Add a new document</li>
+                                 <li className="menuItem" onClick={()=>{this.addChildFolder(info)}}>Add a new folder</li>
+                                 <li className="menuItem" onClick={()=>{this.deleteTreeItem(info)}}>Delete</li>
                              </ul>
                          }
                 >

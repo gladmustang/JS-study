@@ -16,4 +16,10 @@
     border: 1px #ffb951 solid;
     opacity: 1;
 }
-
+body .rc-tree-contextmenu {
+    background-color: black;
+    color: white;
+}
+.menuItem:hover {
+    color: rgb(255, 211, 146);
+}
