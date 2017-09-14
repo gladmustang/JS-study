@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+var fs = require("fs");
+var path = require("path");
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -21,14 +24,34 @@ router.get('/closeApp', function(req, res, next) {
 
 });
 
-router.get('/getChildNodes', function(req, res, next) {
-    var result = [
-        { name: 'child1', key: '/path1' },
-        { name: 'child2', key: '/path2' },
-        { name: 'child3', key: '/path3', isLeaf: true },
-        ]
+router.post('/getChildNodes', function(req, res, next) {
+    var filePath= rootDir + req.body.path;
 
-    res.json({code:0, childNodes: result});
+    fs.readdir(filePath,function(err,files) {
+        if (err) {
+            console.log(err);
+            res.json({code:1, error: err});
+            return;
+        }
+        var count = files.length;
+        var results = [];
+
+        files.forEach(function(filename) {
+            try {
+                var stats = fs.statSync(path.join(filePath, filename));
+                if (stats.isFile()) {
+                    results.push({name:filename, key: path.join(filePath, filename), isLeaf: true});
+                } else if (stats.isDirectory()) {
+                    results.push({name:filename, key:  path.join(filePath, filename)});
+                }
+            } catch(err) {
+                res.json({code:1, error: err});
+                return;
+            }
+        });
+        res.json({code:0, childNodes: results});
+    });
+
 
 });
 

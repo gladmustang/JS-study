@@ -64602,12 +64602,19 @@ var DynamicDraggableTree = function (_Component) {
         }, _this.onLoadData = function (treeNode) {
             var treeData = [].concat(_toConsumableArray(_this.state.treeData));
             return new Promise(function (resolve) {
-                fetch("./getChildNodes").then(function (response) {
+                fetch("./getChildNodes", {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "POST",
+                    body: JSON.stringify({ path: treeNode.props.eventKey })
+                }).then(function (response) {
                     return response.json();
                 }).then(function (data) {
                     if (data.code == 0) {
                         console.log(data);
-                        (0, _dynamicUtils.getNewTreeData)(treeData, treeNode.props.eventKey, data.childNodes, 2);
+                        (0, _dynamicUtils.getNewTreeData)(treeData, treeNode.props.eventKey, data.childNodes, 100);
                         this.setState({ treeData: treeData });
                         resolve();
                     } else {
@@ -64732,7 +64739,7 @@ var DynamicDraggableTree = function (_Component) {
             console.log((0, _animateUtils.contains)(ReactDOM.findDOMNode(this), this.cmContainer));
             setTimeout(function () {
                 _this2.setState({
-                    treeData: [{ name: 'Document Root', key: '/docu' }]
+                    treeData: [{ name: 'Document Root', key: '/public/documents' }]
                 });
             }, 100);
         }
@@ -68496,7 +68503,7 @@ function getNewTreeData(treeData, curKey, child, level) {
         });
     };
     loop(treeData);
-    setLeaf(treeData, curKey, level);
+    // setLeaf(treeData, curKey, level);
 }
 
 exports.generateTreeNodes = generateTreeNodes;

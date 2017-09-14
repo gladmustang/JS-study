@@ -39,7 +39,7 @@ function getNewTreeData(treeData, curKey, child, level) {
         });
     };
     loop(treeData);
-    setLeaf(treeData, curKey, level);
+    // setLeaf(treeData, curKey, level);
 }
 
 export {generateTreeNodes, setLeaf, getNewTreeData};
