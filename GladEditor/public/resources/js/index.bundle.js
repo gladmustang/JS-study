@@ -64631,6 +64631,7 @@ var DynamicDraggableTree = function (_Component) {
                 }, 500);
             });
         }, _this.onSelect = function (selectedKeys) {
+            alert(selectedKeys);
             _this.setState({ selectedKeys: selectedKeys });
         }, _this.onDragStart = function (info) {
             console.log('start', info);

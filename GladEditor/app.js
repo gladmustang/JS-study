@@ -6,8 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 
-var index = require('./src/server/routes/index');
-var users = require('./src/server/routes/users');
+var rootAPI = require('./src/server/routes/rootAPI');
 
 var app = express();
 
@@ -31,8 +30,7 @@ app.get('/', function (req, res) {
     res.redirect('/' + app_name + '/');
 })
 
-app.use('/' + app_name, index);
-app.use('/users/' + app_name, users);
+app.use('/' + app_name, rootAPI);
 
 
 // catch 404 and forward to error handler

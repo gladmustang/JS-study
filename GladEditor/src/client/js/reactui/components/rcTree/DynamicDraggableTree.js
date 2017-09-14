@@ -75,6 +75,7 @@ class DynamicDraggableTree extends Component {
     }
 
     onSelect = (selectedKeys) => {
+        alert(selectedKeys);
         this.setState({ selectedKeys });
     }
 
