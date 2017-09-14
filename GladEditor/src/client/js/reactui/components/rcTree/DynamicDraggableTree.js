@@ -44,7 +44,7 @@ class DynamicDraggableTree extends Component {
         const treeData = [...this.state.treeData];
         var _this = this;
         return new Promise((resolve) => {
-            fetch("./getChildNodes",{
+            fetch("./documents/getChildNodes",{
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -65,6 +65,7 @@ class DynamicDraggableTree extends Component {
                 }
 
             }).catch(function(e) {
+                console.log(e);
                 console.log("Oops, error");
             });
             // setTimeout(() => {

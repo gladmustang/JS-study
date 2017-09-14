@@ -64603,7 +64603,7 @@ var DynamicDraggableTree = function (_Component) {
             var treeData = [].concat(_toConsumableArray(_this2.state.treeData));
             var _this = _this2;
             return new Promise(function (resolve) {
-                fetch("./getChildNodes", {
+                fetch("./documents/getChildNodes", {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
@@ -64622,6 +64622,7 @@ var DynamicDraggableTree = function (_Component) {
                         console.log(data.error);
                     }
                 }).catch(function (e) {
+                    console.log(e);
                     console.log("Oops, error");
                 });
                 // setTimeout(() => {
