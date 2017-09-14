@@ -1,5 +1,6 @@
 import 'rc-tree/assets/index.css';
 import React, {Component} from 'react';
+var Radium = require('radium');
 import Tree, { TreeNode } from 'rc-tree';
 import Tooltip from 'rc-tooltip';
 import '../../../../css/rcTreeBasic.css'
@@ -9,11 +10,12 @@ import {animation, contains} from "./animateUtils"
 import {generateTreeNodes, setLeaf, getNewTreeData} from "./dynamicUtils"
 
 
-var menuListStyle = {
+var menuListStyle =    {
     listStyle:"none",
     marginLeft: 0,
     paddingLeft: 0,
 }
+
 
 class DynamicDraggableTree extends Component {
     state = {
@@ -287,9 +289,9 @@ class DynamicDraggableTree extends Component {
                          defaultVisible
                          overlay={
                              <ul style={menuListStyle}>
-                                 <li onClick={()=>{this.addChildItem(info)}}>Add a new document</li>
-                                 <li onClick={()=>{this.addChildFolder(info)}}>Add a new folder</li>
-                                 <li onClick={()=>{this.deleteTreeItem(info)}}>delete</li>
+                                 <li  onClick={()=>{this.addChildItem(info)}}>Add a new document</li>
+                                 <li  onClick={()=>{this.addChildFolder(info)}}>Add a new folder</li>
+                                 <li  onClick={()=>{this.deleteTreeItem(info)}}>delete</li>
                              </ul>
                          }
                 >
@@ -354,4 +356,4 @@ class DynamicDraggableTree extends Component {
 }
 
 
-export default DynamicDraggableTree;
+export default (DynamicDraggableTree);

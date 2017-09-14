@@ -12,7 +12,6 @@
     "start": "pm2 start app.js --name gladapp",
     "stop": "pm2 stop gladapp",
     "restart": "pm2 restart gladapp"
-
   },
   "author": "",
   "license": "ISC",
@@ -48,6 +47,7 @@
     "material-ui": "^0.19.0",
     "morgan": "~1.8.1",
     "open": "0.0.5",
+    "radium": "^0.19.4",
     "rc-tooltip": "^3.4.9",
     "rc-tree": "^1.7.3",
     "react": "^15.6.1",
