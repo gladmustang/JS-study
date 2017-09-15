@@ -12,6 +12,7 @@ import {generateTreeNodes, setLeaf, getNewTreeDataWithExactMatch} from "./dynami
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
+import RenameDialog from '../RenameDialog'
 
 
 // var menuListStyle =   {
@@ -28,7 +29,8 @@ class DynamicDraggableTree extends Component {
         treeData: [],
         autoExpandParent: true,
         expandedKeys: ['0-2'],
-        selectedKeys:[]
+        selectedKeys:[],
+        renameOpen: false
     };
 
     componentDidMount() {
@@ -243,6 +245,21 @@ class DynamicDraggableTree extends Component {
 
     }
     renameTreeItem = (info)=> {
+        this.setState({
+            renameOpen: true,
+            renameItem: info
+        })
+
+    }
+    handleRenameDialogClose = ()=> {
+        this.setState(
+            {
+                renameOpen: false
+            }
+        );
+    }
+
+    handleRenameDialogSubmit = (info)=> {
         const renameKey = info.node.props.eventKey;
         const loop = (data, key, callback) => {
             data.forEach((item, index, arr) => {
@@ -259,11 +276,11 @@ class DynamicDraggableTree extends Component {
             item.name="NewName"
         });
         this.setState({
-            treeData: data
+            treeData: data,
+            renameOpen: false
         });
-
-
     }
+
     deleteTreeItem = (info) => {
         this._removeContainer();
         const deleteKey = info.node.props.eventKey;
@@ -381,6 +398,11 @@ class DynamicDraggableTree extends Component {
                 >
                     {treeNodes}
                 </Tree>
+                <RenameDialog open={this.state.renameOpen}
+                              handleRenameDialogClose = {this.handleRenameDialogClose}
+                              handleRenameDialogSubmit = {this.handleRenameDialogSubmit}
+                              renameItem = {this.state.renameItem}
+                />
             </div>
         );
     }
