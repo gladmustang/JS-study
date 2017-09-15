@@ -9,20 +9,18 @@ import '../../../../less/contextmenu.less'
 // import { gData } from './rcTreeUtils'
 import {animation, contains} from "./animateUtils"
 import {generateTreeNodes, setLeaf, getNewTreeData} from "./dynamicUtils"
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
 
 
-var menuListStyle =   {
-    listStyle:"none",
-    marginLeft: 0,
-    paddingLeft: 0,
-    paddingTop: 8
-}
-
-var menuItemStyle = {
-    // ':hover': {
-    //     backgroundColor: 'green'
-    // }
-}
+// var menuListStyle =   {
+//     listStyle:"none",
+//     marginLeft: 0,
+//     paddingLeft: 0,
+//     paddingTop: 8
+// }
+//
 
 
 class DynamicDraggableTree extends Component {
@@ -302,10 +300,12 @@ class DynamicDraggableTree extends Component {
                          trigger={['click']}
                          defaultVisible
                          overlay={
-                             <ul style={menuListStyle}>
-                                 <li className="menuItem" onClick={()=>{this.deleteTreeItem(info)}}>Delete</li>
-                                 <li className="menuItem" onClick={()=>{this.renameTreeItem(info)}}>Rename</li>
-                             </ul>
+                             <MuiThemeProvider>
+                                 <Menu>
+                                     <MenuItem primaryText="Rename" onClick={()=>{this.renameTreeItem(info)}}/>
+                                     <MenuItem primaryText="Delete" onClick={()=>{this.deleteTreeItem(info)}}/>
+                                 </Menu>
+                             </MuiThemeProvider>
                          }
                 >
                     <span></span>
@@ -317,14 +317,16 @@ class DynamicDraggableTree extends Component {
                          prefixCls="rc-tree-contextmenu"
                          trigger={['click']}
                          defaultVisible
-                         overlay={
-                             <ul style={menuListStyle}>
-                                 <li className="menuItem" onClick={()=>{this.addChildItem(info)}}>Add a new document</li>
-                                 <li className="menuItem" onClick={()=>{this.addChildFolder(info)}}>Add a new folder</li>
-                                 <li className="menuItem" onClick={()=>{this.renameTreeItem(info)}}>Rename</li>
-                                 <li className="menuItem" onClick={()=>{this.deleteTreeItem(info)}}>Delete</li>
-                             </ul>
-                         }
+                        overlay={
+                            <MuiThemeProvider>
+                              <Menu>
+                                <MenuItem primaryText="Add a new document" onClick={()=>{this.addChildItem(info)}}/>
+                                <MenuItem primaryText="Add a new folder" onClick={()=>{this.addChildFolder(info)}}/>
+                                <MenuItem primaryText="Rename" onClick={()=>{this.renameTreeItem(info)}}/>
+                                <MenuItem primaryText="Delete" onClick={()=>{this.deleteTreeItem(info)}}/>
+                              </Menu>
+                            </MuiThemeProvider>
+                        }
                 >
                     <span></span>
                 </Tooltip>
