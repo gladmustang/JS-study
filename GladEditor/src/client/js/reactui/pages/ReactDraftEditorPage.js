@@ -8,6 +8,7 @@ import htmlToDraft from 'html-to-draftjs';
 import Paper from 'material-ui/Paper';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import DynamicDraggableTree from  '../components/rcTree/DynamicDraggableTree'
+import RaisedButton from 'material-ui/RaisedButton';
 
 // const divStyle={
 //     width: "45%",
@@ -83,7 +84,9 @@ class ReactDraftEditorPage extends Component {
                     <Paper  style={rightStyle} zDepth={1} children={
                         <Tabs>
                             <Tab label="DRAFT" >
+
                                 <Editor onEditorStateChange = {this.onEditorStateChange} editorState={editorState}/>
+
                             </Tab>
                             <Tab label="HTML">
                                 <div id="htmlDisplay" dangerouslySetInnerHTML={{__html: html}}>

@@ -12,7 +12,9 @@ import {generateTreeNodes, setLeaf, getNewTreeDataWithExactMatch} from "./dynami
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
-import RenameDialog from '../RenameDialog'
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
 
 
 // var menuListStyle =   {
@@ -30,7 +32,8 @@ class DynamicDraggableTree extends Component {
         autoExpandParent: true,
         expandedKeys: ['0-2'],
         selectedKeys:[],
-        renameOpen: false
+        renameOpen: false,
+        inputValue: ''
     };
 
     componentDidMount() {
@@ -273,12 +276,20 @@ class DynamicDraggableTree extends Component {
         };
         const data = [...this.state.treeData];
         loop(data, renameKey, (item, index, arr) => {
-            item.name="NewName"
+            item.name=this.state.inputValue;
         });
         this.setState({
             treeData: data,
             renameOpen: false
         });
+    }
+
+    handleInputChange = (e)=> {
+        this.setState(
+            {
+                inputValue: e.target.value
+            }
+        );
     }
 
     deleteTreeItem = (info) => {
@@ -398,11 +409,31 @@ class DynamicDraggableTree extends Component {
                 >
                     {treeNodes}
                 </Tree>
-                <RenameDialog open={this.state.renameOpen}
-                              handleRenameDialogClose = {this.handleRenameDialogClose}
-                              handleRenameDialogSubmit = {this.handleRenameDialogSubmit}
-                              renameItem = {this.state.renameItem}
-                />
+                <Dialog
+                    title="Rename the file/folder"
+                    actions={
+                        [
+                            <FlatButton
+                                label="Cancel"
+                                primary={true}
+                                onClick={this.handleRenameDialogClose}
+                            />,
+                            <FlatButton
+                                label="Submit"
+                                primary={true}
+                                onClick={(e)=> {this.handleRenameDialogSubmit(this.state.renameItem)}}
+                            />,
+                        ]
+                    }
+                    modal={true}
+                    open={this.state.renameOpen}
+                >
+                    <TextField
+                        floatingLabelText="Input New Name"
+                        onChange={this.handleInputChange}
+                        value={this.state.inputValue}
+                    />
+                </Dialog>
             </div>
         );
     }

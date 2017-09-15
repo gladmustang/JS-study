@@ -52,6 +52,7 @@
     "rc-tree": "^1.7.3",
     "react": "^15.6.1",
     "react-ckeditor-wrapper": "^1.0.22",
+    "react-color": "^2.13.8",
     "react-dom": "^15.6.1",
     "react-draft-wysiwyg": "^1.10.8",
     "react-froala-wysiwyg": "^2.7.0",
