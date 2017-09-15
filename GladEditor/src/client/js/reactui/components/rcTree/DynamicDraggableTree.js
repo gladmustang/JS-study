@@ -8,7 +8,7 @@ import '../../../../css/rcTreeBasic.css'
 import '../../../../less/contextmenu.less'
 // import { gData } from './rcTreeUtils'
 import {animation, contains} from "./animateUtils"
-import {generateTreeNodes, setLeaf, getNewTreeData} from "./dynamicUtils"
+import {generateTreeNodes, setLeaf, getNewTreeDataWithExactMatch} from "./dynamicUtils"
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
@@ -63,7 +63,7 @@ class DynamicDraggableTree extends Component {
             }).then(function(data) {
                 if(data.code==0) {
                     // console.log(data);
-                    getNewTreeData(treeData, treeNode.props.eventKey, data.childNodes, 100);
+                    getNewTreeDataWithExactMatch(treeData, treeNode.props.eventKey, data.childNodes, 100);
                     _this.setState({ treeData });
                     resolve();
 

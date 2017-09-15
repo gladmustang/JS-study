@@ -42,4 +42,23 @@ function getNewTreeData(treeData, curKey, child, level) {
     // setLeaf(treeData, curKey, level);
 }
 
-export {generateTreeNodes, setLeaf, getNewTreeData};
+function getNewTreeDataWithExactMatch(treeData, curKey, child, level) {
+    const loop = (data) => {
+        if (level < 1 || curKey.length - 3 > level * 2) return;
+        data.forEach((item) => {
+            if (curKey.indexOf(item.key) === 0) {
+                if (item.children) {
+                    loop(item.children);
+                } else {
+                    if(curKey == item.key) {
+                        item.children = child;
+                    }
+                }
+            }
+        });
+    };
+    loop(treeData);
+    // setLeaf(treeData, curKey, level);
+}
+
+export {generateTreeNodes, setLeaf, getNewTreeData, getNewTreeDataWithExactMatch};
