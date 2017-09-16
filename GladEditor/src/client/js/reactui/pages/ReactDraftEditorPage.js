@@ -84,9 +84,7 @@ class ReactDraftEditorPage extends Component {
                     <Paper  style={rightStyle} zDepth={1} children={
                         <Tabs>
                             <Tab label="DRAFT" >
-
                                 <Editor onEditorStateChange = {this.onEditorStateChange} editorState={editorState}/>
-
                             </Tab>
                             <Tab label="HTML">
                                 <div id="htmlDisplay" dangerouslySetInnerHTML={{__html: html}}>

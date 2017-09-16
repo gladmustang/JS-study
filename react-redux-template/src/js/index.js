@@ -23,5 +23,5 @@ const render = () => {
     );
 };
 
-store.subscribe(render);
+// store.subscribe(render); //this is not needed
 render();

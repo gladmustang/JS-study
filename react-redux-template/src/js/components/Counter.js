@@ -42,7 +42,7 @@ const countReducer = (state= defaultState, action) => {
     switch (action.type) {
         case 'Increase':
             return {
-                value: state.value +2,
+                value: state.value +3,
             };
         default:
             return state;
