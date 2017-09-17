@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {
-    BrowserRouter as Router,
     Route,
     Link
 } from 'react-router-dom'
@@ -24,7 +23,6 @@ class BootNav extends Component {
     }
     render() {
         return (
-            <Router>
                 <div>
                     <nav className="navbar navbar-inverse">
                         <div className="container">
@@ -40,7 +38,6 @@ class BootNav extends Component {
                     </div>
 
                 </div>
-            </Router>
         );
     }
 }
