@@ -1,5 +1,6 @@
 import React from 'react';
 import Draft from 'draft-js';
+import { connect } from 'react-redux'
 import "../../css/RichEditor.css"
 
 
@@ -7,9 +8,11 @@ const {Editor, EditorState, RichUtils} = Draft;
 class RichEditor extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {editorState: EditorState.createEmpty()};
+        // this.state = {editorState: EditorState.createEmpty()};
+
         this.focus = () => this.refs.editor.focus();
-        this.onChange = (editorState) => this.setState({editorState});
+        // this.onChange = (editorState) => this.setState({editorState});
+        this.onChange = props.onChange;
         this.handleKeyCommand = this._handleKeyCommand.bind(this);
         this.onTab = this._onTab.bind(this);
         this.toggleBlockType = this._toggleBlockType.bind(this);
@@ -45,7 +48,7 @@ class RichEditor extends React.Component {
     }
     render() {
 
-        const {editorState} = this.state;
+        const {editorState} = this.props;
         // If the user changes block type before entering any text, we can
         // either style the placeholder or hide it. Let's just hide it now.
         let className = 'RichEditor-editor';
@@ -174,4 +177,29 @@ const InlineStyleControls = (props) => {
     );
 };
 
-export default RichEditor;
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        editorState: state.richEditorReducer.editorState
+    }
+}
+
+const mapDispatchToProps = (
+    dispatch,
+    ownProps ) => {
+    return {
+        onChange: (editorState) => {
+            dispatch({
+                type: 'change',
+                editorState: editorState
+            });
+        }
+    };
+}
+
+var RichEditorWrapper = connect (
+    mapStateToProps,
+    mapDispatchToProps
+)(RichEditor);
+
+export default RichEditorWrapper;
