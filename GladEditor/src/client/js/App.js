@@ -29,7 +29,8 @@ const App = ({ store }) => (
             <div>
                 <Route  exact path="/gladmustang" component={ReactuiNav} />
                 <Route path="/gladmustang/bootnav" component={BootNav} />
-                {/*<Link to="/gladmustang/bootnav">Go to bootcss</Link>*/}
+                <Link to="/gladmustang/bootnav">Go to bootcss</Link>
+                <Link to="/gladmustang">Go to reactui</Link>
             </div>
         </Router>
     </Provider>

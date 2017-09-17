@@ -30,13 +30,13 @@ class BootNav extends Component {
                         <div className="container">
                             <ul className="nav nav-pills">
                                 <li role="presentation" className={this.state.activeUrl=="/"?"active":""} onClick={(e)=> this.clickItem('/')}>
-                                    <Link to="/">Editor</Link>
+                                    <Link to={`${this.props.match.url}/`}>Editor</Link>
                                 </li>
                             </ul>
                         </div>
                     </nav>
                     <div id="content">
-                        <Route path="/" component={RichEditor}/>
+                        <Route path={`${this.props.match.url}/`} component={RichEditor}/>
                     </div>
 
                 </div>
