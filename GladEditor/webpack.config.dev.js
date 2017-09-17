@@ -11,7 +11,8 @@ module.exports = {
         //each entry is mapping to a html page and include all js for they page (different page can have duplicate component import)
         //if you don't want one component to be duplicated, put it in common chunks
         index: [
-            './src/client/js/index.js'
+            './src/client/js/index.js',
+            'webpack-hot-middleware/client'
         ],
         // index2: './src/index2.js',
         // vendors: ['jquery','bootstrap'], //the first method to introduce bootstrap js
@@ -25,7 +26,8 @@ module.exports = {
     },
     output: {
         filename: 'resources/js/[name].bundle.js',
-        path: path.resolve(__dirname, 'public')
+        path: path.resolve(__dirname, 'public/temp'),
+        publicPath: '/gladmustang/'
     },
     devtool: 'source-map', //inline-source-map
     plugins: [
@@ -57,7 +59,8 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: './src/client/index.html'
-        })
+        }),
+        new webpack.HotModuleReplacementPlugin()
     ],
     module: {
         rules: [

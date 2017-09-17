@@ -26,6 +26,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/'+app_name, express.static(path.join(__dirname, 'public')));
 
+/* for webpack dev hot loading start*/
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+
+const config = require('./webpack.config.dev.js');
+const compiler = webpack(config);
+
+// Tell express to use the webpack-dev-middleware and use the webpack.config.js
+// configuration file as a base.
+app.use(webpackDevMiddleware(compiler, {
+    publicPath: config.output.publicPath
+}));
+
+app.use(require("webpack-hot-middleware")(compiler,{
+}));
+/* for webpack dev hot loading end*/
+
 app.get('/', function (req, res) {
     res.redirect('/' + app_name + '/');
 })
