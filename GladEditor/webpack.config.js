@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -19,8 +20,8 @@ module.exports = {
 
     },
     output: {
-        filename: 'js/[name].bundle.js',
-        path: path.resolve(__dirname, 'public/resources')
+        filename: 'resources/js/[name].bundle.js',
+        path: path.resolve(__dirname, 'public')
     },
     devtool: 'source-map', //inline-source-map
     plugins: [
@@ -32,9 +33,9 @@ module.exports = {
         // new HtmlWebpackPlugin({
         //     title: 'Output Management'
         //   }),
-        new CleanWebpackPlugin(['public/resources']),
+        new CleanWebpackPlugin(['public']),
         new ExtractTextPlugin({
-            filename: "css/[name].style.css",
+            filename: "resources/css/[name].style.css",
             allChunks: true
         }),
         // new CopyWebpackPlugin([{
@@ -49,6 +50,9 @@ module.exports = {
             jQuery: 'jquery',
             React: 'React',
             ReactDOM: 'react-dom'
+        }),
+        new HtmlWebpackPlugin({
+            template: './src/client/index.html'
         })
     ],
     module: {
@@ -65,7 +69,7 @@ module.exports = {
                     use: {
                         loader: 'css-loader',
                     },
-                    publicPath: "../"
+                    publicPath: "../../"
                 })
             },
             {
@@ -86,7 +90,7 @@ module.exports = {
                 // by webpacks internal loaders.
                 exclude: [/\.js$/, /\.html$/, /\.json$/],
                 options: {
-                    outputPath: "images/",
+                    outputPath: "resources/images/",
                     name: '[name].[ext]',
                 },
             },
@@ -99,7 +103,7 @@ module.exports = {
                 // by webpacks internal loaders.
                 exclude: [/\.js$/, /\.html$/, /\.json$/],
                 options: {
-                    outputPath: "fonts/",
+                    outputPath: "resources/fonts/",
                     name: '[name].[ext]',
                 },
             },
