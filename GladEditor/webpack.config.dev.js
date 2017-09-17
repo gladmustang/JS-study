@@ -26,7 +26,7 @@ module.exports = {
     },
     output: {
         filename: 'resources/js/[name].bundle.js',
-        path: path.resolve(__dirname, 'public/temp'),
+        path: path.resolve(__dirname, '/dist'),
         publicPath: '/gladmustang/'
     },
     devtool: 'source-map', //inline-source-map
@@ -39,7 +39,7 @@ module.exports = {
         // new HtmlWebpackPlugin({
         //     title: 'Output Management'
         //   }),
-        new CleanWebpackPlugin(['public']),
+        new CleanWebpackPlugin(['dist']),
         new ExtractTextPlugin({
             filename: "resources/css/[name].style.css",
             allChunks: true
@@ -85,7 +85,7 @@ module.exports = {
                     fallback: 'style-loader',
                     //resolve-url-loader may be chained before sass-loader if necessary
                     use: ['css-loader', 'less-loader'],
-                    publicPath: "../"
+                    publicPath: "../../"
                 })
             },
             {
