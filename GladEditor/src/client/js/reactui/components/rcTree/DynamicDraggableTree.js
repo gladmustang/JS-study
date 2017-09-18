@@ -28,7 +28,7 @@ import TextField from 'material-ui/TextField';
 
 class DynamicDraggableTree extends Component {
     state = {
-        treeData: [],
+        // treeData: [],
         autoExpandParent: true,
         expandedKeys: ['0-2'],
         selectedKeys:[],
@@ -39,21 +39,21 @@ class DynamicDraggableTree extends Component {
     componentDidMount() {
         this.getContainer();
         console.log(contains(ReactDOM.findDOMNode(this), this.cmContainer));
-        setTimeout(() => {
-            this.setState({
-                treeData: [
-                    { name: 'Document Root', key: '\\documents' },
-                    // { name: 'pNode 02', key: '0-1' },
-                    // { name: 'pNode 03', key: '0-2', isLeaf: true },
-                ]
-            });
-        }, 100);
+        // setTimeout(() => {
+        //     this.setState({
+        //         treeData: [
+        //             { name: 'Document Root', key: '\\documents' },
+        //             // { name: 'pNode 02', key: '0-1' },
+        //             // { name: 'pNode 03', key: '0-2', isLeaf: true },
+        //         ]
+        //     });
+        // }, 100);
     }
     componentWillUnmount() {
         this._removeContainer();
     }
     onLoadData = (treeNode) => {
-        const treeData = [...this.state.treeData];
+        const treeData = [...this.props.treeData];
         var _this = this;
         return new Promise((resolve,reject) => {
             fetch("./documents/getChildNodes",{
@@ -69,7 +69,8 @@ class DynamicDraggableTree extends Component {
                 if(data.code==0) {
                     // console.log(data);
                     getNewTreeDataWithExactMatch(treeData, treeNode.props.eventKey, data.childNodes, 100);
-                    _this.setState({ treeData });
+                    // _this.setState({ treeData });
+                    _this.props.updateTreeData(treeData);
                     resolve();
 
                 } else {
@@ -141,7 +142,7 @@ class DynamicDraggableTree extends Component {
                     }
                 });
             };
-            const data = [...this.state.treeData];
+            const data = [...this.props.treeData];
             let dragObj;
             loop(data, dragKey, (item, index, arr) => {
                 arr.splice(index, 1);
@@ -162,10 +163,11 @@ class DynamicDraggableTree extends Component {
                     item.children.push(dragObj);
                 });
             }
-            this.setState({
-                treeData: data,
-                // selectedKeys:[dragObj.key]
-            });
+            // this.setState({
+            //     treeData: data,
+            //     // selectedKeys:[dragObj.key]
+            // });
+            this.props.updateTreeData(data);
         });
 
     }
@@ -212,15 +214,16 @@ class DynamicDraggableTree extends Component {
                 }
             });
         };
-        const data = [...this.state.treeData];
+        const data = [...this.props.treeData];
         loop(data, parentKey, (item, index, arr) => {
             item.children.push(
                 {name:"NewDoc.html", key: item.key + "\\NewDoc.html", isLeaf: true}
             );
         });
-        this.setState({
-            treeData: data
-        });
+        // this.setState({
+        //     treeData: data
+        // });
+        this.props.updateTreeData(data);
 
     }
 
@@ -237,15 +240,16 @@ class DynamicDraggableTree extends Component {
                 }
             });
         };
-        const data = [...this.state.treeData];
+        const data = [...this.props.treeData];
         loop(data, parentKey, (item, index, arr) => {
             item.children.push(
                 {name:"NewFolder", key: item.key + "\\NewFolder"}
             );
         });
-        this.setState({
-            treeData: data
-        });
+        // this.setState({
+        //     treeData: data
+        // });
+        this.props.updateTreeData(data);
 
     }
     renameTreeItem = (info)=> {
@@ -275,14 +279,14 @@ class DynamicDraggableTree extends Component {
                 }
             });
         };
-        const data = [...this.state.treeData];
+        const data = [...this.props.treeData];
         loop(data, renameKey, (item, index, arr) => {
             item.name=this.state.inputValue;
         });
         this.setState({
-            treeData: data,
             renameOpen: false
         });
+        this.props.updateTreeData(data);
     }
 
     handleInputChange = (e)=> {
@@ -307,15 +311,16 @@ class DynamicDraggableTree extends Component {
                 }
             });
         };
-        const data = [...this.state.treeData];
+        const data = [...this.props.treeData];
         let deleteObj;
         loop(data, deleteKey, (item, index, arr) => {
             arr.splice(index, 1);
             deleteObj = item;
         });
-        this.setState({
-            treeData: data
-        });
+        // this.setState({
+        //     treeData: data
+        // });
+        this.props.updateTreeData(data);
     }
     renderCm(info) {
         if (this.toolTip) {
@@ -388,7 +393,7 @@ class DynamicDraggableTree extends Component {
                 );
             });
         };
-        const treeNodes = loop(this.state.treeData);
+        const treeNodes = loop(this.props.treeData);
         return (
             <div>
                 <Tree className ="folderTree"
