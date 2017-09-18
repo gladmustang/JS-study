@@ -12,6 +12,7 @@ class EditorToolBar extends Component {
                 <ToolbarGroup firstChild={true}>
                     <TextField style={{marginLeft: 50, minWidth: 800}}
                         hintText="Document Title"
+                        value={this.props.currentItemName}
                     />
                 </ToolbarGroup>
                 <ToolbarGroup>
