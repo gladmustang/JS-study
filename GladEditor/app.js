@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
+require('dotenv').config();
+var env = process.env;
 
 var rootAPI = require('./src/server/routes/rootAPI');
 
@@ -25,22 +27,24 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-/* for webpack dev hot loading start*/
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
+if(env.RUN_MODEL=='development'){
+    /* for webpack dev hot loading start*/
+    const webpack = require('webpack');
+    const webpackDevMiddleware = require('webpack-dev-middleware');
 
-const config = require('./webpack.config.dev.js');
-const compiler = webpack(config);
+    const config = require('./webpack.config.dev.js');
+    const compiler = webpack(config);
 
 // Tell express to use the webpack-dev-middleware and use the webpack.config.js
 // configuration file as a base.
-app.use(webpackDevMiddleware(compiler, {
-    publicPath: config.output.publicPath
-}));
+    app.use(webpackDevMiddleware(compiler, {
+        publicPath: config.output.publicPath
+    }));
 
-app.use(require("webpack-hot-middleware")(compiler,{
-}));
-/* for webpack dev hot loading end*/
+    app.use(require("webpack-hot-middleware")(compiler,{
+    }));
+    /* for webpack dev hot loading end*/
+}
 
 app.use('/'+app_name, express.static(path.join(__dirname, 'public')));
 

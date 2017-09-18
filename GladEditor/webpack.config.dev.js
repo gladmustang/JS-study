@@ -59,7 +59,7 @@ module.exports = {
         }),
         new webpack.HotModuleReplacementPlugin(),
         // Use NoErrorsPlugin for webpack 1.x
-        new webpack.NoEmitOnErrorsPlugin()
+        // new webpack.NoEmitOnErrorsPlugin()
     ],
     module: {
         rules: [

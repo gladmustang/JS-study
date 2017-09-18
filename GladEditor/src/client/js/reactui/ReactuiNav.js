@@ -12,7 +12,7 @@ class ReactuiNav extends Component {
                     <AppBar style={{
                         marginBottom: '1px'
                     }}
-                            title="Glad Editor ttttt"
+                            title="Glad Editor really"
                             iconElementRight={<ConfirmDialog/>}
                     />
                     <MainTab/>
