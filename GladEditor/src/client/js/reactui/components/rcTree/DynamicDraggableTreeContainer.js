@@ -23,6 +23,12 @@ var mapDispatchToProps = (dispatch)=>{
                 type: 'updateTreeData',
                 treeData: treeData
             })
+        },
+        updateMultiStates: (newStates)=> {
+            dispatch({
+                type: 'updateMultiStates',
+                states: newStates
+            })
         }
     }
 }

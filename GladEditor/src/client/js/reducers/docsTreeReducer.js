@@ -1,4 +1,4 @@
-import { Map } from 'immutable';
+import { Map,List } from 'immutable';
 const defaultState = Map({
     currentItemName:"",
     treeData: [
@@ -30,6 +30,14 @@ const docsTreeReducer = (state= defaultState, action) => {
             // newState.treeData = action.treeData;
             // return newState;
             return state.set('treeData', action.treeData);
+        case 'updateMultiStates':
+            var newState = state;
+            for(var key in action.states) {
+                var value = action.states[key];
+                newState = state.set(key, value);
+            }
+            return newState;
+
 
         default:
             return state;

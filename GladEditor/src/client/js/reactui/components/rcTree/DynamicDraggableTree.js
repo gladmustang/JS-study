@@ -31,7 +31,7 @@ class DynamicDraggableTree extends Component {
         // treeData: [],
         autoExpandParent: true,
         expandedKeys: ['0-2'],
-        selectedKeys:[],
+        // selectedKeys:[],
         renameOpen: false,
         inputValue: ''
     };
@@ -87,7 +87,8 @@ class DynamicDraggableTree extends Component {
     }
 
     onSelect = (selectedKeys, info) => {
-        this.setState({ selectedKeys });
+        // this.setState({ selectedKeys });
+        this.props.updateMultiStates({selectedKeys});
         const showContent = this.props.showContent;
         this.props.setCurrentItemName(info.node.props.title);
         if(info.node.props.isLeaf) {
@@ -181,7 +182,8 @@ class DynamicDraggableTree extends Component {
     }
     onRightClick = (info) => {
         console.log('right click', info);
-        this.setState({ selectedKeys: [info.node.props.eventKey] });
+        // this.setState({ selectedKeys: [info.node.props.eventKey] });
+        this.props.updateMultiStates({ selectedKeys: [info.node.props.eventKey] })
         this.renderCm(info);
     }
     getContainer = () => {
@@ -402,7 +404,7 @@ class DynamicDraggableTree extends Component {
                     onRightClick={this.onRightClick}
                     onMouseLeave={this.onMouseLeave}
                     onSelect={this.onSelect}
-                    selectedKeys={this.state.selectedKeys}
+                    selectedKeys={this.props.selectedKeys}
                     showLine
                     expandedKeys={this.state.expandedKeys}
                     onExpand={this.onExpand}
