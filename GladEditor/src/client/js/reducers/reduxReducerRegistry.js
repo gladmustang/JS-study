@@ -3,13 +3,13 @@ import {countReducer} from '../samples/Counter';
 import {innerReducer} from '../samples/Inner';
 import editorPageReducer from './editorPageReducer'
 import richEditorReducer from './richEditorReducer'
-import docsTree from './docsTree'
+import docsTreeReducer from './docsTreeReducer'
 var reducer = combineReducers({
     countReducer,
     innerReducer,
     editorPageReducer,
     richEditorReducer,
-    docsTree
+    docsTreeReducer
 })
 
 

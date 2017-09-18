@@ -3,18 +3,18 @@ import {connect} from "react-redux"
 
 var mapStateToProps = (state, ownProps)=> {
     return {
-        currentItemName: state.docsTree.currentItemName,
+        currentItemName: state.docsTreeReducer.currentItemName,
     }
 }
 
 var mapDispatchToProps = (dispatch)=>{
     return {
-        // setCurrentItemName: (itemName)=>{
-        //     dispatch({
-        //         type: 'setCurrentItemName',
-        //         currentItemName: itemName
-        //     });
-        // }
+        handleChange: (event)=>{
+            dispatch({
+                type: 'changeCurrentItemName',
+                currentItemName: event.target.value
+            });
+        }
     }
 }
 
