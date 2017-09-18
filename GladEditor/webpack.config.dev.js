@@ -34,7 +34,7 @@ module.exports = {
             names: ['vendors', 'common'] // Specify the common bundle's name.
            // names: ['vendors', 'commonTrunk2','common'] // Specify the common bundle's name.
         }), //last 'common' will hold the webpack common facility
-        
+
         new CleanWebpackPlugin(['dist']),
         new ExtractTextPlugin({
             filename: "resources/css/[name].style.css",
