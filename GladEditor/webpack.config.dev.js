@@ -1,7 +1,6 @@
 var path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -35,10 +34,7 @@ module.exports = {
             names: ['vendors', 'common'] // Specify the common bundle's name.
            // names: ['vendors', 'commonTrunk2','common'] // Specify the common bundle's name.
         }), //last 'common' will hold the webpack common facility
-
-        // new HtmlWebpackPlugin({
-        //     title: 'Output Management'
-        //   }),
+        
         new CleanWebpackPlugin(['dist']),
         new ExtractTextPlugin({
             filename: "resources/css/[name].style.css",
@@ -58,6 +54,7 @@ module.exports = {
             ReactDOM: 'react-dom'
         }),
         new HtmlWebpackPlugin({
+            title: 'Glad Editor',
             template: './src/client/index.html'
         }),
         new webpack.HotModuleReplacementPlugin(),
