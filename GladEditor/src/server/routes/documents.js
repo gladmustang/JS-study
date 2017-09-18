@@ -18,12 +18,13 @@ router.post('/getChildNodes', function(req, res, next) {
         var results = [];
 
         files.forEach(function(filename) {
+            var baseFilename = path.basename(filename, '.html');
             try {
                 var stats = fs.statSync(path.join(filePath, filename));
                 if (stats.isFile()) {
-                    results.push({name:filename, key: path.join(clientPath, filename), isLeaf: true});
+                    results.push({name:baseFilename, key: path.join(clientPath, filename), isLeaf: true});
                 } else if (stats.isDirectory()) {
-                    results.push({name:filename, key:  path.join(clientPath, filename)});
+                    results.push({name: baseFilename, key:  path.join(clientPath, filename)});
                 }
             } catch(err) {
                 res.json({code:1, error: err});
