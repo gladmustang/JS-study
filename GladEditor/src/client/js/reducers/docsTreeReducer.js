@@ -8,20 +8,26 @@ var defaultState = {
 const docsTreeReducer = (state= defaultState, action) => {
     switch (action.type) {
         case 'setCurrentItemName':
-            return {
-                currentItemName: action.currentItemName,
-                treeData: state.treeData
-            };
+            // return {
+            //     currentItemName: action.currentItemName,
+            //     treeData: state.treeData
+            // };
+            var newState = {...state};
+            newState.currentItemName = action.currentItemName;
+            return newState;
         case 'changeCurrentItemName':
-            return {
-                currentItemName: action.currentItemName,
-                treeData: state.treeData
-            };
+            // return {
+            //     currentItemName: action.currentItemName,
+            //     treeData: state.treeData
+            // };
+            var newState = {...state};
+            newState.currentItemName = action.currentItemName;
+            return newState;
         case 'updateTreeData':
-            return {
-                currentItemName: state.currentItemName,
-                treeData: action.treeData
-            }
+            var newState = {...state};
+            newState.treeData = action.treeData;
+            return newState;
+
         default:
             return state;
     }
