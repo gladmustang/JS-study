@@ -11,8 +11,8 @@ module.exports = {
         //each entry is mapping to a html page and include all js for they page (different page can have duplicate component import)
         //if you don't want one component to be duplicated, put it in common chunks
         index: [
-            './src/client/js/index.js',
-            'webpack-hot-middleware/client'
+            'webpack-hot-middleware/client',
+            './src/client/js/index.js'
         ],
         // index2: './src/index2.js',
         // vendors: ['jquery','bootstrap'], //the first method to introduce bootstrap js
@@ -60,7 +60,9 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/client/index.html'
         }),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        // Use NoErrorsPlugin for webpack 1.x
+        new webpack.NoEmitOnErrorsPlugin()
     ],
     module: {
         rules: [

@@ -5,8 +5,8 @@
   "main": "public/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "watch": "webpack --watch",
+    "build": "webpack --config webpack.config.prod.js",
+    "watch": "webpack --config webpack.config.prod.js --watch",
     "pm2": "pm2",
     "open": "node ./openBrowser",
     "start": "pm2 start app.js --name gladapp",

@@ -24,7 +24,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use('/'+app_name, express.static(path.join(__dirname, 'public')));
 
 /* for webpack dev hot loading start*/
 const webpack = require('webpack');
@@ -42,6 +41,8 @@ app.use(webpackDevMiddleware(compiler, {
 app.use(require("webpack-hot-middleware")(compiler,{
 }));
 /* for webpack dev hot loading end*/
+
+app.use('/'+app_name, express.static(path.join(__dirname, 'public')));
 
 app.get('/', function (req, res) {
     res.redirect('/' + app_name + '/');
@@ -67,6 +68,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 var port = process.env.PORT || '3000';
 
