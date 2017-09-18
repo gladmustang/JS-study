@@ -19,8 +19,5 @@ const render = () => {
 render();
 
 if (module.hot) {
-   module.hot.accept('./App.js', function() {
-        console.log('Accepting the updated module!');
-        render();
-   })
+   module.hot.accept();
 }
