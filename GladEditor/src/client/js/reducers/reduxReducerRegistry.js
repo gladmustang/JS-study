@@ -1,4 +1,5 @@
-import {combineReducers} from 'redux';
+// import {combineReducers} from 'redux';
+import {combineReducers } from 'redux-immutable';
 import {countReducer} from '../samples/Counter';
 import {innerReducer} from '../samples/Inner';
 import editorPageReducer from './editorPageReducer'

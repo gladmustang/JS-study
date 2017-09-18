@@ -1,32 +1,35 @@
-var defaultState = {
+import { Map } from 'immutable';
+const defaultState = Map({
     currentItemName:"",
     treeData: [
         { name: 'Document Root', key: '\\documents' }
     ],
     selectedKeys:[]
-}
+});
+// var defaultState = {
+//     currentItemName:"",
+//     treeData: [
+//         { name: 'Document Root', key: '\\documents' }
+//     ],
+//     selectedKeys:[]
+// }
 const docsTreeReducer = (state= defaultState, action) => {
     switch (action.type) {
         case 'setCurrentItemName':
-            // return {
-            //     currentItemName: action.currentItemName,
-            //     treeData: state.treeData
-            // };
-            var newState = {...state};
-            newState.currentItemName = action.currentItemName;
-            return newState;
+            // var newState = {...state};
+            // newState.currentItemName = action.currentItemName;
+            // return newState;
+            return state.set('currentItemName', action.currentItemName);
         case 'changeCurrentItemName':
-            // return {
-            //     currentItemName: action.currentItemName,
-            //     treeData: state.treeData
-            // };
-            var newState = {...state};
-            newState.currentItemName = action.currentItemName;
-            return newState;
+            // var newState = {...state};
+            // newState.currentItemName = action.currentItemName;
+            // return newState;
+            return state.set('currentItemName', action.currentItemName);
         case 'updateTreeData':
-            var newState = {...state};
-            newState.treeData = action.treeData;
-            return newState;
+            // var newState = {...state};
+            // newState.treeData = action.treeData;
+            // return newState;
+            return state.set('treeData', action.treeData);
 
         default:
             return state;

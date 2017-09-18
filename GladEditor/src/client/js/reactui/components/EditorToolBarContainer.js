@@ -3,7 +3,8 @@ import {connect} from "react-redux"
 
 var mapStateToProps = (state, ownProps)=> {
     return {
-        currentItemName: state.docsTreeReducer.currentItemName,
+        // currentItemName: state.docsTreeReducer.currentItemName,
+        currentItemName: state.get("docsTreeReducer").get("currentItemName")
     }
 }
 

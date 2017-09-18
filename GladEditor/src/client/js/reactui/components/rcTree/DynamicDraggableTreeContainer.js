@@ -3,10 +3,10 @@ import {connect} from "react-redux"
 
 var mapStateToProps = (state, ownProps)=> {
     return {
-        currentItemName: state.docsTreeReducer.currentItemName,
-        showContent: ownProps.showContent,
-        treeData:state.docsTreeReducer.treeData,
-        selectedKeys: state.docsTreeReducer.selectedKeys
+        currentItemName: state.get("docsTreeReducer").get("currentItemName"),
+        treeData:state.get("docsTreeReducer").get("treeData"),
+        selectedKeys: state.get("docsTreeReducer").get("selectedKeys"),
+        showContent: ownProps.showContent
     }
 }
 

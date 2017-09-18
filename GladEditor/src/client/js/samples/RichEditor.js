@@ -180,7 +180,8 @@ const InlineStyleControls = (props) => {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        editorState: state.richEditorReducer.editorState
+        // editorState: state.richEditorReducer.editorState
+        editorState: state.get("richEditorReducer").get("editorState")
     }
 }
 
