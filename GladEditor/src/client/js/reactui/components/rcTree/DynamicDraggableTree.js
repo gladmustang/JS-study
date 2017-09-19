@@ -91,7 +91,6 @@ class DynamicDraggableTree extends Component {
         this.props.updateMultiStates({selectedKeys});
         const showContent = this.props.showContent;
         if(info.node.props.isLeaf) {
-            // this.props.setCurrentItemName(info.node.props.title);
             this.props.setCurrentDoc(selectedKeys[0]);
             fetch("./documents/getDocument", {
                 headers: {
