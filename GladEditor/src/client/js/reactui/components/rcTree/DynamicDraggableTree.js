@@ -8,7 +8,7 @@ import '../../../../css/rcTreeBasic.css'
 import '../../../../less/contextmenu.less'
 // import { gData } from './rcTreeUtils'
 import {animation, contains} from "./animateUtils"
-import {generateTreeNodes, setLeaf, getNewTreeDataWithExactMatch} from "./dynamicUtils"
+import {generateTreeNodes, setLeaf, getNewTreeDataWithExactMatch, findKeyInTree} from "./dynamicUtils"
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
@@ -133,32 +133,23 @@ class DynamicDraggableTree extends Component {
             const dropKey = info.node.props.eventKey;
             const dragKey = info.dragNode.props.eventKey;
             // const dragNodesKeys = info.dragNodesKeys;
-            const loop = (data, key, callback) => {
-                data.forEach((item, index, arr) => {
-                    if (item.key === key) {
-                        return callback(item, index, arr);
-                    }
-                    if (item.children) {
-                        return loop(item.children, key, callback);
-                    }
-                });
-            };
+
             const data = [...this.props.treeData];
             let dragObj;
-            loop(data, dragKey, (item, index, arr) => {
+            findKeyInTree(data, dragKey, (item, index, arr) => {
                 arr.splice(index, 1);
                 dragObj = item;
             });
             if (info.dropToGap) {
                 let ar;
                 let i;
-                loop(data, dropKey, (item, index, arr) => {
+                findKeyInTree(data, dropKey, (item, index, arr) => {
                     ar = arr;
                     i = index;
                 });
                 ar.splice(i, 0, dragObj);
             } else {
-                loop(data, dropKey, (item) => {
+                findKeyInTree(data, dropKey, (item) => {
                     item.children = item.children || [];
                     // where to insert 示例添加到尾部，可以是随意位置
                     item.children.push(dragObj);
@@ -206,18 +197,9 @@ class DynamicDraggableTree extends Component {
     addChildItem = (info) => {
         this._removeContainer();
         const parentKey = info.node.props.eventKey;
-        const loop = (data, key, callback) => {
-            data.forEach((item, index, arr) => {
-                if (item.key === key) {
-                    return callback(item, index, arr);
-                }
-                if (item.children) {
-                    return loop(item.children, key, callback);
-                }
-            });
-        };
+
         const data = [...this.props.treeData];
-        loop(data, parentKey, (item, index, arr) => {
+        findKeyInTree(data, parentKey, (item, index, arr) => {
             item.children.push(
                 {name:"NewDoc.html", key: item.key + "\\NewDoc.html", isLeaf: true}
             );
@@ -232,18 +214,8 @@ class DynamicDraggableTree extends Component {
     addChildFolder = (info) => {
         this._removeContainer();
         const parentKey = info.node.props.eventKey;
-        const loop = (data, key, callback) => {
-            data.forEach((item, index, arr) => {
-                if (item.key === key) {
-                    return callback(item, index, arr);
-                }
-                if (item.children) {
-                    return loop(item.children, key, callback);
-                }
-            });
-        };
         const data = [...this.props.treeData];
-        loop(data, parentKey, (item, index, arr) => {
+        findKeyInTree(data, parentKey, (item, index, arr) => {
             item.children.push(
                 {name:"NewFolder", key: item.key + "\\NewFolder"}
             );
@@ -271,18 +243,8 @@ class DynamicDraggableTree extends Component {
 
     handleRenameDialogSubmit = (info)=> {
         const renameKey = info.node.props.eventKey;
-        const loop = (data, key, callback) => {
-            data.forEach((item, index, arr) => {
-                if (item.key === key) {
-                    return callback(item, index, arr);
-                }
-                if (item.children) {
-                    return loop(item.children, key, callback);
-                }
-            });
-        };
         const data = [...this.props.treeData];
-        loop(data, renameKey, (item, index, arr) => {
+        findKeyInTree(data, renameKey, (item, index, arr) => {
             item.name=this.state.inputValue;
         });
         this.setState({
@@ -303,19 +265,9 @@ class DynamicDraggableTree extends Component {
         this._removeContainer();
         const deleteKey = info.node.props.eventKey;
         // const dragNodesKeys = info.dragNodesKeys;
-        const loop = (data, key, callback) => {
-            data.forEach((item, index, arr) => {
-                if (item.key === key) {
-                    return callback(item, index, arr);
-                }
-                if (item.children) {
-                    return loop(item.children, key, callback);
-                }
-            });
-        };
         const data = [...this.props.treeData];
         let deleteObj;
-        loop(data, deleteKey, (item, index, arr) => {
+        findKeyInTree(data, deleteKey, (item, index, arr) => {
             arr.splice(index, 1);
             deleteObj = item;
         });
