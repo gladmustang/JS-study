@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import { connect } from 'react-redux'
 import {Tabs, Tab} from 'material-ui/Tabs';
-import ReactDraftEditor from '../components/ReactDraftEditor'
+import ReactDraftEditorContainer from '../components/ReactDraftEditorContainer'
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
@@ -31,41 +31,18 @@ const rightStyle = {
     float: "left"
 };
 
-const Editor = ReactDraftEditor;
+const Editor = ReactDraftEditorContainer;
 
 
 class ReactDraftEditorPage extends Component {
-    constructor(props) {
-        super(props);
-        this.onEditorStateChange= this._onEditorStateChange.bind(this);
-        this.state={
-            editorState: EditorState.createEmpty()
-        };
-
-    }
     // state = {
     //     editorState: EditorState.createEmpty(),
     // }
 
-    _onEditorStateChange (editorState) {
-        this.setState({
-            editorState,
-        });
-    };
 
-    showContent= (content)=> {
-        //loading previous state
-        const html = content;
-        const contentBlock = htmlToDraft(html);
-        if (contentBlock) {
-            const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
-            this.setState({
-                editorState: EditorState.createWithContent(contentState)
-            });
-        }
-    }
+
     render() {
-        const { editorState } = this.state;
+        const { editorState } = this.props;
         var html =draftToHtml(convertToRaw(editorState.getCurrentContent()));
         console.log(html);
         return (
@@ -86,7 +63,7 @@ class ReactDraftEditorPage extends Component {
                         <Tabs>
                             <Tab label="DRAFT" >
                                 <EditorToolBarContainer/>
-                                <Editor onEditorStateChange = {this.onEditorStateChange} editorState={editorState}/>
+                                <Editor/>
                             </Tab>
                             <Tab label="HTML">
                                 <div id="htmlDisplay" dangerouslySetInnerHTML={{__html: html}}>
@@ -96,15 +73,11 @@ class ReactDraftEditorPage extends Component {
 
                     } />
 
-
-
-
             </div>
 
         );
     }
 }
 
-const ReactDraftEditorPageWrapper = connect()(ReactDraftEditorPage)
 
-export default ReactDraftEditorPageWrapper;
+export default ReactDraftEditorPage;

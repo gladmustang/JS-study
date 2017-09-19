@@ -1,13 +1,14 @@
 import DynamicDraggableTree from "./DynamicDraggableTree"
 import {connect} from "react-redux"
+import htmlToDraft from 'html-to-draftjs';
+import { EditorState, convertToRaw, ContentState } from 'draft-js';
 
 var mapStateToProps = (state, ownProps)=> {
     return {
         currentItemName: state.get("docsTreeReducer").get("currentItemName"),
         currentDocKey: state.get("docsTreeReducer").get("currentDocKey"),
         treeData:state.get("docsTreeReducer").get("treeData"),
-        selectedKeys: state.get("docsTreeReducer").get("selectedKeys"),
-        showContent: ownProps.showContent
+        selectedKeys: state.get("docsTreeReducer").get("selectedKeys")
     }
 }
 
@@ -30,6 +31,18 @@ var mapDispatchToProps = (dispatch)=>{
                 type: 'updateMultiStates',
                 states: newStates
             })
+        },
+        showContent:(content)=> {
+            //loading previous state
+            const html = content;
+            const contentBlock = htmlToDraft(html);
+            if (contentBlock) {
+                const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+                dispatch({
+                    type: 'onEditorStateChange',
+                    editorState: EditorState.createWithContent(contentState)
+                });
+            }
         }
     }
 }

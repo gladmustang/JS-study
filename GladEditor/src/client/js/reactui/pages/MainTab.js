@@ -1,6 +1,6 @@
 import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import ReactDraftEditorPageWrapper from './ReactDraftEditorPage'
+import ReactDraftEditorPageContainer from './ReactDraftEditorPageContainer'
 import RichEditorPage from './RichEditorPage'
 
 const styles = {
@@ -24,7 +24,7 @@ const MainTab = () => (
             {/*</div>*/}
         {/*</Tab>*/}
         <Tab label="Draft-Editor" >
-            <ReactDraftEditorPageWrapper/>
+            <ReactDraftEditorPageContainer/>
         </Tab>
         <Tab
             label="Tab 3"
