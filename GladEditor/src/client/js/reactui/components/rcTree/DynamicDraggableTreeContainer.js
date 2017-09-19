@@ -4,6 +4,7 @@ import {connect} from "react-redux"
 var mapStateToProps = (state, ownProps)=> {
     return {
         currentItemName: state.get("docsTreeReducer").get("currentItemName"),
+        currentDocKey: state.get("docsTreeReducer").get("currentDocKey"),
         treeData:state.get("docsTreeReducer").get("treeData"),
         selectedKeys: state.get("docsTreeReducer").get("selectedKeys"),
         showContent: ownProps.showContent
@@ -12,10 +13,10 @@ var mapStateToProps = (state, ownProps)=> {
 
 var mapDispatchToProps = (dispatch)=>{
     return {
-        setCurrentItemName: (itemName)=>{
+        setCurrentDoc:(currentDocKey) => {
             dispatch({
-                type: 'setCurrentItemName',
-                currentItemName: itemName
+                type: 'setCurrentDoc',
+                currentDocKey: currentDocKey
             });
         },
         updateTreeData:(treeData)=>{

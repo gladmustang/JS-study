@@ -61,4 +61,16 @@ function getNewTreeDataWithExactMatch(treeData, curKey, child, level) {
     // setLeaf(treeData, curKey, level);
 }
 
-export {generateTreeNodes, setLeaf, getNewTreeData, getNewTreeDataWithExactMatch};
+
+const findKeyInTree = (data, key, callback) => {
+    data.forEach((item, index, arr) => {
+        if (item.key === key) {
+            return callback(item, index, arr);
+        }
+        if (item.children) {
+            return findKeyInTree(item.children, key, callback);
+        }
+    });
+};
+
+export {generateTreeNodes, setLeaf, getNewTreeData, getNewTreeDataWithExactMatch, findKeyInTree};

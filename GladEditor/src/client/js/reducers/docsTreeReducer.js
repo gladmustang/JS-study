@@ -1,6 +1,8 @@
 import { Map,List } from 'immutable';
+import {findKeyInTree} from '../reactui/components/rcTree/dynamicUtils'
 const defaultState = Map({
     currentItemName:"",
+    currentDocKey:"",
     treeData: [
         { name: 'Document Root', key: '\\documents' }
     ],
@@ -14,17 +16,34 @@ const defaultState = Map({
 //     selectedKeys:[]
 // }
 const docsTreeReducer = (state= defaultState, action) => {
+    const data = [...state.get("treeData")];
     switch (action.type) {
-        case 'setCurrentItemName':
-            // var newState = {...state};
-            // newState.currentItemName = action.currentItemName;
-            // return newState;
-            return state.set('currentItemName', action.currentItemName);
+        case 'setCurrentDoc':
+            const currentDocKey = action.currentDocKey;
+            var currentItem = null;
+            findKeyInTree(data, currentDocKey, (item, index, arr) => {
+                currentItem = item;
+            });
+            if(currentItem) {
+                return state.set('currentItemName', currentItem.name).set('currentDocKey', currentDocKey);
+            } else {
+                return state.set('currentDocKey', currentDocKey);
+            }
+
+
         case 'changeCurrentItemName':
             // var newState = {...state};
             // newState.currentItemName = action.currentItemName;
             // return newState;
-            return state.set('currentItemName', action.currentItemName);
+            const selectedKey = state.get("currentDocKey");
+            findKeyInTree(data, selectedKey, (item, index, arr) => {
+                item.name=action.currentItemName;
+            });
+
+            var newState = state.set('currentItemName', action.currentItemName);
+            return newState.set("treeData", data);
+
+
         case 'updateTreeData':
             // var newState = {...state};
             // newState.treeData = action.treeData;
