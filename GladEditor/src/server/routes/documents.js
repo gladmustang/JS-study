@@ -3,6 +3,7 @@ var router = express.Router();
 
 var fs = require("fs");
 var path = require("path");
+var mv = require('mv');
 
 router.post('/getChildNodes', function(req, res, next) {
     var clientPath = req.body.path;
@@ -51,5 +52,36 @@ router.post('/getDocument', function(req, res, next) {
 
 
 });
+
+router.post('/saveDoc', function(req, res, next) {
+    var docPath = req.body.docPath;
+    var filePath= rootDir + docPath;
+    var fileName = req.body.fileName;
+    var content = req.body.content;
+
+
+    var oldFileName = path.basename(docPath,'.html');
+    var folderPath = path.dirname(filePath);
+    if(oldFileName!=fileName) {
+        mv(filePath, path.join(folderPath,fileName+".html"), function(err) {
+            // done. it tried fs.rename first, and then falls back to
+            // piping the source file to the dest file and then unlinking
+            // the source file.
+            if(err) {
+                res.json({code:1, error: err});
+            }
+            var fileInfo = {
+                name: fileName,
+                key:  path.join(folderPath,fileName+".html"),
+                isLeaf: true
+            };
+            res.json({code:0, fileInfo: fileInfo});
+        });
+    }
+
+
+
+});
+
 
 module.exports = router;

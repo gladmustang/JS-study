@@ -17,7 +17,7 @@ class EditorToolBar extends Component {
                     />
                 </ToolbarGroup>
                 <ToolbarGroup>
-                    <RaisedButton label="Save Document" primary={true} />
+                    <RaisedButton label="Save Document" primary={true} onClick={()=>{this.props.saveDoc(this.props)}}/>
                 </ToolbarGroup>
             </Toolbar>
         );
