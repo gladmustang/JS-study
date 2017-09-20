@@ -80,15 +80,45 @@ var mapDispatchToProps = (dispatch)=>{
         },
         addChildFolder: (treeData, parentKey)=>{
             const newData = [...treeData];
+            var currentItem = null;
             findKeyInTree(newData, parentKey, (item, index, arr) => {
-                item.children.push(
-                    {name:"NewFolder", key: item.key + "\\NewFolder"}
-                );
+                currentItem = item;
+                // item.children.push(
+                //     {name:"NewFolder", key: item.key + "\\NewFolder"}
+                // );
             });
-            dispatch({
-                type: 'updateTreeData',
-                treeData: newData
-            });
+            if(currentItem) {
+                fetch("./documents/addDir",{
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "POST",
+                    body: JSON.stringify({dirPath: currentItem.key + "\\NewFolder"})
+                }).then(function(response) {
+                    return response.json();
+                }).then(function(data) {
+                    if(data.code==0) {
+                        currentItem.children.push(
+                            {name:"NewFolder", key: currentItem.key + "\\NewFolder"}
+                        );
+                        dispatch({
+                            type: 'updateTreeData',
+                            treeData: newData
+                        });
+                        alert("Add folder success");
+                    } else {
+                        console.log(data.error);
+                        alert("Add folder error");
+                    }
+
+                }).catch(function(e) {
+                    console.log(e);
+                    console.log("Oops, error");
+                });
+            } else {
+                alert("Error when adding folder");
+            }
         }
     }
 }
