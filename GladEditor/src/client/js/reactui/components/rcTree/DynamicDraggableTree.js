@@ -30,7 +30,7 @@ class DynamicDraggableTree extends Component {
     state = {
         // treeData: [],
         autoExpandParent: true,
-        expandedKeys: ['0-2'],
+        expandedKeys: [],
         // selectedKeys:[],
         renameOpen: false,
         inputValue: ''
@@ -91,6 +91,11 @@ class DynamicDraggableTree extends Component {
         this.props.updateMultiStates({selectedKeys});
         const showContent = this.props.showContent;
         if(info.node.props.isLeaf) {
+            var expandedKeys = this.state.expandedKeys;
+            expandedKeys.push(info.node.props.eventKey);
+            this.setState({
+                expandedKeys: expandedKeys
+            });
             this.props.setCurrentDoc(selectedKeys[0]);
             fetch("./documents/getDocument", {
                 headers: {
