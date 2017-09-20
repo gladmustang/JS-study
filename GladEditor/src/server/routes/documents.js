@@ -65,7 +65,7 @@ router.post('/saveDoc', function(req, res, next) {
     var folderPath = path.dirname(filePath);
     var newFilePath = path.join(folderPath,fileName+".html");
     var newDocPath = path.join(path.dirname(docPath),fileName+".html");
-    if(oldFileName!=fileName) {
+    if((oldFileName!=fileName)&&(fs.existsSync(filePath))) {
         mv(filePath, newFilePath, function(err) {
             // done. it tried fs.rename first, and then falls back to
             // piping the source file to the dest file and then unlinking
