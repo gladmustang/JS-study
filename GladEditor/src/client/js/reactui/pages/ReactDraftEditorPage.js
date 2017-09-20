@@ -44,7 +44,7 @@ class ReactDraftEditorPage extends Component {
     render() {
         const { editorState } = this.props;
         var html =draftToHtml(convertToRaw(editorState.getCurrentContent()));
-        console.log(html);
+        // console.log(html);
         return (
             <div style={{
                 marginTop: "10px"
