@@ -85,6 +85,10 @@ var mapDispatchToProps = (dispatch)=>{
                 arr.splice(index, 1);
                 deleteObj = item;
             });
+            if(deleteObj.name=='Document Root') {
+                alert("Can not delete document root!")
+                return;
+            }
             fetch("./documents/deleteDir",{
                 headers: {
                     'Accept': 'application/json',
