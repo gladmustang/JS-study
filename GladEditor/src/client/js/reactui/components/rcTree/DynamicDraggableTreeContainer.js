@@ -46,9 +46,9 @@ var mapDispatchToProps = (dispatch)=>{
             }
         },
         deleteDoc:(treeData, deleteKey)=> {
-            var data = [...treeData];
+            var newData = [...treeData];
             let deleteObj;
-            findKeyInTree(data, deleteKey, (item, index, arr) => {
+            findKeyInTree(newData, deleteKey, (item, index, arr) => {
                 arr.splice(index, 1);
                 deleteObj = item;
             });
@@ -65,7 +65,7 @@ var mapDispatchToProps = (dispatch)=>{
                 if(data.code==0) {
                     dispatch({
                         type: 'updateTreeData',
-                        treeData: treeData
+                        treeData: newData
                     });
                     alert("delete success");
                 } else {
@@ -76,6 +76,18 @@ var mapDispatchToProps = (dispatch)=>{
             }).catch(function(e) {
                 console.log(e);
                 console.log("Oops, error");
+            });
+        },
+        addChildFolder: (treeData, parentKey)=>{
+            const newData = [...treeData];
+            findKeyInTree(newData, parentKey, (item, index, arr) => {
+                item.children.push(
+                    {name:"NewFolder", key: item.key + "\\NewFolder"}
+                );
+            });
+            dispatch({
+                type: 'updateTreeData',
+                treeData: newData
             });
         }
     }

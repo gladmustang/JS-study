@@ -221,16 +221,11 @@ class DynamicDraggableTree extends Component {
     addChildFolder = (info) => {
         this._removeContainer();
         const parentKey = info.node.props.eventKey;
-        const data = [...this.props.treeData];
-        findKeyInTree(data, parentKey, (item, index, arr) => {
-            item.children.push(
-                {name:"NewFolder", key: item.key + "\\NewFolder"}
-            );
-        });
         // this.setState({
         //     treeData: data
         // });
-        this.props.updateTreeData(data);
+        this.props.addChildFolder(this.props.treeData, parentKey);
+        // this.props.updateTreeData(data);
 
     }
     renameTreeItem = (info)=> {
