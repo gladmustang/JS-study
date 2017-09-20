@@ -188,8 +188,34 @@ var mapDispatchToProps = (dispatch)=>{
                 console.log(e);
                 console.log("Oops, error");
             });
+        },
+        dragMove: (dropKey, dragKey, dropToGap, treeData) => {
+            const newTreeData = [...treeData];
+            let dragObj;
+            findKeyInTree(newTreeData, dragKey, (item, index, arr) => {
+                arr.splice(index, 1);
+                dragObj = item;
+            });
+            if (dropToGap) {
+                let ar;
+                let i;
+                findKeyInTree(newTreeData, dropKey, (item, index, arr) => {
+                    ar = arr;
+                    i = index;
+                });
+                ar.splice(i, 0, dragObj);
+            } else {
+                findKeyInTree(newTreeData, dropKey, (item) => {
+                    item.children = item.children || [];
+                    // where to insert 示例添加到尾部，可以是随意位置
+                    item.children.push(dragObj);
+                });
+            }
+            dispatch({
+                type: 'updateTreeData',
+                treeData: newTreeData
+            });
         }
-
     }
 }
 
