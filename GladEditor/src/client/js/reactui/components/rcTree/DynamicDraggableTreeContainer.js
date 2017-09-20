@@ -137,6 +137,9 @@ var mapDispatchToProps = (dispatch)=>{
                     findKeyInTree(newTreeData, treeKey, (item, index, arr) => {
                         item.name=newName;
                         item.key = data.treeItemInfo.key;
+                        if(item.children) {
+                            item.children = null;//put it to null can let tree refresh children
+                        }
                     });
                     dispatch({
                         type: 'updateTreeData',
