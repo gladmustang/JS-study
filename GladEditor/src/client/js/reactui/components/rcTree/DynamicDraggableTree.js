@@ -245,15 +245,14 @@ class DynamicDraggableTree extends Component {
 
     handleRenameDialogSubmit = (info)=> {
         const renameKey = info.node.props.eventKey;
-        const data = [...this.props.treeData];
-        findKeyInTree(data, renameKey, (item, index, arr) => {
-            item.name=this.state.inputValue;
-        });
+        var newName = this.state.inputValue;
         this.setState({
             renameOpen: false
         });
-        this.props.updateTreeData(data);
+        // this.props.updateTreeData(data);
+        this.props.renameDirOrDoc(renameKey, newName, this.props.treeData);
     }
+
 
     handleInputChange = (e)=> {
         this.setState(

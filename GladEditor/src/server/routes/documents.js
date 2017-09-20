@@ -134,4 +134,41 @@ router.post('/addDir', function(req, res, next) {
 
 });
 
+router.post('/renameDirOrDoc', function(req, res, next) {
+    var dirOrDocPath = req.body.dirOrDocPath;
+    var srcPath= rootDir + dirOrDocPath;
+    var parentDir = path.dirname(srcPath);
+    var newName = req.body.newName;
+    var destPath = path.join(parentDir, newName);
+    var destKey = path.join(path.dirname(dirOrDocPath), newName)
+    try {
+        var stats = fs.statSync(srcPath);
+        if (stats.isFile()) {
+            destPath = destPath+".html";
+            destKey = destKey+".html";
+        }
+        mv(srcPath, destPath, {mkdirp: true}, function(err) {
+            // done. it first created all the necessary directories, and then
+            // tried fs.rename, then falls back to using ncp to copy the dir
+            // to dest and then rimraf to remove the source dir
+            if(err) {
+                res.json({code:1, error: err});
+            }
+            var treeItemInfo= {
+                key: destKey,
+                name: newName
+            }
+            res.json({code:0, treeItemInfo: treeItemInfo});
+        });
+
+    } catch(err) {
+        console.log(err);
+        res.json({code:1, error: err});
+    }
+
+
+});
+
+
+
 module.exports = router;

@@ -119,7 +119,41 @@ var mapDispatchToProps = (dispatch)=>{
             } else {
                 alert("Error when adding folder");
             }
+        },
+        renameDirOrDoc: (treeKey, newName, treeData)=> {
+            const newTreeData = [...treeData];
+
+            fetch("./documents/renameDirOrDoc",{
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify({dirOrDocPath: treeKey, newName: newName})
+            }).then(function(response) {
+                return response.json();
+            }).then(function(data) {
+                if(data.code==0) {
+                    findKeyInTree(newTreeData, treeKey, (item, index, arr) => {
+                        item.name=newName;
+                        item.key = data.treeItemInfo.key;
+                    });
+                    dispatch({
+                        type: 'updateTreeData',
+                        treeData: newTreeData
+                    });
+                    alert("Rename success");
+                } else {
+                    console.log(data.error);
+                    alert("Rename error");
+                }
+
+            }).catch(function(e) {
+                console.log(e);
+                console.log("Oops, error");
+            });
         }
+
     }
 }
 
