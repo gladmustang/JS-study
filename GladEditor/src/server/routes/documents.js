@@ -117,10 +117,28 @@ router.post('/deleteDoc', function(req, res, next) {
         }
         res.json({code:0});
     } catch(err) {
+        console.log(err);
         res.json({code:1});
     }
 
 });
+
+router.post('/deleteDir', function(req, res, next) {
+    var dirPath = req.body.dirPath;
+    var delPath= rootDir + dirPath;
+    try{
+        if(fs.existsSync(delPath)) {
+            fs.rmdirSync(delPath);
+        }
+        res.json({code:0});
+    } catch(err) {
+        console.log(err);
+        res.json({code:1});
+    }
+
+});
+
+
 
 router.post('/addDir', function(req, res, next) {
     var dirPath = req.body.dirPath;

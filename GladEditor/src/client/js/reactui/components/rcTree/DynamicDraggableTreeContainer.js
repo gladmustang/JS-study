@@ -78,6 +78,39 @@ var mapDispatchToProps = (dispatch)=>{
                 console.log("Oops, error");
             });
         },
+        deleteFolder:(treeData, deleteKey)=> {
+            var newData = [...treeData];
+            let deleteObj;
+            findKeyInTree(newData, deleteKey, (item, index, arr) => {
+                arr.splice(index, 1);
+                deleteObj = item;
+            });
+            fetch("./documents/deleteDir",{
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify({dirPath: deleteObj.key})
+            }).then(function(response) {
+                return response.json();
+            }).then(function(data) {
+                if(data.code==0) {
+                    dispatch({
+                        type: 'updateTreeData',
+                        treeData: newData
+                    });
+                    alert("delete folder success");
+                } else {
+                    console.log(data.error);
+                    alert("delete folder error");
+                }
+
+            }).catch(function(e) {
+                console.log(e);
+                console.log("Oops, error");
+            });
+        },
         addChildFolder: (treeData, parentKey)=>{
             const newData = [...treeData];
             var currentItem = null;

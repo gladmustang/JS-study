@@ -267,6 +267,12 @@ class DynamicDraggableTree extends Component {
         const deleteKey = info.node.props.eventKey;
         this.props.deleteDoc(this.props.treeData, deleteKey);
     }
+
+    deleteFolderItem = (info) =>{
+        this._removeContainer();
+        const deleteKey = info.node.props.eventKey;
+        this.props.deleteFolder(this.props.treeData, deleteKey);
+    }
     renderCm(info) {
         if (this.toolTip) {
             ReactDOM.unmountComponentAtNode(this.cmContainer);
@@ -302,7 +308,7 @@ class DynamicDraggableTree extends Component {
                                 <MenuItem primaryText="Add a new document" onClick={()=>{this.addChildItem(info)}}/>
                                 <MenuItem primaryText="Add a new folder" onClick={()=>{this.addChildFolder(info)}}/>
                                 <MenuItem primaryText="Rename" onClick={()=>{this.renameTreeItem(info)}}/>
-                                <MenuItem primaryText="Delete" onClick={()=>{this.deleteTreeItem(info)}}/>
+                                <MenuItem primaryText="Delete" onClick={()=>{this.deleteFolderItem(info)}}/>
                               </Menu>
                             </MuiThemeProvider>
                         }
