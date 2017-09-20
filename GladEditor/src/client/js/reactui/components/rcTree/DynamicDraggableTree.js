@@ -271,17 +271,7 @@ class DynamicDraggableTree extends Component {
     deleteTreeItem = (info) => {
         this._removeContainer();
         const deleteKey = info.node.props.eventKey;
-        // const dragNodesKeys = info.dragNodesKeys;
-        const data = [...this.props.treeData];
-        let deleteObj;
-        findKeyInTree(data, deleteKey, (item, index, arr) => {
-            arr.splice(index, 1);
-            deleteObj = item;
-        });
-        // this.setState({
-        //     treeData: data
-        // });
-        this.props.updateTreeData(data);
+        this.props.deleteDoc(this.props.treeData, deleteKey);
     }
     renderCm(info) {
         if (this.toolTip) {

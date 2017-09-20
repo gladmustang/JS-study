@@ -2,6 +2,7 @@ import DynamicDraggableTree from "./DynamicDraggableTree"
 import {connect} from "react-redux"
 import htmlToDraft from 'html-to-draftjs';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
+import {findKeyInTree} from './dynamicUtils'
 
 var mapStateToProps = (state, ownProps)=> {
     return {
@@ -43,6 +44,39 @@ var mapDispatchToProps = (dispatch)=>{
                     editorState: EditorState.createWithContent(contentState)
                 });
             }
+        },
+        deleteDoc:(treeData, deleteKey)=> {
+            var data = [...treeData];
+            let deleteObj;
+            findKeyInTree(data, deleteKey, (item, index, arr) => {
+                arr.splice(index, 1);
+                deleteObj = item;
+            });
+            fetch("./documents/deleteDoc",{
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify({docPath: deleteObj.key})
+            }).then(function(response) {
+                return response.json();
+            }).then(function(data) {
+                if(data.code==0) {
+                    dispatch({
+                        type: 'updateTreeData',
+                        treeData: treeData
+                    });
+                    alert("delete success");
+                } else {
+                    console.log(data.error);
+                    alert("delete error");
+                }
+
+            }).catch(function(e) {
+                console.log(e);
+                console.log("Oops, error");
+            });
         }
     }
 }

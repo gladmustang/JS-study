@@ -106,9 +106,22 @@ router.post('/saveDoc', function(req, res, next) {
         })
     }
 
+});
+
+router.post('/deleteDoc', function(req, res, next) {
+    var docPath = req.body.docPath;
+    var filePath= rootDir + docPath;
+    try{
+        if(fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+        }
+        res.json({code:0});
+    } catch(err) {
+        res.json({code:1});
+    }
+
 
 
 });
-
 
 module.exports = router;
