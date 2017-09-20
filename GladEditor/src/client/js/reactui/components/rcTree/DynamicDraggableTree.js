@@ -135,6 +135,9 @@ class DynamicDraggableTree extends Component {
     }
     onDrop = (info) => {
         console.log('drop', info);
+        if(info.node.props.isLeaf) {
+            return;
+        }
         this.onLoadData(info.node).then(()=> {
             const dropKey = info.node.props.eventKey;
             const dragKey = info.dragNode.props.eventKey;
