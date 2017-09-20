@@ -107,6 +107,7 @@ class DynamicDraggableTree extends Component {
                     showContent(data.content);
                 } else {
                     console.log(data.error);
+                    showContent("");
                 }
 
             }).catch(function (e) {
@@ -199,15 +200,21 @@ class DynamicDraggableTree extends Component {
         const parentKey = info.node.props.eventKey;
 
         const data = [...this.props.treeData];
+        var docKey=null;
         findKeyInTree(data, parentKey, (item, index, arr) => {
+            docKey =  item.key + "\\NewDoc.html";
             item.children.push(
-                {name:"NewDoc.html", key: item.key + "\\NewDoc.html", isLeaf: true}
+                {name:"NewDoc", key: docKey, isLeaf: true}
             );
         });
-        // this.setState({
-        //     treeData: data
-        // });
-        this.props.updateTreeData(data);
+
+        this.props.updateMultiStates({
+            treeData: data,
+            selectedKeys: [docKey]
+        });
+        this.props.setCurrentDoc(docKey);
+        this.props.showContent("");
+        // this.props.updateTreeData(data);
 
     }
 
