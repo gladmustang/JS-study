@@ -52,6 +52,7 @@ var mapDispatchToProps = (dispatch)=>{
                             type:'updateTreeData',
                             treeData: treeData
                         })
+                        alert("save success");
                     } else {
                         console.log(data.error);
                     }
