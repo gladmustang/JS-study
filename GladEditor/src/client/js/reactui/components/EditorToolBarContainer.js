@@ -52,7 +52,13 @@ var mapDispatchToProps = (dispatch)=>{
                             type:'updateTreeData',
                             treeData: treeData
                         })
-                        alert("save success");
+                        // alert("save success");
+                        window.msgContainer.success(
+                            "Save document",
+                            "Save success!", {
+                                timeOut: 5000,
+                                extendedTimeOut: 3000
+                            });
                     } else {
                         console.log(data.error);
                     }

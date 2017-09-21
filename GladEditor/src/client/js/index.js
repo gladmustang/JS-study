@@ -6,6 +6,8 @@ import { Provider } from 'react-redux'
 import reducer from "./reducers/reduxReducerRegistry"
 import "font-awesome/css/font-awesome.min.css"
 import "../css/index.css"
+import "../css/animate.css"
+import "../css/toastr2.1.3..min.css"
 
 
 const store = createStore(reducer);
