@@ -49,6 +49,7 @@ var mapDispatchToProps = (dispatch)=>{
                         var fileInfo= data.fileInfo;
                         currentItem.name = fileInfo.name;
                         currentItem.key=fileInfo.key;
+                        currentItem.className="";
                         dispatch({
                             type:'updateTreeData',
                             treeData: treeData

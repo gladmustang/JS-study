@@ -21,18 +21,7 @@
     /*box-shadow: 0px 0px 10px 2px rgb(0, 188, 212);*/
 }
 
-/*.folderTree .rc-tree-node-selected .rc-tree-title{*/
-    /*!*color: white;*!*/
-/*}*/
-/*body .rc-tree-contextmenu {*/
-    /*background-color: rgb(0, 188, 212);*/
-    /*color: white;*/
-    /*width: 180px;*/
-/*}*/
-/*.menuItem {*/
-    /*height: 25px;*/
-    /*line-height: 25px;*/
-/*}*/
-/*.menuItem:hover {*/
-    /*color: rgb(255, 211, 146);*/
-/*}*/
+.dirtyDoc .rc-tree-title {
+    color:red;
+
+}

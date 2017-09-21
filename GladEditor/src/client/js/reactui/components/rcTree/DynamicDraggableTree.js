@@ -96,29 +96,32 @@ class DynamicDraggableTree extends Component {
             this.setState({
                 expandedKeys: expandedKeys
             });
-            this.props.setCurrentDoc(selectedKeys[0]);
-            fetch("./documents/getDocument", {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: "POST",
-                body: JSON.stringify({docPath: selectedKeys})
-            }).then(function (response) {
-                return response.json();
-            }).then(function (data) {
-                if (data.code == 0) {
-                    //show data in editor
-                    showContent(data.content);
-                } else {
-                    console.log(data.error);
-                    showContent("");
-                }
+            if(selectedKeys.length>0) {
+                this.props.setCurrentDoc(selectedKeys[0]);
+                fetch("./documents/getDocument", {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: "POST",
+                    body: JSON.stringify({docPath: selectedKeys})
+                }).then(function (response) {
+                    return response.json();
+                }).then(function (data) {
+                    if (data.code == 0) {
+                        //show data in editor
+                        showContent(data.content);
+                    } else {
+                        console.log(data.error);
+                        showContent("");
+                    }
 
-            }).catch(function (e) {
-                console.log(e);
-                console.log("Oops, error");
-            });
+                }).catch(function (e) {
+                    console.log(e);
+                    console.log("Oops, error");
+                });
+            }
+
         }
 
     }
@@ -195,7 +198,7 @@ class DynamicDraggableTree extends Component {
             var suffix = Math.round(Math.random()*10000);
             docKey =  item.key + "\\NewDoc"+suffix+".html";
             item.children.push(
-                {name:"NewDoc"+suffix, key: docKey, isLeaf: true}
+                {name:"NewDoc"+suffix, key: docKey, isLeaf: true, className: 'dirtyDoc'}
             );
         });
 
@@ -326,11 +329,14 @@ class DynamicDraggableTree extends Component {
     render(){
         const loop = (data) => {
             return data.map((item) => {
+                if(!item.className) {
+                    item.className = "";
+                }
                 if (item.children) {
-                    return <TreeNode title={item.name} key={item.key}>{loop(item.children)}</TreeNode>;
+                    return <TreeNode title={item.name} key={item.key} className={item.className}>{loop(item.children)}</TreeNode>;
                 }
                 return (
-                    <TreeNode title={item.name} key={item.key} isLeaf={item.isLeaf}
+                    <TreeNode title={item.name} key={item.key} isLeaf={item.isLeaf} className={item.className}
                     />
                 );
             });
