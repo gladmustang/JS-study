@@ -85,7 +85,6 @@ var mapDispatchToProps = (dispatch)=>{
             var newData = [...treeData];
             let deleteObj;
             findKeyInTree(newData, deleteKey, (item, index, arr) => {
-                arr.splice(index, 1);
                 deleteObj = item;
             });
             if(deleteObj.name=='Document Root') {
@@ -104,6 +103,9 @@ var mapDispatchToProps = (dispatch)=>{
                 return response.json();
             }).then(function(data) {
                 if(data.code==0) {
+                    findKeyInTree(newData, deleteKey, (item, index, arr) => {
+                        arr.splice(index, 1);
+                    });
                     dispatch({
                         type: 'updateTreeData',
                         treeData: newData
