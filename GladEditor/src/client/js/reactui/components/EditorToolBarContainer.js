@@ -54,7 +54,7 @@ var mapDispatchToProps = (dispatch)=>{
                         })
                         // alert("save success");
                         window.msgContainer.success(
-                            "Save document",
+                            "",
                             "Save success!", {
                                 timeOut: 5000,
                                 extendedTimeOut: 3000
