@@ -52,20 +52,28 @@ class DynamicDraggableTree extends Component {
     componentWillUnmount() {
         this._removeContainer();
     }
+    loadFolderData = (treeNode, callback, errCallback)=>{
+        fetch("./documents/getChildNodes",{
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify({path: treeNode.props.eventKey})
+        }).then(function(response) {
+            return response.json();
+        }).then(function(data) {
+            callback(data);
+
+        }).catch(function(e) {
+            errCallback(e);
+        });
+    }
     onLoadData = (treeNode) => {
         const treeData = [...this.props.treeData];
         var _this = this;
         return new Promise((resolve,reject) => {
-            fetch("./documents/getChildNodes",{
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: "POST",
-                body: JSON.stringify({path: treeNode.props.eventKey})
-            }).then(function(response) {
-                return response.json();
-            }).then(function(data) {
+            this.loadFolderData(treeNode, (data)=>{
                 if(data.code==0) {
                     // console.log(data);
                     getNewTreeDataWithExactMatch(treeData, treeNode.props.eventKey, data.childNodes, 100);
@@ -77,13 +85,41 @@ class DynamicDraggableTree extends Component {
                     console.log(data.error);
                     reject();
                 }
-
-            }).catch(function(e) {
+            }, (e)=>{
                 console.log(e);
                 console.log("Oops, error");
                 reject();
-            });
+            })
         });
+        // return new Promise((resolve,reject) => {
+        //     fetch("./documents/getChildNodes",{
+        //         headers: {
+        //             'Accept': 'application/json',
+        //             'Content-Type': 'application/json'
+        //         },
+        //         method: "POST",
+        //         body: JSON.stringify({path: treeNode.props.eventKey})
+        //     }).then(function(response) {
+        //         return response.json();
+        //     }).then(function(data) {
+        //         if(data.code==0) {
+        //             // console.log(data);
+        //             getNewTreeDataWithExactMatch(treeData, treeNode.props.eventKey, data.childNodes, 100);
+        //             // _this.setState({ treeData });
+        //             _this.props.updateTreeData(treeData);
+        //             resolve();
+        //
+        //         } else {
+        //             console.log(data.error);
+        //             reject();
+        //         }
+        //
+        //     }).catch(function(e) {
+        //         console.log(e);
+        //         console.log("Oops, error");
+        //         reject();
+        //     });
+        // });
     }
 
     onSelect = (selectedKeys, info) => {
@@ -267,6 +303,38 @@ class DynamicDraggableTree extends Component {
         const deleteKey = info.node.props.eventKey;
         this.props.deleteFolder(this.props.treeData, deleteKey);
     }
+
+    refreshFolderItem = (info) => {
+        this._removeContainer();
+        const treeData = [...this.props.treeData];
+        var _this = this;
+        this.loadFolderData(info.node, (data)=>{
+            if(data.code==0) {
+                const curKey = info.node.props.eventKey;
+                const child = data.childNodes;
+                const loop = (data) => {
+                    data.forEach((item) => {
+                        if (curKey == item.key) {
+                            if( item.children) {
+                                item.children = child;
+                            }
+                        } else {
+                            if (item.children) {
+                                loop(item.children);
+                            }
+                        }
+                    });
+                };
+                loop(treeData);
+                _this.props.updateTreeData(treeData);
+            } else {
+                console.log(data.error);
+            }
+        }, (e)=>{
+            console.log(e);
+            console.log("Oops, error");
+        })
+    }
     renderCm(info) {
         if (this.toolTip) {
             ReactDOM.unmountComponentAtNode(this.cmContainer);
@@ -303,6 +371,7 @@ class DynamicDraggableTree extends Component {
                                 <MenuItem primaryText="Add a new folder" onClick={()=>{this.addChildFolder(info)}}/>
                                 <MenuItem primaryText="Rename" onClick={()=>{this.renameTreeItem(info)}}/>
                                 <MenuItem primaryText="Delete" onClick={()=>{this.deleteFolderItem(info)}}/>
+                                <MenuItem primaryText="Refresh" onClick={()=>{this.refreshFolderItem(info)}}/>
                               </Menu>
                             </MuiThemeProvider>
                         }

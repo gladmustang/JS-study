@@ -41,7 +41,7 @@ class ReactDraftEditor extends Component {
                     wrapperClassName="demo-wrapper"
                     editorClassName="demo-editor"
                     onEditorStateChange={onEditorStateChange}
-                    onContentStateChange={(contentState)=>{onContentStateChange(editorState, this.props.currentDocKey, this.props.treeData)}}
+                    onChange={(contentState)=>{onContentStateChange(editorState, this.props.currentDocKey, this.props.treeData)}}
                     toolbar={{
                         image: { uploadCallback: uploadImageCallBack, alt: { present: true, mandatory: false } }
                     }}
