@@ -15,6 +15,7 @@ import MenuItem from 'material-ui/MenuItem';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import config from '../../../../../config/common'
 
 
 // var menuListStyle =   {
@@ -232,7 +233,7 @@ class DynamicDraggableTree extends Component {
         var docKey=null;
         findKeyInTree(data, parentKey, (item, index, arr) => {
             var suffix = Math.round(Math.random()*10000);
-            docKey =  item.key + "\\NewDoc"+suffix+".html";
+            docKey =  item.key + "\\NewDoc"+suffix+config.defaultExt;
             item.children.push(
                 {name:"NewDoc"+suffix, key: docKey, isLeaf: true, className: 'dirtyDoc'}
             );

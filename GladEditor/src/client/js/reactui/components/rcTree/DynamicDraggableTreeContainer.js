@@ -40,24 +40,32 @@ var mapDispatchToProps = (dispatch)=>{
             //loading previous state
             const html = content;
             let contentState = null;
-            if(tools.fileExt(docKey)=='.html') {
-                const contentBlock = htmlToDraft(html);
-                if (contentBlock) {
-                    contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+            if(content) {
+                if(tools.fileExt(docKey)=='.html') {
+                    const contentBlock = htmlToDraft(html);
+                    if (contentBlock) {
+                        contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+                    }
+                } else if (tools.fileExt(docKey)=='.md') {
+                    contentState = stateFromMarkdown(html);
+                } else {
+                    const contentBlock = htmlToDraft(html);
+                    if (contentBlock) {
+                        contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+                    }
                 }
-            } else if (tools.fileExt(docKey)=='.md') {
-                contentState = stateFromMarkdown(html);
+                dispatch({
+                    type: 'onEditorStateChange',
+                    editorState: EditorState.createWithContent(contentState)
+                });
             } else {
-                const contentBlock = htmlToDraft(html);
-                if (contentBlock) {
-                    contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
-                }
+                var editorState = EditorState.createEmpty();
+                dispatch({
+                    type: 'onEditorStateChange',
+                    editorState: editorState
+                });
             }
 
-            dispatch({
-                type: 'onEditorStateChange',
-                editorState: EditorState.createWithContent(contentState)
-            });
         },
         deleteDoc:(treeData, deleteKey)=> {
             var newData = [...treeData];
