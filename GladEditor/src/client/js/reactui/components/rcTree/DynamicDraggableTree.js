@@ -192,9 +192,10 @@ class DynamicDraggableTree extends Component {
         const data = [...this.props.treeData];
         var docKey=null;
         findKeyInTree(data, parentKey, (item, index, arr) => {
-            docKey =  item.key + "\\NewDoc.html";
+            var suffix = Math.round(Math.random()*10000);
+            docKey =  item.key + "\\NewDoc"+suffix+".html";
             item.children.push(
-                {name:"NewDoc", key: docKey, isLeaf: true}
+                {name:"NewDoc"+suffix, key: docKey, isLeaf: true}
             );
         });
 
