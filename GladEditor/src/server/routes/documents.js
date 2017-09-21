@@ -187,6 +187,50 @@ router.post('/renameDirOrDoc', function(req, res, next) {
 
 });
 
+router.post('/dragMove', function(req, res, next) {
+    var dragSrcPath = req.body.dragSrcPath;
+    var dragDestPath = req.body.dragDestPath;
+    var dropToGap = req.body.dropToGap;
+
+    var srcPath= path.join(rootDir,dragSrcPath);
+    if(dropToGap) {
+        dragDestPath = path.dirname(dragDestPath);
+    }
+
+    var baseName = path.basename(srcPath, ".html");
+    var destPath = path.join(rootDir,dragDestPath);
+    destPath = path.join(destPath, baseName);
+    var destKey = path.join(dragDestPath, baseName);
+    try {
+        var stats = fs.statSync(srcPath);
+        if (stats.isFile()) {
+
+            destPath = destPath+".html";
+            var destKey = destKey+".html"
+        }
+        mv(srcPath, destPath, {mkdirp: true}, function(err) {
+            // done. it first created all the necessary directories, and then
+            // tried fs.rename, then falls back to using ncp to copy the dir
+            // to dest and then rimraf to remove the source dir
+            if(err) {
+                res.json({code:1, error: err});
+            }
+            var treeItemInfo= {
+                key: destKey
+            }
+            res.json({code:0, treeItemInfo: treeItemInfo});
+        });
+
+    } catch(err) {
+        console.log(err);
+        res.json({code:1, error: err});
+    }
+
+
+});
+
+
+
 
 
 module.exports = router;

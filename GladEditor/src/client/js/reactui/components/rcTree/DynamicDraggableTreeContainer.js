@@ -215,9 +215,35 @@ var mapDispatchToProps = (dispatch)=>{
                     item.children.push(dragObj);
                 });
             }
-            dispatch({
-                type: 'updateTreeData',
-                treeData: newTreeData
+
+            fetch("./documents/dragMove",{
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify({dragSrcPath: dragKey, dragDestPath: dropKey, dropToGap: dropToGap})
+            }).then(function(response) {
+                return response.json();
+            }).then(function(data) {
+                if(data.code==0) {
+                    dragObj.key = data.treeItemInfo.key;
+                    if(dragObj.children) {
+                        dragObj.children = null;//put it to null can let tree refresh children
+                    }
+                    dispatch({
+                        type: 'updateTreeData',
+                        treeData: newTreeData
+                    });
+                    alert("DragMove success");
+                } else {
+                    console.log(data.error);
+                    alert("DragMove error");
+                }
+
+            }).catch(function(e) {
+                console.log(e);
+                console.log("Oops, error");
             });
         }
     }
