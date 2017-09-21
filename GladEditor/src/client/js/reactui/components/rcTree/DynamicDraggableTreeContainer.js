@@ -5,6 +5,7 @@ import {stateFromMarkdown} from 'draft-js-import-markdown';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import {findKeyInTree} from './dynamicUtils'
 import {success, warning, error} from '../Alert'
+import tools from "../../../utils/tools"
 
 var mapStateToProps = (state, ownProps)=> {
     return {
@@ -35,18 +36,24 @@ var mapDispatchToProps = (dispatch)=>{
                 states: newStates
             })
         },
-        showContent:(content)=> {
+        showContent:(content, docKey)=> {
             //loading previous state
             const html = content;
-            // const contentBlock = htmlToDraft(html);
-            // if (contentBlock) {
-            //     const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
-            //     dispatch({
-            //         type: 'onEditorStateChange',
-            //         editorState: EditorState.createWithContent(contentState)
-            //     })
-            // }
-            let contentState = stateFromMarkdown(html);
+            let contentState = null;
+            if(tools.fileExt(docKey)=='.html') {
+                const contentBlock = htmlToDraft(html);
+                if (contentBlock) {
+                    contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+                }
+            } else if (tools.fileExt(docKey)=='.md') {
+                contentState = stateFromMarkdown(html);
+            } else {
+                const contentBlock = htmlToDraft(html);
+                if (contentBlock) {
+                    contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+                }
+            }
+
             dispatch({
                 type: 'onEditorStateChange',
                 editorState: EditorState.createWithContent(contentState)

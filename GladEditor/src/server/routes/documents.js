@@ -5,6 +5,16 @@ var fs = require("fs");
 var path = require("path");
 var mv = require('mv');
 
+function fileExt(filename){
+    var ext = null;
+    var name = filename.toLowerCase();
+    var i = name.lastIndexOf(".");
+    if(i > -1){
+        var ext = name.substring(i);
+    }
+    return ext;
+}
+
 router.post('/getChildNodes', function(req, res, next) {
     var clientPath = req.body.path;
     var filePath= rootDir + req.body.path;
@@ -19,12 +29,14 @@ router.post('/getChildNodes', function(req, res, next) {
         var results = [];
 
         files.forEach(function(filename) {
-            var baseFilename = path.basename(filename, '.html');
             try {
                 var stats = fs.statSync(path.join(filePath, filename));
                 if (stats.isFile()) {
+                    var ext= fileExt(filename);
+                    var baseFilename = path.basename(filename, ext);
                     results.push({name:baseFilename, key: path.join(clientPath, filename), isLeaf: true});
                 } else if (stats.isDirectory()) {
+                    var baseFilename = path.basename(filename);
                     results.push({name: baseFilename, key:  path.join(clientPath, filename)});
                 }
             } catch(err) {
@@ -60,11 +72,11 @@ router.post('/saveDoc', function(req, res, next) {
     var fileName = req.body.fileName;
     var content = req.body.content;
 
-
-    var oldFileName = path.basename(docPath,'.html');
+    var ext=fileExt(docPath);
+    var oldFileName = path.basename(docPath,ext);
     var folderPath = path.dirname(filePath);
-    var newFilePath = path.join(folderPath,fileName+".html");
-    var newDocPath = path.join(path.dirname(docPath),fileName+".html");
+    var newFilePath = path.join(folderPath,fileName+ext);
+    var newDocPath = path.join(path.dirname(docPath),fileName+ext);
     if((oldFileName!=fileName)&&(fs.existsSync(filePath))) {
         mv(filePath, newFilePath, function(err) {
             // done. it tried fs.rename first, and then falls back to
@@ -162,8 +174,9 @@ router.post('/renameDirOrDoc', function(req, res, next) {
     try {
         var stats = fs.statSync(srcPath);
         if (stats.isFile()) {
-            destPath = destPath+".html";
-            destKey = destKey+".html";
+            var ext = fileExt(dirOrDocPath)
+            destPath = destPath+ext;
+            destKey = destKey+ext;
         }
         mv(srcPath, destPath, {mkdirp: true}, function(err) {
             // done. it first created all the necessary directories, and then
@@ -196,17 +209,16 @@ router.post('/dragMove', function(req, res, next) {
     if(dropToGap) {
         dragDestPath = path.dirname(dragDestPath);
     }
-
-    var baseName = path.basename(srcPath, ".html");
+    var ext = fileExt(srcPath);
+    var baseName = path.basename(srcPath, ext);
     var destPath = path.join(rootDir,dragDestPath);
     destPath = path.join(destPath, baseName);
     var destKey = path.join(dragDestPath, baseName);
     try {
         var stats = fs.statSync(srcPath);
         if (stats.isFile()) {
-
-            destPath = destPath+".html";
-            var destKey = destKey+".html"
+            destPath = destPath+ext;
+            var destKey = destKey+ext;
         }
         mv(srcPath, destPath, {mkdirp: true}, function(err) {
             // done. it first created all the necessary directories, and then

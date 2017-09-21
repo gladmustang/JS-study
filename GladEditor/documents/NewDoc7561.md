@@ -1,0 +1,11 @@
+&amp;nbsp; Substantive procedures (or **substantive tests**) are those activities performed by th[auditor](https://en.wikipedia.org/wiki/Audit) to detect material misstatement or fraud at the assertion level. The different assertions of balances are:
+- existence,
+- rights and obligations,
+- validity, and
+- completeness. Those for transactions are:
+- occurrence
+- completeness,
+- accuracy,
+- authorization,
+- cut-off, and
+- 阿士大夫撒发

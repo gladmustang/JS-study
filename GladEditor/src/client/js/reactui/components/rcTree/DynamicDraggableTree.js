@@ -146,7 +146,7 @@ class DynamicDraggableTree extends Component {
                 }).then(function (data) {
                     if (data.code == 0) {
                         //show data in editor
-                        showContent(data.content);
+                        showContent(data.content, selectedKeys[0]);
                     } else {
                         console.log(data.error);
                         showContent("");

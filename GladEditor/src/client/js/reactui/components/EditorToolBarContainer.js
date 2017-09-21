@@ -5,6 +5,7 @@ import draftToMarkdown from 'draftjs-to-markdown';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import {findKeyInTree} from './rcTree/dynamicUtils'
 import {success, warning, error} from './Alert'
+import tools from '../../utils/tools'
 
 var mapStateToProps = (state, ownProps)=> {
     return {
@@ -34,8 +35,14 @@ var mapDispatchToProps = (dispatch)=>{
             if(currentItem) {
                 var newFileName = currentItem.name;
                 var docPath = currentItem.key;
-                // var html =draftToHtml(convertToRaw(editorState.getCurrentContent()));
-                var html =draftToMarkdown(convertToRaw(editorState.getCurrentContent()));
+                var content = null;
+                if(tools.fileExt(docPath)=='.html') {
+                    content =draftToHtml(convertToRaw(editorState.getCurrentContent()));
+                } else if (tools.fileExt(docPath)=='.md'){
+                    content =draftToMarkdown(convertToRaw(editorState.getCurrentContent()));
+                } else {
+                    content =draftToHtml(convertToRaw(editorState.getCurrentContent()));
+                }
 
                 fetch("./documents/saveDoc",{
                     headers: {
@@ -43,7 +50,7 @@ var mapDispatchToProps = (dispatch)=>{
                         'Content-Type': 'application/json'
                     },
                     method: "POST",
-                    body: JSON.stringify({docPath: docPath, fileName: newFileName, content: html })
+                    body: JSON.stringify({docPath: docPath, fileName: newFileName, content: content })
                 }).then(function(response) {
                     return response.json();
                 }).then(function(data) {
