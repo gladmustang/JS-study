@@ -3,6 +3,7 @@ import {connect} from "react-redux"
 import htmlToDraft from 'html-to-draftjs';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import {findKeyInTree} from './dynamicUtils'
+import {success, warning, error} from '../Alert'
 
 var mapStateToProps = (state, ownProps)=> {
     return {
@@ -67,10 +68,12 @@ var mapDispatchToProps = (dispatch)=>{
                         type: 'updateTreeData',
                         treeData: newData
                     });
-                    alert("delete success");
+                    // alert("delete success");
+                    success("delete success")
                 } else {
                     console.log(data.error);
-                    alert("delete error");
+                    // alert("delete error");
+                    error("delete error");
                 }
 
             }).catch(function(e) {
@@ -86,7 +89,8 @@ var mapDispatchToProps = (dispatch)=>{
                 deleteObj = item;
             });
             if(deleteObj.name=='Document Root') {
-                alert("Can not delete document root!")
+                // alert("Can not delete document root!")
+                warning("Can not delete document root!");
                 return;
             }
             fetch("./documents/deleteDir",{
@@ -104,10 +108,12 @@ var mapDispatchToProps = (dispatch)=>{
                         type: 'updateTreeData',
                         treeData: newData
                     });
-                    alert("delete folder success");
+                    // alert("delete folder success");
+                    success("delete folder success");
                 } else {
                     console.log(data.error);
-                    alert("delete folder error");
+                    // alert("delete folder error");
+                    error("delete folder error")
                 }
 
             }).catch(function(e) {
@@ -143,10 +149,11 @@ var mapDispatchToProps = (dispatch)=>{
                             type: 'updateTreeData',
                             treeData: newData
                         });
-                        alert("Add folder success");
+                        // alert("Add folder success");
+                        success("Add folder success");
                     } else {
                         console.log(data.error);
-                        alert("Add folder error");
+                        error("Add folder error");
                     }
 
                 }).catch(function(e) {
@@ -154,7 +161,7 @@ var mapDispatchToProps = (dispatch)=>{
                     console.log("Oops, error");
                 });
             } else {
-                alert("Error when adding folder");
+                error("Error when adding folder");
             }
         },
         renameDirOrDoc: (treeKey, newName, treeData)=> {
@@ -182,10 +189,10 @@ var mapDispatchToProps = (dispatch)=>{
                         type: 'updateTreeData',
                         treeData: newTreeData
                     });
-                    alert("Rename success");
+                    success("Rename success");
                 } else {
                     console.log(data.error);
-                    alert("Rename error");
+                    error("Rename error");
                 }
 
             }).catch(function(e) {
@@ -235,10 +242,10 @@ var mapDispatchToProps = (dispatch)=>{
                         type: 'updateTreeData',
                         treeData: newTreeData
                     });
-                    alert("DragMove success");
+                    success("DragMove success");
                 } else {
                     console.log(data.error);
-                    alert("DragMove error");
+                    error("DragMove error");
                 }
 
             }).catch(function(e) {
