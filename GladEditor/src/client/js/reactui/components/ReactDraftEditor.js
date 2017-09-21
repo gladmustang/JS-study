@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
+var editorStyle={
+    height: 550,
+    overflow: "auto"
+}
 
 function uploadImageCallBack(file) {
     return new Promise(
@@ -31,7 +35,7 @@ class ReactDraftEditor extends Component {
     render() {
         const {editorState, onEditorStateChange} = this.props;
         return (
-            <div>
+            <div style={editorStyle}>
                 <Editor
                     editorState={editorState}
                     wrapperClassName="demo-wrapper"

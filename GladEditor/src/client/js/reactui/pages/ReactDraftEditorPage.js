@@ -28,7 +28,7 @@ const leftStyle = {
 const rightStyle = {
     width: '74%',
     // textAlign: 'center',
-    float: "left"
+    float: "left",
 };
 
 const Editor = ReactDraftEditorContainer;
