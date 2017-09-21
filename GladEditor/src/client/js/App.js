@@ -22,9 +22,7 @@ import ReactuiNav from './reactui/ReactuiNav'
 import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import {ToastContainer, ToastMessage } from "react-toastr"
-
-var ToastMessageFactory = React.createFactory(ToastMessage.animation);
+import Alert from './reactui/components/Alert'
 
 class App extends Component {
     render(){
@@ -52,10 +50,7 @@ class App extends Component {
                             <Link style={linkStyle} to="/gladmustang/bootnav">Boot CSS</Link>
                             <Link style={linkStyle} to="/gladmustang">React UI</Link>
                         </div>
-                        <ToastContainer  ref={(input) => {window.msgContainer = input;}}
-                                        toastMessageFactory={ToastMessageFactory}
-                                        className="toast-top-right"
-                                         />
+                        <Alert/>
                     </div>
                 </Router>
             </Provider>

@@ -3,6 +3,7 @@ import {connect} from "react-redux"
 import draftToHtml from 'draftjs-to-html';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import {findKeyInTree} from './rcTree/dynamicUtils'
+import {success, warning, error} from './Alert'
 
 var mapStateToProps = (state, ownProps)=> {
     return {
@@ -53,12 +54,7 @@ var mapDispatchToProps = (dispatch)=>{
                             treeData: treeData
                         })
                         // alert("save success");
-                        window.msgContainer.success(
-                            "",
-                            "Save success!", {
-                                timeOut: 5000,
-                                extendedTimeOut: 3000
-                            });
+                        success("Save Success!")
                     } else {
                         console.log(data.error);
                     }
@@ -68,7 +64,8 @@ var mapDispatchToProps = (dispatch)=>{
                     console.log("Oops, error");
                 });
             } else {
-                alert("Error on saving!");
+                // alert("Error on saving!");
+                error("Error on saving!");
             }
 
         }
