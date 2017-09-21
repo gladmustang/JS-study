@@ -134,6 +134,11 @@ class DynamicDraggableTree extends Component {
                 expandedKeys: expandedKeys
             });
             if(selectedKeys.length>0) {
+                findKeyInTree(this.props.treeData, this.props.currentDocKey, (item, index, arr) => {
+                    if(item.className=="dirtyDoc") {
+                        this.props.saveCurrentDoc(this.props);
+                    }
+                });
                 this.props.setCurrentDoc(selectedKeys[0]);
                 fetch("./documents/getDocument", {
                     headers: {

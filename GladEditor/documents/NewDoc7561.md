@@ -1,4 +1,4 @@
-Substantive procedures (or **substantive tests**) are those activities performed by[auditor](https://en.wikipedia.org/wiki/Audit) to detect material misstatement or fraud at the assertion level. The different assertions of balances are:
+Substantive procedures (or **substantive tests**) are those activities performed [auditor](https://en.wikipedia.org/wiki/Audit) to detect material misstatement or fraud at the assertion level. The different assertions of balances are:
 - existence,
 - rights and obligations,
 - validity, and
@@ -8,6 +8,6 @@ Substantive procedures (or **substantive tests**) are those activities performed
 - accuracy,
 - authorization,
 - cut-off, and
-- 阿士大夫撒发 &amp;nbsp;
+- 阿士大夫撒发 &amp;amp;amp;nbsp;
 # ***新浪一切由你開始***
-- [Sina English](http://english.sina.com/index.html)![undefined](http://ui.sina.com/assets/img/www/worldmap.jpg)![undefined](http://ui.sina.com/pub/www/0908/Navi.gif)&amp;nbsp;
+- [Sina English](http://english.sina.com/index.html)![undefined](http://ui.sina.com/assets/img/www/worldmap.jpg)![undefined](http://ui.sina.com/pub/www/0908/Navi.gif)&amp;amp;amp;nbsp;
