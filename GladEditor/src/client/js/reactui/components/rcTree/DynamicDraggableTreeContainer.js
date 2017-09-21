@@ -1,6 +1,7 @@
 import DynamicDraggableTree from "./DynamicDraggableTree"
 import {connect} from "react-redux"
 import htmlToDraft from 'html-to-draftjs';
+import {stateFromMarkdown} from 'draft-js-import-markdown';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import {findKeyInTree} from './dynamicUtils'
 import {success, warning, error} from '../Alert'
@@ -37,14 +38,19 @@ var mapDispatchToProps = (dispatch)=>{
         showContent:(content)=> {
             //loading previous state
             const html = content;
-            const contentBlock = htmlToDraft(html);
-            if (contentBlock) {
-                const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
-                dispatch({
-                    type: 'onEditorStateChange',
-                    editorState: EditorState.createWithContent(contentState)
-                });
-            }
+            // const contentBlock = htmlToDraft(html);
+            // if (contentBlock) {
+            //     const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+            //     dispatch({
+            //         type: 'onEditorStateChange',
+            //         editorState: EditorState.createWithContent(contentState)
+            //     })
+            // }
+            let contentState = stateFromMarkdown(html);
+            dispatch({
+                type: 'onEditorStateChange',
+                editorState: EditorState.createWithContent(contentState)
+            });
         },
         deleteDoc:(treeData, deleteKey)=> {
             var newData = [...treeData];

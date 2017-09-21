@@ -1,6 +1,7 @@
 import EditorToolBar from "./EditorToolBar"
 import {connect} from "react-redux"
 import draftToHtml from 'draftjs-to-html';
+import draftToMarkdown from 'draftjs-to-markdown';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import {findKeyInTree} from './rcTree/dynamicUtils'
 import {success, warning, error} from './Alert'
@@ -33,7 +34,9 @@ var mapDispatchToProps = (dispatch)=>{
             if(currentItem) {
                 var newFileName = currentItem.name;
                 var docPath = currentItem.key;
-                var html =draftToHtml(convertToRaw(editorState.getCurrentContent()));
+                // var html =draftToHtml(convertToRaw(editorState.getCurrentContent()));
+                var html =draftToMarkdown(convertToRaw(editorState.getCurrentContent()));
+
                 fetch("./documents/saveDoc",{
                     headers: {
                         'Accept': 'application/json',
