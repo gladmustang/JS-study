@@ -38,6 +38,7 @@ const docsTreeReducer = (state= defaultState, action) => {
             const selectedKey = state.get("currentDocKey");
             findKeyInTree(data, selectedKey, (item, index, arr) => {
                 item.name=action.currentItemName;
+                item.className = "dirtyDoc";
             });
 
             var newState = state.set('currentItemName', action.currentItemName);
