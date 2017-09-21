@@ -1,7 +1,8 @@
 import EditorToolBar from "./EditorToolBar"
 import {connect} from "react-redux"
 import draftToHtml from 'draftjs-to-html';
-import draftToMarkdown from 'draftjs-to-markdown';
+// import draftToMarkdown from 'draftjs-to-markdown';
+import {stateToMarkdown} from 'draft-js-export-markdown';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import {findKeyInTree} from './rcTree/dynamicUtils'
 import {success, warning, error} from './Alert'
@@ -39,7 +40,8 @@ var mapDispatchToProps = (dispatch)=>{
                 if(tools.fileExt(docPath)=='.html') {
                     content =draftToHtml(convertToRaw(editorState.getCurrentContent()));
                 } else if (tools.fileExt(docPath)=='.md'){
-                    content =draftToMarkdown(convertToRaw(editorState.getCurrentContent()));
+                    // content =draftToMarkdown(convertToRaw(editorState.getCurrentContent()));
+                    content = stateToMarkdown(editorState.getCurrentContent());
                 } else {
                     content =draftToHtml(convertToRaw(editorState.getCurrentContent()));
                 }
