@@ -5,7 +5,7 @@ var success = (successMsg)=>{
     window.msgContainer.success(
         "",
         successMsg, {
-            timeOut: 5000,
+            timeOut: 3000,
             extendedTimeOut: 3000
         });
 }
@@ -13,7 +13,7 @@ var warning = (warnMsg)=>{
     window.msgContainer.warning(
         "",
         warnMsg, {
-            timeOut: 5000,
+            timeOut: 3000,
             extendedTimeOut: 3000
         });
 }
@@ -21,7 +21,7 @@ var error = (errorMsg)=>{
     window.msgContainer.error(
         "",
         errorMsg, {
-            timeOut: 5000,
+            timeOut: 3000,
             extendedTimeOut: 3000
         });
 }
