@@ -25,9 +25,9 @@ var mapDispatchToProps = (dispatch)=>{
         },
         saveDoc: (props)=> {
             var {currentDocKey, editorState, treeData} = props;
-            const data = [...treeData];
+            const newTreeData = [...treeData];
             var currentItem = null;
-            findKeyInTree(data, currentDocKey, (item, index, arr) => {
+            findKeyInTree(newTreeData, currentDocKey, (item, index, arr) => {
                 currentItem = item;
             });
             if(currentItem) {
@@ -52,7 +52,7 @@ var mapDispatchToProps = (dispatch)=>{
                         currentItem.className="";
                         dispatch({
                             type:'updateTreeData',
-                            treeData: treeData
+                            treeData: newTreeData
                         })
                         // alert("save success");
                         success("Save Success!")
