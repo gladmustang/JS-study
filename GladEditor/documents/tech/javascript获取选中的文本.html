@@ -1,0 +1,58 @@
+<p>&nbsp;</p>
+<h2><a href="http://www.cnblogs.com/ArthurPatten/p/3317263.html" target="_self">javascript获取选中的文本/html</a></h2>
+<p>首先来谈一下Selection对象和Range对象。</p>
+<p>　　Selection是window.getSelection()方法返回的一个对象，用于表示用户选中的文本区域。Selection对象表现为一组Range对象。而Range对象表示文档的连续范围区域，例如用户在浏览器窗口中用鼠标拖动选中的区域。通常情况下，Selection对象只有一个Range对象，如下：</p>
+<p>　　var selectionObj = window.getSelection();　</p>
+<p>　　var rangeObj = selectionObj.getRangeAt(0);</p>
+<p>selectionObj为Selection对象，rangeObj为Range对象。</p>
+<p>　来个例子:</p>
+<p>　　var selectionObj = window.getSelection();</p>
+<p>　　var selectedText = selectionObj.toString();</p>
+<p>　selectedText即为用户选中区域的文本。</p>
+<p>　　如果想获取选中部分的html代码，就需要用到Range对象的cloneContents方法，cloneContents方法把Range对象的内容复制到一个DocumentFragment对象。</p>
+<p>　　　　var selectionObj = window.getSelection();</p>
+<p>　　　　var rangeObj = selectionObj.getRangeAt(0);</p>
+<p>　　　　var docFragment = rangeObj.cloneContents();</p>
+<p>　然后将docFragment渲染出来，获取其innerHTML即可。</p>
+<p>　　　　var testDiv = document.createElement("div");</p>
+<p>　　　　testDiv.appendChild(docFragment);</p>
+<p>　　　　var selectHtml = testDiv.innerHTML;</p>
+<p>selectedHtml即为用户选中区域的html代码　</p>
+<p>　当然一如既往的，上述的吧啦吧啦对IE是不起作用的。IE自己玩自己的。。。</p>
+<p>　　IE中，通过document.selection创建Selection对象，通过createRange方法创建Range对象，如下：</p>
+<p>　　　　var selectionObj = document.selection;</p>
+<p>　　　　var rangeObj = selectionObj.createRange();</p>
+<p>　range对象的text属性即为用户选中区域的文本，htmlText属性即为用户选中区域的html代码。</p>
+<p>　　　　var selectedText = rangeObj.text;</p>
+<p>　　　　var selectedHtml = rangeObj.htmlText;</p>
+<p>OK,上面说了这么一大推，来个具体的例子吧。</p>
+<p>　　html代码如下：</p>
+<p></p>
+<img src="http://images.cnitblog.com/blog/538577/201309/12175321-1bd0706f55d14ffbbfe885e9ad45d3ce.png" alt="undefined" style="float:none;height: ;width: "/>
+<p> 　javascript代码为:</p>
+<p>　　　var testDiv = document.getElementById("testDiv");</p>
+<p>　　　testDiv.onmouseup = function(){</p>
+<p>　　　　　var selectionObj = null, rangeObj = null, selectedText = "", selectedHtml = "";</p>
+<p>　　　　　if(window.getSelection){</p>
+<p>　　　　　　　selectionObj = window.getSelection();</p>
+<p>　　　　　　　selectedText = selectionObj.toString();</p>
+<p>　　　　　　　rangeObj = selectionObj.getRangeAt(0);</p>
+<p>　　　　　　　var docFragment = rangeObj.cloneContents();</p>
+<p>　　　　　　   var tempDiv = document.createElement("div");</p>
+<p>　　　　　　　tempDiv.appendChild(docFragment);</p>
+<p>　　　　　　　selectedHtml = tempDiv.innerHTML;</p>
+<p>　　　　　}else if(document.selection){</p>
+<p>　　　　　　　selectionObj = document.selection;</p>
+<p>　　　　　　　rangeObj = selectionObj.createRange();</p>
+<p>　　　　　　　selectedText = rangeObj.text;</p>
+<p>　　　　　　　selectedHtml = rangeObj.htmlText;</p>
+<p>　　　　　}</p>
+<p>　　　　　alert(selectedText);</p>
+<p>　　　　　alert(selectedHtml);</p>
+<p>　　　};</p>
+<p>webkit浏览器的运行结果如下：</p>
+<p></p>
+<img src="http://images.cnitblog.com/blog/538577/201309/12181917-1cec038618de4b94949c735396ffdb08.png" alt="undefined" style="float:none;height: ;width: "/>
+<p>IE浏览器的运行结果如下：</p>
+<p></p>
+<img src="http://images.cnitblog.com/blog/538577/201309/12181951-ba92fc881de14576bd9767da540245cc.png" alt="undefined" style="float:none;height: ;width: "/>
