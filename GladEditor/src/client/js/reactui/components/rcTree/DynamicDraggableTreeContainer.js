@@ -139,7 +139,7 @@ var mapDispatchToProps = (dispatch)=>{
                     arr.splice(index, 1);
                     deleteObj = item;
                 });
-                if(!deleteObj){
+                if(deleteObj){
                     deleteObjs.push(deleteObj);
                     docPaths.push(deleteObj.key);
                 }
