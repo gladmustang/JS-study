@@ -23,11 +23,11 @@ const MainTab = () => (
                 {/*This is editor home*/}
             {/*</div>*/}
         {/*</Tab>*/}
-        <Tab label="Draft-Editor" >
+        <Tab label="Home" >
             <ReactDraftEditorPageContainer/>
         </Tab>
         <Tab
-            label="Tab 3"
+            label="In development"
             // onActive={handleActive}
         >
             <RichEditorPage/>
