@@ -13,6 +13,7 @@ var rootAPI = require('./src/server/routes/rootAPI');
 var app = express();
 
 global.rootDir = __dirname;
+global.docRoot = path.join(path.join(rootDir, '..'),'documents');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

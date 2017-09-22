@@ -5,6 +5,7 @@ var fs = require("fs");
 var path = require("path");
 var mv = require('mv');
 
+
 function fileExt(filename){
     var ext = null;
     var name = filename.toLowerCase();
@@ -17,7 +18,7 @@ function fileExt(filename){
 
 router.post('/getChildNodes', function(req, res, next) {
     var clientPath = req.body.path;
-    var filePath= rootDir + req.body.path;
+    var filePath= docRoot + req.body.path;
 
     fs.readdir(filePath,function(err,files) {
         if (err) {
@@ -52,7 +53,7 @@ router.post('/getChildNodes', function(req, res, next) {
 
 router.post('/getDocument', function(req, res, next) {
     var docPath = req.body.docPath;
-    var filePath= rootDir + docPath;
+    var filePath= docRoot + docPath;
     fs.readFile(filePath,function (err, data) {
         if (err) {
             console.log(err);
@@ -68,7 +69,7 @@ router.post('/getDocument', function(req, res, next) {
 
 router.post('/saveDoc', function(req, res, next) {
     var docPath = req.body.docPath;
-    var filePath= rootDir + docPath;
+    var filePath= docRoot + docPath;
     var fileName = req.body.fileName;
     var content = req.body.content;
 
@@ -122,7 +123,7 @@ router.post('/saveDoc', function(req, res, next) {
 
 router.post('/deleteDoc', function(req, res, next) {
     var docPath = req.body.docPath;
-    var filePath= rootDir + docPath;
+    var filePath= docRoot + docPath;
     try{
         if(fs.existsSync(filePath)) {
             fs.unlinkSync(filePath);
@@ -140,7 +141,7 @@ router.post('/deleteDocs', function(req, res, next) {
     try {
         for (var i = 0; i < docPaths.length; i++) {
             let docPath = docPaths[i];
-            var filePath = rootDir + docPath;
+            var filePath = docRoot + docPath;
             if (fs.existsSync(filePath)) {
                 var stats = fs.statSync(filePath);
                 if (stats.isFile()) {
@@ -159,7 +160,7 @@ router.post('/deleteDocs', function(req, res, next) {
 
 router.post('/deleteDir', function(req, res, next) {
     var dirPath = req.body.dirPath;
-    var delPath= rootDir + dirPath;
+    var delPath= docRoot + dirPath;
     try{
         if(fs.existsSync(delPath)) {
             fs.rmdirSync(delPath);
@@ -176,7 +177,7 @@ router.post('/deleteDir', function(req, res, next) {
 
 router.post('/addDir', function(req, res, next) {
     var dirPath = req.body.dirPath;
-    var folderPath= rootDir + dirPath;
+    var folderPath= docRoot + dirPath;
     try{
         fs.mkdirSync(folderPath)
         res.json({code:0});
@@ -188,7 +189,7 @@ router.post('/addDir', function(req, res, next) {
 
 router.post('/renameDirOrDoc', function(req, res, next) {
     var dirOrDocPath = req.body.dirOrDocPath;
-    var srcPath= rootDir + dirOrDocPath;
+    var srcPath= docRoot + dirOrDocPath;
     var parentDir = path.dirname(srcPath);
     var newName = req.body.newName;
     var destPath = path.join(parentDir, newName);
@@ -227,13 +228,13 @@ router.post('/dragMove', function(req, res, next) {
     var dragDestPath = req.body.dragDestPath;
     var dropToGap = req.body.dropToGap;
 
-    var srcPath= path.join(rootDir,dragSrcPath);
+    var srcPath= path.join(docRoot,dragSrcPath);
     if(dropToGap) {
         dragDestPath = path.dirname(dragDestPath);
     }
     var ext = fileExt(srcPath);
     var baseName = path.basename(srcPath, ext);
-    var destPath = path.join(rootDir,dragDestPath);
+    var destPath = path.join(docRoot,dragDestPath);
     destPath = path.join(destPath, baseName);
     var destKey = path.join(dragDestPath, baseName);
     try {
