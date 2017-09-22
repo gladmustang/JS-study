@@ -127,20 +127,31 @@ var mapDispatchToProps = (dispatch)=>{
             }
 
         },
-        deleteDoc:(treeData, deleteKey)=> {
+        deleteDocs:(treeData, deleteKeys)=> {
             var newData = [...treeData];
-            let deleteObj;
-            findKeyInTree(newData, deleteKey, (item, index, arr) => {
-                arr.splice(index, 1);
-                deleteObj = item;
-            });
-            fetch("./documents/deleteDoc",{
+            let deleteObjs=[];
+            let docPaths=[];
+            for(var i=0; i<deleteKeys.length; i++) {
+                let deleteObj;
+                let deleteKey=deleteKeys[i];
+                findKeyInTree(newData, deleteKey, (item, index, arr) => {
+                    if(item.children) return;
+                    arr.splice(index, 1);
+                    deleteObj = item;
+                });
+                if(!deleteObj){
+                    deleteObjs.push(deleteObj);
+                    docPaths.push(deleteObj.key);
+                }
+            }
+
+            fetch("./documents/deleteDocs",{
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
                 method: "POST",
-                body: JSON.stringify({docPath: deleteObj.key})
+                body: JSON.stringify({docPaths: docPaths})
             }).then(function(response) {
                 return response.json();
             }).then(function(data) {

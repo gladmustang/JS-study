@@ -127,7 +127,6 @@ class DynamicDraggableTree extends Component {
     onSelect = (selectedKeys, info) => {
         // this.setState({ selectedKeys });
         this.props.updateMultiStates({selectedKeys});
-        console.log(info)
         const showContent = this.props.showContent;
         if(info.node.props.isLeaf) {
             var expandedKeys = this.state.expandedKeys;
@@ -299,10 +298,13 @@ class DynamicDraggableTree extends Component {
         );
     }
 
-    deleteTreeItem = (info) => {
+    deleteTreeItems = (info) => {
         this._removeContainer();
-        const deleteKey = info.node.props.eventKey;
-        this.props.deleteDoc(this.props.treeData, deleteKey);
+        // const deleteKey = info.node.props.eventKey;
+        // this.props.deleteDoc(this.props.treeData, deleteKey);
+        const selectedKeys = this.props.selectedKeys;
+        this.props.deleteDocs(this.props.treeData,selectedKeys);
+
     }
 
     deleteFolderItem = (info) =>{
@@ -365,7 +367,7 @@ class DynamicDraggableTree extends Component {
                              <MuiThemeProvider>
                                  <Menu>
                                      <MenuItem primaryText="Rename" onClick={()=>{this.renameTreeItem(info)}}/>
-                                     <MenuItem primaryText="Delete" onClick={()=>{this.deleteTreeItem(info)}}/>
+                                     <MenuItem primaryText="Delete" onClick={()=>{this.deleteTreeItems(info)}}/>
                                      <MenuItem primaryText={this.state.multiple?"Cancel Multiple Selection Mode": "Multiple Selection Mode"} onClick={this.toggleMultiple}/>
                                  </Menu>
                              </MuiThemeProvider>

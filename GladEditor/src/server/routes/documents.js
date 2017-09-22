@@ -135,6 +135,28 @@ router.post('/deleteDoc', function(req, res, next) {
 
 });
 
+router.post('/deleteDocs', function(req, res, next) {
+    var docPaths = req.body.docPaths;
+    try {
+        for (var i = 0; i < docPaths.length; i++) {
+            let docPath = docPaths[i];
+            var filePath = rootDir + docPath;
+            if (fs.existsSync(filePath)) {
+                var stats = fs.statSync(filePath);
+                if (stats.isFile()) {
+                    fs.unlinkSync(filePath);
+                }
+            }
+        }
+        res.json({code: 0});
+    } catch(err){
+        console.log(err);
+        res.json({code:1});
+    }
+
+});
+
+
 router.post('/deleteDir', function(req, res, next) {
     var dirPath = req.body.dirPath;
     var delPath= rootDir + dirPath;
