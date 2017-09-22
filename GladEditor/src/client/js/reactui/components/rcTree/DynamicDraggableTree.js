@@ -32,6 +32,7 @@ class DynamicDraggableTree extends Component {
         // treeData: [],
         autoExpandParent: true,
         expandedKeys: [],
+        multiple: false,
         // selectedKeys:[],
         renameOpen: false,
         inputValue: ''
@@ -342,6 +343,14 @@ class DynamicDraggableTree extends Component {
             console.log("Oops, error");
         })
     }
+
+    toggleMultiple = ()=>{
+        this._removeContainer();
+        var multiple = !this.state.multiple;
+        this.setState({
+            multiple: multiple
+        })
+    }
     renderCm(info) {
         if (this.toolTip) {
             ReactDOM.unmountComponentAtNode(this.cmContainer);
@@ -358,6 +367,7 @@ class DynamicDraggableTree extends Component {
                                  <Menu>
                                      <MenuItem primaryText="Rename" onClick={()=>{this.renameTreeItem(info)}}/>
                                      <MenuItem primaryText="Delete" onClick={()=>{this.deleteTreeItem(info)}}/>
+                                     <MenuItem primaryText={this.state.multiple?"Cancel Multiple Selection Mode": "Multiple Selection Mode"} onClick={this.toggleMultiple}/>
                                  </Menu>
                              </MuiThemeProvider>
                          }
@@ -436,7 +446,7 @@ class DynamicDraggableTree extends Component {
                     onDragEnter={this.onDragEnter}
                     onDrop={this.onDrop}
                     loadData={this.onLoadData}
-                    multiple={true}
+                    multiple={this.state.multiple}
                 >
                     {treeNodes}
                 </Tree>
