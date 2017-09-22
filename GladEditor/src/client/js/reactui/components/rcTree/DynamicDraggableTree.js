@@ -126,6 +126,7 @@ class DynamicDraggableTree extends Component {
     onSelect = (selectedKeys, info) => {
         // this.setState({ selectedKeys });
         this.props.updateMultiStates({selectedKeys});
+        console.log(info)
         const showContent = this.props.showContent;
         if(info.node.props.isLeaf) {
             var expandedKeys = this.state.expandedKeys;
@@ -146,7 +147,7 @@ class DynamicDraggableTree extends Component {
                         'Content-Type': 'application/json'
                     },
                     method: "POST",
-                    body: JSON.stringify({docPath: selectedKeys})
+                    body: JSON.stringify({docPath: selectedKeys[0]})
                 }).then(function (response) {
                     return response.json();
                 }).then(function (data) {
@@ -435,6 +436,7 @@ class DynamicDraggableTree extends Component {
                     onDragEnter={this.onDragEnter}
                     onDrop={this.onDrop}
                     loadData={this.onLoadData}
+                    multiple={true}
                 >
                     {treeNodes}
                 </Tree>
