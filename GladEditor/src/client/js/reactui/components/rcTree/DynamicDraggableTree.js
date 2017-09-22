@@ -211,8 +211,7 @@ class DynamicDraggableTree extends Component {
     }
     onRightClick = (info) => {
         console.log('right click', info);
-        // this.setState({ selectedKeys: [info.node.props.eventKey] });
-        this.props.updateMultiStates({ selectedKeys: [info.node.props.eventKey] })
+        // this.props.updateMultiStates({ selectedKeys: [info.node.props.eventKey] })
         this.renderCm(info);
     }
     getContainer = () => {
